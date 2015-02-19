@@ -100,7 +100,7 @@ class HgBasis(object):
         y=y1*y2*y3*y4
         return y               
 
-class LGbeam(object):
+class LgBasis(object):
     '''
     Generation of Hermite Gauss beams 
     '''
