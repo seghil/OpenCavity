@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; OpenCavity 0.1 Pre-Alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1 Pre-Alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="OpenCavity 0.1 Pre-Alpha documentation" href="index.html" />
+    <link rel="next" title="Before starting" href="before_starting.html" />
+    <link rel="prev" title="Welcome to OpenCavity documentation!" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="before_starting.html" title="Before starting"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to OpenCavity documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>OpenCavity is a python package for design of free-space laser cavities and calculate their  eigenvalues and eigenmodes.
+It uses matrix method with Fresnel Kernel formulation plus an eigenvalue solver to find the fundamental mode of the laser cavity
+plus the higher order ones.
+the package is written with a sake of simplicity of use and fast learning curve.
+In addition to the mode solver, it contains Physical optics module (Fresnel propagator) for general 1D and 2D systems, and also
+an 1D/2D Gaussian beam generator.</p>
+<dl class="docutils">
+<dt>Thanks to its general systems definition, the package can be used as a tool to :</dt>
+<dd><ul class="first last">
+<li><p class="first">simulate and understand laser cavities physics.</p>
+</li>
+<li><dl class="first docutils">
+<dt>design &amp; optimization to study the effect of</dt>
+<dd><ul class="first last simple">
+<li>aberrations.</li>
+<li>thermal lens.</li>
+<li>intra-cavity phase/amplitude elements (aperture, phase mask...)</li>
+<li>misalignment of optical elements...</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>The physical optics module with the Gaussian beam generator can be used as a tool to study beam propagation through optical
+systems (paraxial case), this can be useful fore example to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>design &amp; study interference and interferometers.</li>
+<li>beam transformation using phase/amplitude elements. (lens, axicon, aperture, spatial light modulators ...etc)</li>
+<li>high order Gaussian beams propagation through optical systems.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="python-dependencies">
+<h2>Python &amp; dependencies<a class="headerlink" href="#python-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>We choose <a class="reference external" href="https://www.python.org/">python</a> programming language to write <strong>OpenCavity</strong> because it is powerful, fast and multi-platform
+(windows /Linux /Mac Os). It is also friendly, easy to learn and is open with   very important and active community,
+and a lot of useful packages.
+<strong>OpenCavity</strong> package like most scientific python softwares, needs  <a class="reference external" href="http://scipy.org/">scipy</a> and <a class="reference external" href="http://numpy.org/">numpy</a> for fast matrix manipulation,
+numerical and linear algebra calculations. It also depends on <em>matplotlib</em> package for 1D and 2D plots.</p>
+<p>If you are new to python the next section is for you, we will see how to install python and the needed dependencies for <strong>OpenCavity</strong> package.
+However we will see juste the minimum required for start using <strong>OpenCavity</strong>, to learn more about python there are plenty of excellent tutorials on the
+web, and the official python <a class="reference external" href="https://www.python.org/">website</a> would be a good place where to start.</p>
+<img alt="_images/python-logo.png" src="_images/python-logo.png" />
+<img alt="_images/numpylogo.png" src="_images/numpylogo.png" />
+<img alt="_images/scipy-logo.png" src="_images/scipy-logo.png" />
+<img alt="_images/matplotlib-logo.png" src="_images/matplotlib-logo.png" />
+</div>
+<div class="section" id="gallery">
+<h2>Gallery<a class="headerlink" href="#gallery" title="Permalink to this headline">¶</a></h2>
+<p>Some figures from the tutorials</p>
+<a class="reference internal image-reference" href="_images/tuto6_plot_propagate_tem00_2D_I.png"><img alt="_images/tuto6_plot_propagate_tem00_2D_I.png" src="_images/tuto6_plot_propagate_tem00_2D_I.png" style="width: 2.5in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto5_plot_tem01_yz_1D.png"><img alt="_images/tuto5_plot_tem01_yz_1D.png" src="_images/tuto5_plot_tem01_yz_1D.png" style="width: 2.5in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto6_plot_tem01_I_2D.png"><img alt="_images/tuto6_plot_tem01_I_2D.png" src="_images/tuto6_plot_tem01_I_2D.png" style="width: 2.5in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto8_plot2_tem01_I_2D.png"><img alt="_images/tuto8_plot2_tem01_I_2D.png" src="_images/tuto8_plot2_tem01_I_2D.png" style="width: 2.5in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto8_plot_mask2_3D.png"><img alt="_images/tuto8_plot_mask2_3D.png" src="_images/tuto8_plot_mask2_3D.png" style="width: 2.5in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto8_plot2_tem10_I_2D.png"><img alt="_images/tuto8_plot2_tem10_I_2D.png" src="_images/tuto8_plot2_tem10_I_2D.png" style="width: 2.5in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto9_plot_interference_I.png"><img alt="_images/tuto9_plot_interference_I.png" src="_images/tuto9_plot_interference_I.png" style="width: 2.5in;" /></a>
+<a class="reference internal image-reference" href="_images/Bessel_cavity_scheme2.png"><img alt="_images/Bessel_cavity_scheme2.png" src="_images/Bessel_cavity_scheme2.png" style="width: 3.5in;" /></a>
+<a class="reference internal image-reference" href="_images/schema_interfero_donut.png"><img alt="_images/schema_interfero_donut.png" src="_images/schema_interfero_donut.png" style="width: 3.5in;" /></a>
+<a class="reference internal image-reference" href="_images/Optical_cavity_aperture.png"><img alt="_images/Optical_cavity_aperture.png" src="_images/Optical_cavity_aperture.png" style="width: 3.5in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto6_plot_tem03_I_2D.png"><img alt="_images/tuto6_plot_tem03_I_2D.png" src="_images/tuto6_plot_tem03_I_2D.png" style="width: 2.5in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto5_plot_tem03_yz_1D.png"><img alt="_images/tuto5_plot_tem03_yz_1D.png" src="_images/tuto5_plot_tem03_yz_1D.png" style="width: 2.5in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto9_plot_arm1_P.png"><img alt="_images/tuto9_plot_arm1_P.png" src="_images/tuto9_plot_arm1_P.png" style="width: 2.5in;" /></a>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#python-dependencies">Python &amp; dependencies</a></li>
+<li><a class="reference internal" href="#gallery">Gallery</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to OpenCavity documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="before_starting.html"
+                        title="next chapter">Before starting</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/introduction.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="before_starting.html" title="Before starting"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to OpenCavity documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, M.Seghilani.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b2.
+    </div>
+  </body>
+</html>

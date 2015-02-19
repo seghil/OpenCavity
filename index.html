@@ -1,0 +1,1349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to OpenCavity documentation! &mdash; OpenCavity 0.1 Pre-Alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1 Pre-Alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="OpenCavity 0.1 Pre-Alpha documentation" href="#" />
+    <link rel="next" title="Introduction" href="introduction.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-opencavity-documentation">
+<h1>Welcome to OpenCavity documentation!<a class="headerlink" href="#welcome-to-opencavity-documentation" title="Permalink to this headline">¶</a></h1>
+<p><em>opencavity</em> is a python package for designing and solving eigenmodes of open optical cavities.
+It comes with other tools that allow to design and study laser resonators such as optical wave propagator through paraxial systems using Fresnel
+integral and Gaussian beam generator.
+The package is designed and written with a sake of usage simplicity and fast learning curve.</p>
+<a class="reference internal image-reference" href="_images/plot_mode0_E_1D.png"><img alt="_images/plot_mode0_E_1D.png" src="_images/plot_mode0_E_1D.png" style="width: 2.5in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto7_plot_tem00_E_2D.png"><img alt="_images/tuto7_plot_tem00_E_2D.png" src="_images/tuto7_plot_tem00_E_2D.png" style="width: 2.5in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto8_plot2_tem01_I_2D.png"><img alt="_images/tuto8_plot2_tem01_I_2D.png" src="_images/tuto8_plot2_tem01_I_2D.png" style="width: 2.5in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto8_plot2_tem10_I_2D.png"><img alt="_images/tuto8_plot2_tem10_I_2D.png" src="_images/tuto8_plot2_tem10_I_2D.png" style="width: 2.5in;" /></a>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="before_starting.html">Before starting</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial1.html">Tutorial 1 - Simple 2 mirrors cavity</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial2.html">Tutorial 2 - Generalizes 1D cavity</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial3.html">Tutorial 3 - using apertures and phase masks</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial4.html">Tutorial 4 - Calculating the output beam</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial5.html">Tutorial 5 - An advanced cavity example &#8216;Bessel-Gauss&#8217; cavity</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial6.html">Tutorial 6 - A second &#8216;Bessel-Gauss&#8217; cavity design</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial7.html">Tutorial 7 - General 2D cavity design</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial8.html">Tutorial 8 - 2D cavity with masks</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial9.html">Tutorial 9 - Fresnel propagation module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</div>
+<span class="target" id="module-opencavity.modesolver"></span><p>Created on 30 mars 2014</p>
+<p>&#64;author: Mohamed</p>
+<dl class="class">
+<dt id="opencavity.modesolver.AmpMask2D">
+<em class="property">class </em><code class="descclassname">opencavity.modesolver.</code><code class="descname">AmpMask2D</code><span class="sig-paren">(</span><em>grid_x</em>, <em>grid_y</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.AmpMask2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class containing definitions of amplitude masks as aperture and losses like absorbers in the cavity
+::Args:</p>
+<blockquote>
+<div><ul class="simple">
+<li>grid_x(float), grid_y(float):  Squared grid (matrix) vectors in which the shape of the mask is defined these tow vectors are important because usually in cavity eienvalues problem they don&#8217;t follow a linear spacingbut Lgendre-Gauss spacing scheme (for the integral calculation).</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">the unit of the dimensions are normalized to the wavelength&#8217;s unit (grid_x=1000 means that it is =1000 the wavelength unit.</p>
+</div>
+<dl class="docutils">
+<dt>Example of use </dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">apert</span><span class="o">=</span><span class="n">solver</span><span class="o">.</span><span class="n">AmpMask2D</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">)</span> <span class="c"># create a mask object   </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apert</span><span class="o">.</span><span class="n">add_circle</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="c">#create a circular aperture in x1,y1 coordinates with radius=100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apert</span><span class="o">.</span><span class="n">add_rectangle</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="c"># add a rectangle </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apert</span><span class="o">.</span><span class="n">add_rectangle</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="method">
+<dt id="opencavity.modesolver.AmpMask2D.add_circle">
+<code class="descname">add_circle</code><span class="sig-paren">(</span><em>radius</em>, <em>x_center=0</em>, <em>y_center=0</em>, <em>positive=True</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.AmpMask2D.add_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a circular aperture function and add it to the mask object.</p>
+<dl class="docutils">
+<dt>::Args: </dt>
+<dd><ul class="first last simple">
+<li>radius: the radius of the circular aperture</li>
+<li>x_center, y_center: coordinates of the shape center, default values (0,0)</li>
+<li>positive: is a boolean flag, default value =True, means the amplitude inside the shape =&#8216;1&#8217; and &#8216;0&#8217; outside</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.AmpMask2D.add_rectangle">
+<code class="descname">add_rectangle</code><span class="sig-paren">(</span><em>x_dim</em>, <em>y_dim</em>, <em>x_center=0</em>, <em>y_center=0</em>, <em>positive=True</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.AmpMask2D.add_rectangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a rectangular aperture function and add it to the mask object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>x_dim, y_dim: dimensions of the rectangle.</li>
+<li>x_center, y_center: coordinates of the shape center, default values (0,0)</li>
+<li>positive: is a boolean flag, default value =True, means the amplitude inside the shape =&#8216;1&#8217; and &#8216;0&#8217; outside</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.AmpMask2D.show_msk2D">
+<code class="descname">show_msk2D</code><span class="sig-paren">(</span><em>what='amplitude'</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.AmpMask2D.show_msk2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the amplitude/phase of the mask in 2D plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>what : string= (amplitude/phase) to choose what to plot.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This function needs matplotlib package</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.AmpMask2D.show_msk3D">
+<code class="descname">show_msk3D</code><span class="sig-paren">(</span><em>what='amplitude'</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.AmpMask2D.show_msk3D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the amplitude/phase of the mask in 3D plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>what : string= (amplitude/phase) to choose what to plot.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This function needs matplotlib package</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opencavity.modesolver.CavEigenSys">
+<em class="property">class </em><code class="descclassname">opencavity.modesolver.</code><code class="descname">CavEigenSys</code><span class="sig-paren">(</span><em>wavelength=1</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys" title="Permalink to this definition">¶</a></dt>
+<dd><p>classdocs</p>
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.apply_mask1D">
+<code class="descname">apply_mask1D</code><span class="sig-paren">(</span><em>MaskObj</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.apply_mask1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applay a phase and amplitude mask to the matrix kernel of 1D systems.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>MaskObj : object of the class AmpMask2D which contains the mask matrix in self.Msk</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>this function is to use with 1D systems</li>
+<li>This function multiply each coulumn of the matrix Kernel and the mask (phas &amp; amplitude)</li>
+</ul>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none. the modifications are applyied directly on the kernel (self.Kt)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.apply_mask2D">
+<code class="descname">apply_mask2D</code><span class="sig-paren">(</span><em>MaskObj</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.apply_mask2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a phase and amplitude mask to the matrix kernel of 2D systems.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>MaskObj : object of the class AmpMask2D which contains the mask matrix in self.Msk</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>this function is to use with 1D systems</li>
+<li>This function multiply each coulumn of the matrix Kernel and the mask (phas &amp; amplitude)</li>
+</ul>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none. the modifications are applyied directly on the kernel (self.Kt)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.build_1D_cav">
+<code class="descname">build_1D_cav</code><span class="sig-paren">(</span><em>a</em>, <em>n_pts</em>, <em>R1</em>, <em>R2</em>, <em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.build_1D_cav" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>calculate the matrix kernel of the cavity.</li>
+<li>R1, R2 are given in wavelength units (normalized).</li>
+<li>return the matrix kernel and the x axis (lengendre-Gauss distribution).</li>
+</ul>
+<p>Fresnel Kernel calculation for 1D 2 mirrors optical systems, this function is used internally in the solver, to construct the cavity Kernel matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>a: (positive real)the size of the calculation area.</li>
+<li>n_pts: (positive integer) the number of point used in discretization.</li>
+<li>R1,R2: (reals) the radius of curvature of the 1st and 2nd mirror.</li>
+<li>d : (positive real) the length of the cavity (distance between the two mirrors)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>this function is appropriate for 1D systems, for a 2 mirrors, optical cavity.</li>
+<li>x1 : the vector representing the initial plane is generated inside the function rather than getting it as an argument because it follows a legendre polynomials distribution and not linear spacing.</li>
+<li>The kernel matrix elements spacing follows Legendre polynomials distribution rather than linear spacing, this is needed to replace the Fresnel integral by a sum (Legendre-Gauss quadrature scheme)</li>
+<li>All the distances are in the wavelength unit.</li>
+</ul>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none. the Fresnel kernel of the system and x1,x2 the 2 planes (initial and propagated) are build and stored directly in the class attribute: &#8216;self.K&#8217;, &#8216;self.x1&#8217;,&#8217;self.x2&#8217;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.build_1D_cav_ABCD">
+<code class="descname">build_1D_cav_ABCD</code><span class="sig-paren">(</span><em>a</em>, <em>n_pts</em>, <em>A</em>, <em>B</em>, <em>C</em>, <em>D</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.build_1D_cav_ABCD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the  Fresnel-Kernel for a general ABCD optical 1D systems, this function construct the cavity Kernel matrix and stores it in the class attribute &#8216;self.K&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>a : (positive, real) Size of calculation zone (squared zone)</li>
+<li>n_pts: number of points used in discretization of the calculation zone, the step will be &#8216;a/n_pts&#8217;</li>
+<li>A,B,C,D: (reals) elements of the optical matrix defining the paraxial optical system.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>this function is appropriate for 1D systems, for a general case, optical cavity (multi-elements).</li>
+<li>All distances are in the wavelength unit.</li>
+</ul>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none. the Fresnel kernel of the system is build and stored directly in the class attribute: &#8216;self.K&#8217;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.build_2D_cav_ABCD">
+<code class="descname">build_2D_cav_ABCD</code><span class="sig-paren">(</span><em>a</em>, <em>n_pts</em>, <em>A</em>, <em>B</em>, <em>C</em>, <em>D</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.build_2D_cav_ABCD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the  Fresnel-Kernel for a general ABCD optical 2D systems, this function construct the cavity Kernel matrix and stores it in the class attribute &#8216;self.K&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>a : (positive, real) Size of calculation zone (squared zone)</li>
+<li>n_pts: number of points used in discretization of the calculation zone, the step will be &#8216;a/n_pts&#8217;</li>
+<li>A,B,C,D: (reals) elements of the optical matrix defining the paraxial optical system.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>this function is appropriate for 2D systems, for a general case, optical cavity (multi-elements).</li>
+<li>All distances are normalized to the wavelength unit.</li>
+</ul>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none. the Fresnel kernel of the system is build and stored directly in the class attribute: &#8216;self.K&#8217;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.cascade_subsystem">
+<code class="descname">cascade_subsystem</code><span class="sig-paren">(</span><em>SysObj</em>, <em>order=1</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.cascade_subsystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cascade 2 systems (2 objects &#8216;MatEigenSolv&#8217;) each one containig its Matrix kernel (self.Kt).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>SysObj : (object of the classMatEigenSolv) contains the kernel matrix in &#8216;self.Kt&#8217; and all elements of the system.</li>
+<li>order: (1/-1) corresponds to the order of cascading (order=1 :sys1 &#8211;&gt; sys2); (order=-1 :sys2 &#8211;&gt; sys1)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>this function is to use with 1D &amp; 2D systems</li>
+<li>This function multiply each coulumn of the matrix Kernel and the mask (phas &amp; amplitude)</li>
+</ul>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none. the modifications are applyied directly on the kernel (self.Kt)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.eig_sort">
+<code class="descname">eig_sort</code><span class="sig-paren">(</span><em>l</em>, <em>v</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.eig_sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>l :eigenvalue; v:eigenvector.
+sorting eigenvalues &amp; eigenvectors.
+this function is used internally after solving the eigenvalue problem to sort the modes from the fundamental (0) to the (n&#8217;th)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.find_waist">
+<code class="descname">find_waist</code><span class="sig-paren">(</span><em>beam</em>, <em>x</em>, <em>value=0.36</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.find_waist" title="Permalink to this definition">¶</a></dt>
+<dd><p>find the waist at 36% of the maximum amlitude</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.fresnel1D_ABCD_cav">
+<code class="descname">fresnel1D_ABCD_cav</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em>, <em>A</em>, <em>B</em>, <em>C</em>, <em>D</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.fresnel1D_ABCD_cav" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fresnel Kernel formulation for a general ABCD optical 1D systems, this function is used internally in the solver, to construct the cavity Kernel matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>x1,x2 : 1D vectors of real, defining the calculation zones of 1st and 2nd mirrors forming the optical cavity.</li>
+<li>A,B,C,D: (reals) elements of the optical matrix defining the paraxial optical system.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>this function is appropriate for 1D systems, for a general case, optical cavity (multi-elements)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none. the Fresnel kernel of the system is build and stored directly in the class attribute: &#8216;self.K&#8217; &#8216;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.fresnel1D_cav">
+<code class="descname">fresnel1D_cav</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em>, <em>d</em>, <em>R1</em>, <em>R2</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.fresnel1D_cav" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#8220;Fresnel Kernel formulation for 1D systems, this function is used internally in the solver, to construct the cavity Kernel matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>x1,x2 : 1D vectors of real, defining the calculation zones of 1st and 2nd mirrors forming the optical cavity.</li>
+<li>d : (positive real) the cavity length.</li>
+<li>R1, R2: (reals) Radius of curvature of the two mirrors forming the cavity</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>this function is appropriate for 1D systems, of optical cavities composed of 2 mirrors</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none. the Fresnel kernel of the system is build and stored directly in the class attribute: &#8216;self.K&#8217; &#8216;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.fresnel2DC">
+<code class="descname">fresnel2DC</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em>, <em>y1</em>, <em>y2</em>, <em>d</em>, <em>R1</em>, <em>R2</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.fresnel2DC" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#8220;Fresnel Kernel formulation for 2D systems, this function is used internally in the solver, to construct the cavity Kernel matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>x1,y1,x2,y2 : 1D vectors of real, defining the calculation zones of 1st (x1,y1) and 2nd (x2,y2) mirrors forming the optical cavity.</li>
+<li>d : (positive real) the cavity length.</li>
+<li>R1, R2: (reals) Radius of curvature of the two mirrors forming the cavity</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>this function is appropriate for 2D systems, of optical cavities composed of 2 mirrors</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none. the Fresnel kernel of the system is build and stored directly in the class attribute: &#8216;self.K&#8217; &#8216;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.fresnel2D_ABCD">
+<code class="descname">fresnel2D_ABCD</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em>, <em>y1</em>, <em>y2</em>, <em>A</em>, <em>B</em>, <em>C</em>, <em>D</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.fresnel2D_ABCD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fresnel Kernel formulation for a general ABCD optical 2D systems, this function is used internally in the solver, to construct the cavity Kernel matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>x1,y1,x2,y2 : 1D vectors of real, defining the calculation zones of 1st (x1,y1) and 2nd (x2,y2) mirrors forming the optical cavity.</li>
+<li>A,B,C,D: (reals) elements of the optical matrix defining the paraxial optical system.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>this function is appropriate for 2D systems, for a general case, optical cavity (multi-elements)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none. the Fresnel kernel of the system is build and stored directly in the class attribute: &#8216;self.K&#8217; &#8216;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.get_mode1D">
+<code class="descname">get_mode1D</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.get_mode1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch the n&#8217;th eigenvalue and eigenfunctions from the solved eigenbasis of 1D system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>n: order of eigenvalues and eigenfunctions to fetch</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>self.l[n]: (complex) the n&#8217;th eigenvalue.</li>
+<li>self.v[:,n]:  (complex vector) the n&#8217;th eigenfunction of the system. (complex field distribution of the n&#8217;th mode of the cavity)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>this function is used with 1D systems.</li>
+<li>The i&#8217;th eigenvalue corresponds to: losses (amplitude) and phase-shift (phase) per round-trip of the i&#8217;th mode of the cavity.</li>
+<li>The i&#8217;th eigenfunction corresponds to the complex field distribution function of the i&#8217;th mode of the cavity.</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.get_mode2D">
+<code class="descname">get_mode2D</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.get_mode2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch the n&#8217;th eigenvalue and eigenfunctions from the solved eigenbasis of 2D system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>n: order of eigenvalues and eigenfunctions to fetch</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>self.l[n]: (complex) the n&#8217;th eigenvalue.</li>
+<li>tem :  2D (complex vector) the n&#8217;th eigenfunction of the system. (complex field distribution of the n&#8217;th mode of the cavity)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>this function is used with 2D systems.</li>
+<li>out of the solver the eigenfunction is a complex 1D vector, it has to be reshaped to get the 2D field distribution called tem.</li>
+<li>The i&#8217;th eigenvalue corresponds to: losses (amplitude) and phase-shift (phase) per round-trip of the i&#8217;th mode of the cavity.</li>
+<li>The i&#8217;th eigenfunction corresponds to the complex field distribution function of the i&#8217;th mode of the cavity.</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.normalize_beam">
+<code class="descname">normalize_beam</code><span class="sig-paren">(</span><em>beam</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.normalize_beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the amplitude a beam this function is used internally.
+:Args:</p>
+<blockquote>
+<div><ul class="simple">
+<li>beam : 1D or 2D field</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>beam : normalized to the maximum value of the entered beam</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.normalize_modes1D">
+<code class="descname">normalize_modes1D</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.normalize_modes1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the amplitude of all calculated modes, this function is used internally.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.show_mode">
+<code class="descname">show_mode</code><span class="sig-paren">(</span><em>n</em>, <em>what='amplitude'</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.show_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the amplitude/phase of the n&#8217;th mode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first last simple">
+<li>what : string= (amplitude/phase) to choose what to plot.</li>
+<li>n : (positive integer) the order of the mode to show.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This function needs matplotlib package</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.modesolver.CavEigenSys.solve_modes">
+<code class="descname">solve_modes</code><span class="sig-paren">(</span><em>n_modes=30</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.modesolver.CavEigenSys.solve_modes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the eigenvalues and eigenfunctions of the matrix-Kernel of the optical cavity defined in class attribute &#8216;self.K&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Args:</th><td class="field-body"><ul class="first simple">
+<li>n_modes: number of eigenvalues and eigenfunctions to calculate</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="first last simple">
+<li>none. the eigenvalues and eigenfunctions are stored directly in the class attribute: &#8216;self.l&#8217; and &#8216;self.v&#8217; respectively.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>The i&#8217;th eigenvalue corresponds to: losses (amplitude) and phase-shift (phase) per round-trip of the i&#8217;th mode of the cavity.</li>
+<li>The i&#8217;th eigenfunction corresponds to the complex field distribution function of the i&#8217;th mode of the cavity.</li>
+<li>eigenvalues and modes can be obtained using the function &#8216;get_mode(n)&#8217;.</li>
+<li>the eigenfunctions (modes of the cavity) can be shwon using &#8216;show_mode(n)&#8217; to show the n&#8217;th mode.</li>
+</ul>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opencavity.modesolver.Help">
+<em class="property">class </em><code class="descclassname">opencavity.modesolver.</code><code class="descname">Help</code><a class="headerlink" href="#opencavity.modesolver.Help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class containing functions that launch help/docs html files</p>
+</dd></dl>
+
+<span class="target" id="module-opencavity.beams"></span><p>Created on 9 mars 2014</p>
+<p>&#64;author: Mohamed seghilani</p>
+<dl class="class">
+<dt id="opencavity.beams.HgBasis">
+<em class="property">class </em><code class="descclassname">opencavity.beams.</code><code class="descname">HgBasis</code><span class="sig-paren">(</span><em>wavelength</em>, <em>w0x</em>, <em>w0y=0</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.beams.HgBasis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generation of Hermite Gauss beams</p>
+<dl class="method">
+<dt id="opencavity.beams.HgBasis.Rx">
+<code class="descname">Rx</code><span class="sig-paren">(</span><em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.beams.HgBasis.Rx" title="Permalink to this definition">¶</a></dt>
+<dd><p>radius of curvature of the beam evolution</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.beams.HgBasis.Ry">
+<code class="descname">Ry</code><span class="sig-paren">(</span><em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.beams.HgBasis.Ry" title="Permalink to this definition">¶</a></dt>
+<dd><p>radius of curvature of the beam evolution</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.beams.HgBasis.Wx">
+<code class="descname">Wx</code><span class="sig-paren">(</span><em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.beams.HgBasis.Wx" title="Permalink to this definition">¶</a></dt>
+<dd><p>x waist evolution in z</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.beams.HgBasis.Wy">
+<code class="descname">Wy</code><span class="sig-paren">(</span><em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.beams.HgBasis.Wy" title="Permalink to this definition">¶</a></dt>
+<dd><p>y waist evolution in z</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.beams.HgBasis.generate_hg">
+<code class="descname">generate_hg</code><span class="sig-paren">(</span><em>m</em>, <em>p</em>, <em>x</em>, <em>y</em>, <em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.beams.HgBasis.generate_hg" title="Permalink to this definition">¶</a></dt>
+<dd><p>generate a Hermite Gauss beam of order m,p</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opencavity.beams.LGbeam">
+<em class="property">class </em><code class="descclassname">opencavity.beams.</code><code class="descname">LGbeam</code><span class="sig-paren">(</span><em>wavelength</em>, <em>w0</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.beams.LGbeam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generation of Hermite Gauss beams</p>
+<dl class="method">
+<dt id="opencavity.beams.LGbeam.generate_lg">
+<code class="descname">generate_lg</code><span class="sig-paren">(</span><em>p</em>, <em>m</em>, <em>x</em>, <em>y</em>, <em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.beams.LGbeam.generate_lg" title="Permalink to this definition">¶</a></dt>
+<dd><p>generate a Hermite Gauss beam of order m,p</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-opencavity.propagators"></span><p>Created on 23 mars 2014</p>
+<p>&#64;author: Mohamed seghilani</p>
+<dl class="class">
+<dt id="opencavity.propagators.FresnelProp">
+<em class="property">class </em><code class="descclassname">opencavity.propagators.</code><code class="descname">FresnelProp</code><span class="sig-paren">(</span><em>wavelength=1</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for Fresnel propagation kernel construction and integrals calculation
+this class contains all informations about the optical system:</p>
+<blockquote>
+<div><ul class="simple">
+<li>wavelength =1 (default value)</li>
+<li>U1 : the initial field (complex 1D or 2D vector)</li>
+<li>x1,y1 : starting plane coordinates (1D vector of float)</li>
+<li>U2 : resulting field   ((complex 1D or 2D vector)</li>
+<li>x2,y2 : result plane coordinates (1D vector of float)</li>
+</ul>
+</div></blockquote>
+<p>The optical system can be 1D or 2D, this information is stored in the attribute
+&#8216;dimension_flag&#8217;</p>
+<p>This class contains a method to calculate the propagated field at several distances  
+to follow the propagation. It is called yz_prop_chart()</p>
+<p>The class contains plotting methods to show the start/result field</p>
+<p>Steps to use this class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># create a propagation system (object)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">U1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="c"># set the starting field </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M1</span><span class="p">)</span> <span class="c"># M1 is an ABCD optical system matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">propagate1D_ABCD</span><span class="p">(</span><span class="n">x2</span><span class="o">=</span><span class="mi">30</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="c"># calculate the propagation integral</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">show_result_beam</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">)</span> <span class="c"># plot the resulting field </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">show_result_beam</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;phase&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.apply_mask1D">
+<code class="descname">apply_mask1D</code><span class="sig-paren">(</span><em>Mask</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.apply_mask1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply phase and amplitude mask given as an argument to the initial field.
+Args:</p>
+<blockquote>
+<div>-Mask (complex 1D matrix): the initial field will be multiplied by this matrix (element by element).</div></blockquote>
+<dl class="docutils">
+<dt>Returns: </dt>
+<dd>-none.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>The same result can be obtained by directly multiplying  &#8216;self.U1&#8217; by Mask, but using this function is preferred for the clarity of the code.</li>
+</ul>
+</div>
+<dl class="docutils">
+<dt>Example of use </dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># creating propagator object    </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T_lens</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mi">1j</span><span class="o">*</span><span class="n">opSys</span><span class="o">.</span><span class="n">k</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c"># creating phase mask of thin lens with FL=f </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="c"># setting the initial, see the function documentation for more information </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M1</span><span class="p">)</span>  <span class="c"># set the ABCD propagation matrix </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">apply_mask1D</span><span class="p">(</span><span class="n">T_lens</span><span class="p">)</span> <span class="c"># Applying the phase mask</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.cascade_subsystem">
+<code class="descname">cascade_subsystem</code><span class="sig-paren">(</span><em>M2</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.cascade_subsystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cascade subsytem does dot product with the initial ABCD matrix (inverted order).
+Args:</p>
+<blockquote>
+<div><ul class="simple">
+<li>M2 (2x2) real matrix : Paraxial propagation system.</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns: </dt>
+<dd>-none.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="simple">
+<li>The same result can be obtained by directly doing the dot product &#8216;self.M=np.dot(M2,self.M) but using this function is preferred for the clarity of the code.</li>
+<li>another way to do the same thing (preferred one) is to calculate the complete system matrix and then assign it</li>
+</ul>
+<p class="last">(see &#8216;set_ABCD()&#8217; function doc )
+- Matrix with propagation distance =&#8216;0&#8217; can not be assigned this causes division by &#8216;0&#8217; in the propagation Kernel</p>
+</div>
+<p>Example of use</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c">#  definition of the ABCD matrices L1, L2, f are real variables     </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">L1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span> <span class="c"># propagation distance L1 </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">f</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span> <span class="c"># thin lens with EFL=f</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M3</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">L2</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span> <span class="c"># propagation distance L2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">=</span><span class="n">M3</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M1</span><span class="p">)</span> <span class="c"># calculating the global matrix </span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># creating propagation system (object)     </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>  <span class="c"># set the ABCD propagation matrix</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.cpropagate2D_ABCD">
+<code class="descname">cpropagate2D_ABCD</code><span class="sig-paren">(</span><em>U1</em>, <em>x1</em>, <em>x2</em>, <em>y1</em>, <em>y2</em>, <em>Ax</em>, <em>Bx</em>, <em>Cx</em>, <em>Dx</em>, <em>Ay=0</em>, <em>By=0</em>, <em>Cy=0</em>, <em>Dy=0</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.cpropagate2D_ABCD" title="Permalink to this definition">¶</a></dt>
+<dd><p>propagator using c library</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.get_result_beam">
+<code class="descname">get_result_beam</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.get_result_beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch the propagation result contained in &#8216;self.U2&#8217; and the corresponding abscissa self.x2 it returns U2,x2 and y2 if 2D.
+Args:</p>
+<blockquote>
+<div>-none</div></blockquote>
+<dl class="docutils">
+<dt>Returns: </dt>
+<dd>An array containing the following elements:
+- U2 (complex 1D or 2D matrix): the propagation result field 
+- x2 (vector of float): abscissa of the starting plane
+- y2 (vector of float): ordinate of the starting plane (for 2D case)</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>The same result can be obtained by directly accessing &#8216;self.U2&#8217;,&#8217;self.x2&#8217; and &#8216;self.y2&#8217; of the class after calculation.</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.get_start_beam">
+<code class="descname">get_start_beam</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.get_start_beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch the initial beam contained in &#8216;self.U1&#8217; and the corresponding abscissa self.x1 it returns U2,x2 and y2 if 2D.
+Args:</p>
+<blockquote>
+<div>-none</div></blockquote>
+<dl class="docutils">
+<dt>Returns: </dt>
+<dd>An array containing the following elements:
+- U1 (complex 1D or 2D matrix): the initial field &#8220;entered by the user&#8221;
+- x1 (vector of float): abscissa of the starting plane &#8220;entered by the user&#8221;
+- y1 (vector of float): ordinate of the starting plane (for 2D case)</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>This function returns the field entered by the user using the function &#8216;set_start_beam&#8217;.</li>
+<li>The same result can be obtained by directly accessing &#8216;self.U1&#8217;,&#8217;self.x1&#8217; and &#8216;self.y1&#8217; of the class</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.kernel1D_ABCD">
+<code class="descname">kernel1D_ABCD</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em>, <em>A</em>, <em>B</em>, <em>C</em>, <em>D</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.kernel1D_ABCD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fresnel Kernel 1D this function is used internally in Fresnel integral calculation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.kernel2D_ABCD">
+<code class="descname">kernel2D_ABCD</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em>, <em>y1</em>, <em>y2</em>, <em>Ax</em>, <em>Bx</em>, <em>Cx</em>, <em>Dx</em>, <em>Ay=0</em>, <em>By=0</em>, <em>Cy=0</em>, <em>Dy=0</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.kernel2D_ABCD" title="Permalink to this definition">¶</a></dt>
+<dd><p>fresnel Kernel 2D this function is used internally in Fresnel integral calculation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.propagate1D_ABCD">
+<code class="descname">propagate1D_ABCD</code><span class="sig-paren">(</span><em>x2=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.propagate1D_ABCD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fresnel propagation (1D case) of a complex field U1 one iteration through ABCD optical system
+from the plane x1 to the plane x2 .</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>x2 (real 1D vector) : vector defining the propagation plane coordinates can be assimilated to a detector surface for example. by default it is a void vector, this means that the result plane is taken equal to the startingone (same size).</li>
+</ul>
+</dd>
+<dt>Returns: </dt>
+<dd>-none. the propagation result is stored in &#8216;self.U2&#8217; to get it use the function &#8216;self.get_result_beam()&#8217;</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>x2 size must to satisfy Fresnel condition (Paraxial optics condition) ...to be explained later...</li>
+</ul>
+</div>
+<p>Example of use</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># creating propagation system (object)    </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="c"># tem00 is a complex field , &#39;x&#39; (real) is starting plane  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>  <span class="c"># set the ABCD propagation matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">propagate2D_ABCD</span><span class="p">()</span> <span class="c"># propagation through the ABCD system, the result plane is equal the starting one</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">show_result_beam</span><span class="p">()</span> <span class="c"># plots the result field </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">show_result_beam</span><span class="p">()</span> <span class="c"># plots the result field </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.propagate2D_ABCD">
+<code class="descname">propagate2D_ABCD</code><span class="sig-paren">(</span><em>x2=[]</em>, <em>y2=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.propagate2D_ABCD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fresnel propagation (2D case) of a complex field U1 one iteration through ABCD optical system from the plane x1,y1 to the plane x2,y2 .</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>x2,y2 (real 1D vectors) : vectors defining the propagation plane coordinates, can be assimilated to a detector surface for example. by default it is a void vector, this means that the result plane is taken equal to the starting one (same size).</li>
+</ul>
+</dd>
+<dt>Returns: </dt>
+<dd>-none. the propagation result is stored in &#8216;self.U2&#8217; to get it use the function &#8216;self.get_result_beam()&#8217;</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>x2,y2 size must to satisfy Fresnel condition (Paraxial optics condition) ...to be explained later...</li>
+</ul>
+</div>
+<p>Example of use</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># creating propagation system (object)    </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="c"># tem00 is a complex 2D field , &#39;x&#39; (real) is starting plane  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>  <span class="c"># set the ABCD propagation matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">propagate1D_ABCD</span><span class="p">(</span><span class="n">x2</span><span class="o">=</span><span class="mi">30</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="c"># propagation through the ABCD system, the result plane is 30 times the starting one</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.set_ABCD">
+<code class="descname">set_ABCD</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.set_ABCD" title="Permalink to this definition">¶</a></dt>
+<dd><p>assign an ABCD matrix the system (the ABCD matrix is self.M : an attribute of the class holding the system)</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>M (2x2) real matrix : Paraxial propagation system.</li>
+</ul>
+</dd>
+<dt>Returns: </dt>
+<dd>-none.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>The same result can be obtained by directly assigning &#8216;self.M=M&#8217; by Mask, but using this function is preferred for the clarity of the code.</li>
+</ul>
+</div>
+<dl class="docutils">
+<dt>Example of use </dt>
+<dd><div class="first highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c">#  definition of the ABCD matrices L1, L2, f are real variables     </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">L1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span> <span class="c"># propagation distance L1 </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">f</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span> <span class="c"># thin lens with EFL=f</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M3</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">L2</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span> <span class="c"># propagation distance L2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="o">=</span><span class="n">M3</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M1</span><span class="p">)</span> <span class="c"># calculating the global matrix </span>
+</pre></div>
+</div>
+<div class="last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># creating propagation system (object)     </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>  <span class="c"># set the ABCD propagation matrix</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.set_start_beam">
+<code class="descname">set_start_beam</code><span class="sig-paren">(</span><em>U1</em>, <em>x1</em>, <em>y1=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.set_start_beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign initial value to self.U1 taken as the start beam for propagation functions in the class.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>U1 (complex 1D or 2D matrix): the initial field</li>
+<li>x1 (vector of float): abscissa of the starting plane</li>
+<li>y1 (vector of float): ordinate of the starting plane (for 2D case)</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>default value of y1 is void vector, this assumes 1D system.</li>
+<li>For 2D system if y1 is not given it will be taken equals to x1.</li>
+</ul>
+</div>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><ul class="first last simple">
+<li>none.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.show_prop_yz">
+<code class="descname">show_prop_yz</code><span class="sig-paren">(</span><em>what='amplitude'</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.show_prop_yz" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows self.Uyz : result of propagations at successive planes to follow the propagation
+Args:</p>
+<blockquote>
+<div><ul class="simple">
+<li>what (string): flag to indicate what to plot (amplitude,phase or intensity) of the result field, by default is amplitude.</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns: </dt>
+<dd>-none.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>the function plots the resulting field using &#8216;matplotlib&#8217;.</li>
+<li>it shows 2D map of &#8216;self.U2&#8217; representing propagation result at several planes defined in &#8216;self.zz&#8217;.</li>
+<li>sometimes (when not using Ipython) the function &#8216;matplotlib.pylab.show()&#8217; must be used to show the plot result.</li>
+</ul>
+</div>
+<p>Example of use</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># creating propagation system (object)    </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="c"># tem00 is a complex 1D field , &#39;x&#39; (real) is initial plane  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#opSys.yz_prop_chart(5e3,50e3,100,30*x) # propagate the start field from Lmin=5mm to Lmax=50mm at 100 intermediate planes (linearly spaced ), result plane is 30x times the start one.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#opSys.show_prop_yz() # do the calculations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#opSys.show_prop_yz(what=&#39;intensity&#39;) # show intensity of resulting fields </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#plt.show()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.show_result_beam">
+<code class="descname">show_result_beam</code><span class="sig-paren">(</span><em>what='amplitude'</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.show_result_beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows &#8216;self.U2&#8217;  result of propagation calculation.
+Args:</p>
+<blockquote>
+<div><ul class="simple">
+<li>what (string): flag to indicate what to plot (amplitude,phase or intensity) of the result field, by default is amplitude.</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns: </dt>
+<dd>-none.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>the function plots the resulting field using &#8216;matplotlib&#8217;.</li>
+<li>it plots &#8216;self.U2&#8217; as a function of &#8216;self.x2&#8217; for 1D case.</li>
+<li>it shows 2D map of &#8216;self.U2&#8217; in the plane defined by &#8216;self.x2&#8217;, &#8216;self.y2&#8217;.</li>
+<li>sometimes (when not using Ipython) the function &#8216;matplotlib.pylab.show()&#8217; must be used to show the plot result.</li>
+</ul>
+</div>
+<p>Example of use</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># creating propagation system (object)   </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="c"># tem00 is a complex 2D field , &#39;x&#39; (real) is initial plane  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>  <span class="c"># set the ABCD propagation matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">propagate1D_ABCD</span><span class="p">(</span><span class="n">x2</span><span class="o">=</span><span class="mi">30</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="c"># propagation through the ABCD system, the result plane is 30 times the initial one</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">show_result_beam</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">)</span> <span class="c"># show result of propagation </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">show_result_beam</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;phase&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.show_start_beam">
+<code class="descname">show_start_beam</code><span class="sig-paren">(</span><em>what='amplitude'</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.show_start_beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows self.U1 the start beam assigned by the user
+Args:</p>
+<blockquote>
+<div><ul class="simple">
+<li>what (string): flag to indicate what to plot (amplitude,phase or intensity) of the result field, by default is amplitude.</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns: </dt>
+<dd>-none.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>the function plots the resulting field using &#8216;matplotlib&#8217;.</li>
+<li>it plots &#8216;self.U1&#8217; as a function of &#8216;self.x1&#8217; for 1D case.</li>
+<li>it shows 2D map of &#8216;self.U2&#8217; in the plane defined by &#8216;self.x1&#8217;, &#8216;self.y1&#8217;.</li>
+<li>sometimes (when not using Ipython) the function &#8216;matplotlib.pylab.show()&#8217; must be used to show the plot result.</li>
+</ul>
+</div>
+<p>Example of use</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># creating propagation system (object)   </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="c"># tem00 is a complex 2D field , &#39;x&#39; (real) is initial plane  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">show_start_beam</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">)</span> <span class="c"># show initial field assigned by the user</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">show_start_beam</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;phase&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.propagators.FresnelProp.yz_prop_chart">
+<code class="descname">yz_prop_chart</code><span class="sig-paren">(</span><em>Lmin</em>, <em>Lmax</em>, <em>nstep</em>, <em>x2=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.yz_prop_chart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Propagate the 1D complex field to several planes and store the results in a matrix to follow the propagation as a function of distance    .</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>Lmin (real) : initial distance from which propagations calculation starts.</li>
+<li>Lmax (real)&gt; Lmax : Stop distance until which propagations are calculated.</li>
+<li>nstep (integer) : number of planes where the propagated field is calculated.</li>
+<li>x2(real 1D vectors) : vector defining the propagation plane coordinates, can be assimilated to a detector surface for example. by default it is a void vector, this means that the result plane is taken equal to the starting one (same size)</li>
+</ul>
+</dd>
+<dt>Returns: </dt>
+<dd>-none. the propagation result is stored in &#8216;self.Uyz&#8217; :2D complex matrix containing result field at several planes stored in &#8216;self.zz&#8217;.</dd>
+</dl>
+<p>Example of use</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># creating propagation system (object)    </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="c"># tem00 is a complex 1D field , &#39;x&#39; (real) is initial plane  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#opSys.yz_prop_chart(5e3,50e3,100,30*x) # propagate the start field from Lmin=5mm to Lmax=50mm at 100 intermediate planes (linearly spaced ), result plane is 30x times the start one.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#opSys.show_prop_yz() # do the calculations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#opSys.show_prop_yz(what=&#39;intensity&#39;) # show the result </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#plt.show()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-opencavity.utilsfunc"></span><p>Created on 11 mars 2014</p>
+<p>&#64;author: Mohamed seghilani</p>
+<dl class="class">
+<dt id="opencavity.utilsfunc.UtilsFunc">
+<em class="property">class </em><code class="descclassname">opencavity.utilsfunc.</code><code class="descname">UtilsFunc</code><a class="headerlink" href="#opencavity.utilsfunc.UtilsFunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility functions to be called from other classes</p>
+<dl class="method">
+<dt id="opencavity.utilsfunc.UtilsFunc.gauss_legendre">
+<code class="descname">gauss_legendre</code><span class="sig-paren">(</span><em>m</em>, <em>tol=1e-08</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.utilsfunc.UtilsFunc.gauss_legendre" title="Permalink to this definition">¶</a></dt>
+<dd><p>x,A = gauss_legendre(m,tol=10e-9)
+Returns nodal abscissas {x} and weights {A} of
+Gauss-Legendre m-point quadrature.
+<a class="reference external" href="http://w3mentor.com/learn/python/scientific-computation/gauss-legendre-m-point-quadrature-in-python/">http://w3mentor.com/learn/python/scientific-computation/gauss-legendre-m-point-quadrature-in-python/</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.utilsfunc.UtilsFunc.greet">
+<code class="descname">greet</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.utilsfunc.UtilsFunc.greet" title="Permalink to this definition">¶</a></dt>
+<dd><p>test funtion</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.utilsfunc.UtilsFunc.hermite">
+<code class="descname">hermite</code><span class="sig-paren">(</span><em>n</em>, <em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.utilsfunc.UtilsFunc.hermite" title="Permalink to this definition">¶</a></dt>
+<dd><p>evaluate the hermite polynomial at a given x</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencavity.utilsfunc.UtilsFunc.hermite_poly">
+<code class="descname">hermite_poly</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.utilsfunc.UtilsFunc.hermite_poly" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>for more info see &#8216;<a class="reference external" href="http://suinotes.wordpress.com/2010/05/26/hermite-polynomials-with-matlab/">http://suinotes.wordpress.com/2010/05/26/hermite-polynomials-with-matlab/</a></dt>
+<dd><p class="first">function h = hermite_rec(n)
+if( 0==n ), h = 1;
+elseif( 1==n ), h = [2 0];
+else</p>
+<blockquote>
+<div><p>h1 = zeros(1,n+1);
+h1(1:n) = 2*hermite_rec(n-1);</p>
+<p>h2 = zeros(1,n+1);
+h2(3:end) = 2*(n-1)*hermite_rec(n-2);</p>
+<p>h = h1 - h2;</p>
+</div></blockquote>
+<p class="last">end</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to OpenCavity documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="introduction.html"
+                        title="next chapter">Introduction</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             >next</a> |</li>
+        <li><a href="#">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, M.Seghilani.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial 4 - Calculating the output beam &mdash; OpenCavity 0.1 Pre-Alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1 Pre-Alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="OpenCavity 0.1 Pre-Alpha documentation" href="index.html" />
+    <link rel="next" title="Tutorial 5 - An advanced cavity example ‘Bessel-Gauss’ cavity" href="tutorial5.html" />
+    <link rel="prev" title="Tutorial 3 - using apertures and phase masks" href="tutorial3.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial5.html" title="Tutorial 5 - An advanced cavity example ‘Bessel-Gauss’ cavity"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tutorial3.html" title="Tutorial 3 - using apertures and phase masks"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tutorial-4-calculating-the-output-beam">
+<span id="tuto4-label"></span><h1>Tutorial 4 - Calculating the output beam<a class="headerlink" href="#tutorial-4-calculating-the-output-beam" title="Permalink to this headline">¶</a></h1>
+<p>In the previous tutorials we learned how to use OpenCavity to define a general optical cavity system and solve its eigenmodes. The solver calculate the
+modes inside the optical cavity more precisely on the first mirror, but in practical applications we need the laser beam outside the cavity. In this
+tutorial we see how to calculate the output beam using the a physical optics module called <code class="docutils literal"><span class="pre">FresnelProp</span></code> that comes with <strong>OpenCavity</strong>, this module
+propagates 1D and 2D optical waves trough a general ABCD system using the Fresnel integral and other tutorials will be dedicated to it to show for what
+kind of things it could be useful, for now we will use it to calculate the output beam or put another way the fundamental mode outside the cavity.
+Let&#8217;s start by taking the cavity system of tutorial-2 and calculate its eigenmodes.</p>
+<p>The round trip matrix of the cavity is (note that the order is inverted):</p>
+<div class="math">
+\[\begin{split}\begin{bmatrix} A &amp; B \\ C &amp; D \end{bmatrix}=
+\begin{bmatrix} 1 &amp; 0 \\ -2/R2 &amp; 1 \end{bmatrix}
+\times \begin{bmatrix} 1 &amp; Lc \\ 0 &amp; 1 \end{bmatrix}
+\times \begin{bmatrix} 1 &amp; 0 \\ -2/R1 &amp; 1 \end{bmatrix}
+\times \begin{bmatrix} 1 &amp; Lc \\ 0 &amp; 1 \end{bmatrix}\end{split}\]</div>
+<p>The first step is to import <code class="docutils literal"><span class="pre">opencavity</span></code> module and enter the global matrix of the cavity, this can be done directly by writing each matrix then do the dot
+product, or we can simply use <cite>g1,g2</cite> parameters as we did in <em class="xref std std-ref">tuto2-using-g1g2-label</em>.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">oc</span><span class="p">;</span> <span class="c">#importing the opencavity module</span>
+
+<span class="gp">In [2]: </span><span class="n">R1</span><span class="o">=</span><span class="mf">1e13</span><span class="p">;</span> <span class="n">R2</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">Lc</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">npts</span><span class="o">=</span><span class="mi">120</span><span class="p">;</span> <span class="n">a</span><span class="o">=</span><span class="mi">150</span><span class="p">;</span> <span class="c"># cavity parameters</span>
+
+<span class="gp">In [3]: </span><span class="n">g1</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">Lc</span><span class="o">/</span><span class="n">R1</span><span class="p">;</span> <span class="n">g2</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">Lc</span><span class="o">/</span><span class="n">R2</span><span class="p">;</span>
+
+<span class="gp">In [4]: </span><span class="n">A</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">B</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g2</span><span class="o">*</span><span class="n">Lc</span><span class="p">;</span> <span class="n">C</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">/</span><span class="n">Lc</span><span class="p">;</span> <span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+<span class="gp">In [5]: </span><span class="n">opsys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">()</span> <span class="c">#creating a oc object</span>
+
+<span class="gp">In [6]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span> <span class="c"># enter the ABCD matrixc and build the system-Kerenl</span>
+
+<span class="gp">In [7]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">solve_modes</span><span class="p">()</span>
+<span class="go">running the eigenvalues solver...</span>
+
+<span class="gp">In [8]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># the fundamental mode E-field</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/tuto4_plot_mode0_E_1D.png"><img alt="_images/tuto4_plot_mode0_E_1D.png" src="_images/tuto4_plot_mode0_E_1D.png" style="width: 4in;" /></a>
+<p>Well nothing new till now this is basically tutorial2, and as we just explained the mode shown by the solver is the mode inside the cavity on the first
+mirror. To calculate the output beam say at 5cm outside the cavity first we have to define the ABCD matrix of the optical system shown in the figure below:</p>
+<img alt="_images/Optical_cavity_output.png" src="_images/Optical_cavity_output.png" />
+<p>The ABCD matrix of this optical system can be written as follows:</p>
+<div class="math">
+\[\begin{split}\begin{bmatrix} A &amp; B \\ C &amp; D \end{bmatrix}=
+\begin{bmatrix} 1 &amp; d2 \\ 0 &amp; 1 \end{bmatrix}
+\times \begin{bmatrix} 1 &amp; 1 \\ 0 &amp; n1/n0 \end{bmatrix}
+\times \begin{bmatrix} 1 &amp; d1 \\ 0 &amp; 1 \end{bmatrix}
+\times \begin{bmatrix} 1 &amp; 0 \\ \frac{(n0-n1)}{R2*n1} &amp; n0/n1 \end{bmatrix}
+\times \begin{bmatrix} 1 &amp; Lc \\ 0 &amp; 1 \end{bmatrix}\end{split}\]</div>
+<p>As you can notice the order of matrix multiplication is inverted, so from the first plane on the first mirror M1 to the final plane outside the optical
+cavity where we want to calculate the output beam we have: Propagation distance Lc, then refraction at curved interface (n0/n1), propagation distance d1,
+refraction at flat interface and finally propagation distance d2 until the final plane.
+let&#8217;s enter this matrices and calculate the global matrix system by taking n0=1, n1=1.5, and d1=5mm, and d2=50mm. We also calculate the global matrix in
+the case of free space propagation by neglecting the mirror M2 to see its effect on the output beam.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [9]: </span><span class="n">M00</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="n">Lc</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>
+
+<span class="gp">In [10]: </span><span class="n">M01</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span> <span class="p">],[(</span><span class="mi">1</span><span class="o">-</span><span class="mf">1.5</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="o">-</span><span class="n">R2</span><span class="o">*</span><span class="mf">1.5</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="mf">1.5</span><span class="p">]]);</span><span class="c"># -R2  (&lt;0 because it is a concave interface)</span>
+
+<span class="gp">In [11]: </span><span class="n">M02</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mf">5e3</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>
+
+<span class="gp">In [12]: </span><span class="n">M03</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="o">/</span><span class="mi">1</span><span class="p">]]);</span>
+
+<span class="gp">In [13]: </span><span class="n">M04</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mf">50e3</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>
+
+<span class="gp">In [14]: </span><span class="n">M_out</span><span class="o">=</span><span class="n">M04</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M03</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M02</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M01</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M00</span><span class="p">))));</span>
+
+<span class="gp">In [15]: </span><span class="n">M_out2</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="n">Lc</span><span class="o">+</span><span class="mf">5e3</span><span class="o">+</span><span class="mf">50e3</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span> <span class="c"># neglecting M2 = just propagation distances</span>
+</pre></div>
+</div>
+<p>Now that the matrices are calculated, we will create a Fresnel propagator object then set the propagation system and the beam to propagate for each case
+(with / without the concave mirror M2) then we use <code class="docutils literal"><span class="pre">propagate1D_ABCD()</span></code> function to propagate the beam.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [16]: </span><span class="kn">from</span> <span class="nn">opencavity.propagators</span> <span class="kn">import</span> <span class="n">FresnelProp</span>
+
+<span class="gp">In [17]: </span><span class="n">propsys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c">#create propagator object</span>
+
+<span class="gp">In [18]: </span><span class="n">propsys2</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span>
+
+<span class="gp">In [19]: </span><span class="n">l</span><span class="p">,</span><span class="n">tem00</span><span class="o">=</span><span class="n">opsys</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># get the fundamental mode of the cavity</span>
+
+<span class="gp">In [20]: </span><span class="n">propsys</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">opsys</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span> <span class="c"># set the beam to propagate</span>
+
+<span class="gp">In [21]: </span><span class="n">propsys2</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">opsys</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span>
+
+<span class="gp">In [22]: </span><span class="n">propsys</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M_out</span><span class="p">)</span> <span class="c"># taking M2 into account</span>
+
+<span class="gp">In [23]: </span><span class="n">propsys2</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M_out2</span><span class="p">)</span> <span class="c"># without M2</span>
+
+<span class="gp">In [24]: </span><span class="n">propsys</span><span class="o">.</span><span class="n">propagate1D_ABCD</span><span class="p">(</span><span class="n">x2</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="n">opsys</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span> <span class="c"># calculate the propagation from initial plane to a plane 10 times larger (the beam is wider)</span>
+
+<span class="gp">In [25]: </span><span class="n">propsys2</span><span class="o">.</span><span class="n">propagate1D_ABCD</span><span class="p">(</span><span class="n">x2</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="n">opsys</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span>
+
+<span class="gp">In [26]: </span><span class="n">propsys</span><span class="o">.</span><span class="n">show_result_beam</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">)</span> <span class="c"># show propagation result</span>
+
+<span class="gp">In [27]: </span><span class="n">propsys2</span><span class="o">.</span><span class="n">show_result_beam</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/tuto4_plot_propagate_tem00_1D_1.png"><img alt="_images/tuto4_plot_propagate_tem00_1D_1.png" src="_images/tuto4_plot_propagate_tem00_1D_1.png" style="width: 4in;" /></a>
+<a class="reference internal image-reference" href="_images/tuto4_plot_propagate_tem00_1D_2.png"><img alt="_images/tuto4_plot_propagate_tem00_1D_2.png" src="_images/tuto4_plot_propagate_tem00_1D_2.png" style="width: 4in;" /></a>
+<p>What we can see from comparing these two figures is that when the beam propagates trough the output mirror it diverges more than in the case of pure
+free space propagation, actually the output mirror acts like a diverging lens and this is not surprising given its shape.
+For a more precise comparison we can get the waist of the beam using the function <code class="docutils literal"><span class="pre">find_waist(beam,x)</span></code> in the class <code class="docutils literal"><span class="pre">CavEigenSys</span></code> before this we have to get the result beam using
+the function <code class="docutils literal"><span class="pre">get_result_beam()</span></code> in the class <code class="docutils literal"><span class="pre">FresnelProp</span></code> as follows:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [28]: </span><span class="n">tem00_1</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">propsys</span><span class="o">.</span><span class="n">get_result_beam</span><span class="p">()</span> <span class="c"># get the propagated beam and the abscissa vector</span>
+
+<span class="gp">In [29]: </span><span class="n">tem00_2</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">propsys2</span><span class="o">.</span><span class="n">get_result_beam</span><span class="p">()</span>
+
+<span class="gp">In [30]: </span><span class="k">print</span> <span class="n">opsys</span><span class="o">.</span><span class="n">find_waist</span><span class="p">(</span><span class="n">tem00_1</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="c"># calculate the waist of the beam at 36% of maximum amplitude</span>
+<span class="go">764.060403123</span>
+
+<span class="gp">In [31]: </span><span class="k">print</span> <span class="n">opsys</span><span class="o">.</span><span class="n">find_waist</span><span class="p">(</span><span class="n">tem00_2</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+<span class="go">660.868672265</span>
+</pre></div>
+</div>
+<div class="section" id="the-cleaned-code">
+<h2>The cleaned code<a class="headerlink" href="#the-cleaned-code" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">@author: M.seghilani</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">ms</span>
+<span class="kn">from</span> <span class="nn">opencavity.propagators</span> <span class="kn">import</span> <span class="n">FresnelProp</span>
+
+<span class="n">R1</span><span class="o">=</span><span class="mf">1e13</span><span class="p">;</span> <span class="n">R2</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">Lc</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">npts</span><span class="o">=</span><span class="mi">120</span><span class="p">;</span> <span class="n">a</span><span class="o">=</span><span class="mi">150</span><span class="p">;</span> <span class="c"># cavity parameters </span>
+<span class="n">g1</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">Lc</span><span class="o">/</span><span class="n">R1</span><span class="p">;</span> <span class="n">g2</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">Lc</span><span class="o">/</span><span class="n">R2</span><span class="p">;</span>
+<span class="n">A</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">B</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g2</span><span class="o">*</span><span class="n">Lc</span><span class="p">;</span> <span class="n">C</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">/</span><span class="n">Lc</span><span class="p">;</span> <span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+<span class="n">opsys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">();</span> 
+<span class="n">opsys</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span>
+<span class="n">opsys</span><span class="o">.</span><span class="n">solve_modes</span><span class="p">()</span>
+<span class="n">opsys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c">#opsys.show_mode(2,what=&#39;intensity&#39;) </span>
+<span class="n">opsys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;phase&#39;</span><span class="p">)</span> 
+<span class="n">ms</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c"># creating ABCD matrix of the beam path from the mode calculation plane to the output calculation plane</span>
+<span class="n">M00</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="n">Lc</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>
+<span class="n">M01</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span> <span class="p">],[(</span><span class="mi">1</span><span class="o">-</span><span class="mf">1.5</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="o">-</span><span class="n">R2</span><span class="o">*</span><span class="mf">1.5</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="mf">1.5</span><span class="p">]]);</span>
+<span class="n">M02</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mf">5e3</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>
+<span class="n">M03</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="o">/</span><span class="mi">1</span><span class="p">]]);</span>
+<span class="n">M04</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mf">50e3</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>
+
+<span class="n">M_out</span><span class="o">=</span><span class="n">M04</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M03</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M02</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M01</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M00</span><span class="p">))));</span> <span class="c"># global matrix </span>
+<span class="n">M_out2</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="n">Lc</span><span class="o">+</span><span class="mf">5e3</span><span class="o">+</span><span class="mf">50e3</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span> <span class="c"># free space ABCD system from mode calculation plane to output calculation plane</span>
+
+<span class="n">l</span><span class="p">,</span><span class="n">tem00</span><span class="o">=</span><span class="n">opsys</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+ 
+<span class="n">propsys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># create a propagator object </span>
+<span class="n">propsys2</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> 
+<span class="n">propsys</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">opsys</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span> 
+<span class="n">propsys2</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">opsys</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span>
+<span class="n">propsys</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M_out</span><span class="p">)</span> <span class="c"># set the propagation matrix </span>
+<span class="n">propsys2</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M_out2</span><span class="p">)</span> 
+
+<span class="n">propsys</span><span class="o">.</span><span class="n">propagate1D_ABCD</span><span class="p">(</span><span class="n">x2</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="n">opsys</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span> <span class="c"># propagate the beam </span>
+<span class="n">propsys2</span><span class="o">.</span><span class="n">propagate1D_ABCD</span><span class="p">(</span><span class="n">x2</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="n">opsys</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span>
+
+<span class="n">propsys</span><span class="o">.</span><span class="n">show_result_beam</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">)</span> <span class="c"># show the propagated beam</span>
+<span class="n">propsys2</span><span class="o">.</span><span class="n">show_result_beam</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">)</span>
+
+<span class="n">tem00_1</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">propsys</span><span class="o">.</span><span class="n">get_result_beam</span><span class="p">()</span><span class="c"># fetch propagated beam and abscissa </span>
+<span class="n">tem00_2</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">propsys2</span><span class="o">.</span><span class="n">get_result_beam</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="n">opsys</span><span class="o">.</span><span class="n">find_waist</span><span class="p">(</span><span class="n">tem00_1</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="c"># find the wais of the beam</span>
+<span class="k">print</span> <span class="n">opsys</span><span class="o">.</span><span class="n">find_waist</span><span class="p">(</span><span class="n">tem00_2</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tutorial 4 - Calculating the output beam</a><ul>
+<li><a class="reference internal" href="#the-cleaned-code">The cleaned code</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tutorial3.html"
+                        title="previous chapter">Tutorial 3 - using apertures and phase masks</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorial5.html"
+                        title="next chapter">Tutorial 5 - An advanced cavity example &#8216;Bessel-Gauss&#8217; cavity</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tutorial4.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial5.html" title="Tutorial 5 - An advanced cavity example ‘Bessel-Gauss’ cavity"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tutorial3.html" title="Tutorial 3 - using apertures and phase masks"
+             >previous</a> |</li>
+        <li><a href="index.html">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, M.Seghilani.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b2.
+    </div>
+  </body>
+</html>

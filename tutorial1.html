@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial 1 - Simple 2 mirrors cavity &mdash; OpenCavity 0.1 Pre-Alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1 Pre-Alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="OpenCavity 0.1 Pre-Alpha documentation" href="index.html" />
+    <link rel="next" title="Tutorial 2 - Generalizes 1D cavity" href="tutorial2.html" />
+    <link rel="prev" title="Before starting" href="before_starting.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial2.html" title="Tutorial 2 - Generalizes 1D cavity"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="before_starting.html" title="Before starting"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tutorial-1-simple-2-mirrors-cavity">
+<h1>Tutorial 1 - Simple 2 mirrors cavity<a class="headerlink" href="#tutorial-1-simple-2-mirrors-cavity" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="system-defenition">
+<h2>System defenition<a class="headerlink" href="#system-defenition" title="Permalink to this headline">¶</a></h2>
+<p>In this example we see how to calculate the eigenmodes of a simple 2 mirrors optical resonator (see Fig below)</p>
+<img alt="_images/Optical_cavity_scheme.png" src="_images/Optical_cavity_scheme.png" />
+<p>Where M1, M2 are two mirrors with radius of curvature R1,R2 respectively, and Lc the distance between M1,M2 is the cavity length.
+It is important to note that the sign sign convention adopted is R&gt;0 means concave mirror and R&lt;0 means a convex one. We consider
+a plano-concave cavity also called VECSEL type cavity, for Vertical Cavity Surface Emitting lasers which means that the waist is on
+the plane mirror.</p>
+<p>This is the simplest example one can get, Well let&#8217;s see how to calculate the eigenmodes of this cavity:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">ms</span><span class="p">;</span> <span class="c">#importing the opencavity module</span>
+
+<span class="gp">In [2]: </span><span class="n">sys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="mf">1.01</span><span class="p">);</span> <span class="c">#creating a oc object at wavelength =1.01</span>
+
+<span class="gp">In [3]: </span><span class="n">R1</span><span class="o">=</span><span class="mf">1e13</span><span class="p">;</span> <span class="n">R2</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">Lc</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">npts</span><span class="o">=</span><span class="mi">120</span><span class="p">;</span> <span class="n">a</span><span class="o">=</span><span class="mi">150</span><span class="p">;</span> <span class="c"># entering cavity parameters</span>
+
+<span class="gp">In [4]: </span><span class="n">sys</span><span class="o">.</span><span class="n">build_1D_cav</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Lc</span><span class="p">);</span> <span class="c"># building the matrix-kernel system</span>
+<span class="go">Building the  kernel matrix ...</span>
+<span class="go">Building the  kernel matrix done.</span>
+
+<span class="gp">In [5]: </span><span class="n">sys</span><span class="o">.</span><span class="n">solve_modes</span><span class="p">(</span><span class="n">n_modes</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span> <span class="c"># solve the 10 first modes of the cavity, default value of n_modes is 30</span>
+<span class="go">running the eigenvalues solver...</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">in the first command we import the <strong>CavityMode</strong> module  and we call it <code class="docutils literal"><span class="pre">oc</span></code> in the running session, the <strong>;</strong> to not show messages.</p>
+</li>
+<li><dl class="first docutils">
+<dt>in the command 2 we create a opencavity object working at a wavelength=1.01, this object will contain all the system (parameters, solutions...) note that:</dt>
+<dd><ul class="first last simple">
+<li>the default wavelength is 1, this means that <code class="docutils literal"><span class="pre">sys=ms.CavEigenSys()</span></code> = <code class="docutils literal"><span class="pre">sys=ms.CavEigenSys(wavelength=1)</span></code></li>
+<li>the wavelength is unitless, thus all distances are in the wavelength unit. (here micron)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">in line 3 we just enter the cavity parameters.</p>
+</li>
+<li><p class="first">in line 4 we build the Fresnel-kernel matrix of the system.</p>
+</li>
+<li><dl class="first docutils">
+<dt>in line 5 we ask the oc to Change to find the 10 first eigenvalues and modes of the cavity, note that</dt>
+<dd><ul class="first last simple">
+<li>the default value of <code class="docutils literal"><span class="pre">n_modes</span></code> is 30.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Now to see the calculated modes and eigenvalues:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [6]: </span><span class="n">sys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c">#plot the E-field of the 1st mode.</span>
+
+<span class="gp">In [7]: </span><span class="n">sys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">);</span> <span class="c">#plot the intensity of the 2d mode.</span>
+
+<span class="gp">In [8]: </span><span class="n">sys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">what</span><span class="o">=</span><span class="s">&quot;phase&quot;</span><span class="p">);</span>  <span class="c">#plot the phase of the 2nd mode.</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/plot_mode0_E_1D1.png"><img alt="_images/plot_mode0_E_1D1.png" src="_images/plot_mode0_E_1D1.png" style="width: 4in;" /></a>
+<a class="reference internal image-reference" href="_images/plot_mode1_I_1D.png"><img alt="_images/plot_mode1_I_1D.png" src="_images/plot_mode1_I_1D.png" style="width: 4in;" /></a>
+<a class="reference internal image-reference" href="_images/plot_mode1_P_1D.png"><img alt="_images/plot_mode1_P_1D.png" src="_images/plot_mode1_P_1D.png" style="width: 4in;" /></a>
+<p>To get the eigenvalues:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [9]: </span><span class="n">l</span><span class="p">,</span><span class="n">v</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># l is the eigenvalue, and v the eigenvector: complex E-field of the mode</span>
+
+<span class="gp">In [10]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c"># the round trip losses = 1- |l|^2, we use np numerical-python imported within the oc</span>
+<span class="go">0.0099009900994</span>
+</pre></div>
+</div>
+<p>In this example we used the function <code class="docutils literal"><span class="pre">buid_1D_cav()</span></code> to build the cavity <cite>kernel</cite>,  this function is appropriate for simple systems like the one of this
+tutorial when we have linear 2 mirrors cavity, however, there is a more general and powerful function which is <code class="docutils literal"><span class="pre">build_1D_cav_ABCD()</span></code> which can be used to
+define any optical cavity using its transfer matrix. (see <em class="xref std std-ref">_ray-matrices-label</em>). In next tutorials we will use this function, starting with the next one which
+is a tutorial that aim at getting familiar with defining general cavity designs.</p>
+<p>The standard steps one should do to define a cavity systems and solve its modes using <code class="docutils literal"><span class="pre">opencavity</span></code> can be summarized as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li>importing <code class="docutils literal"><span class="pre">opencavity</span></code> module</li>
+<li>enter the cavity parameters</li>
+<li>create a solver object (CavEigenSys()) that keeps in one place  all informations about the system</li>
+<li>solve the mode</li>
+<li>show the modes</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="the-cleaned-code">
+<h2>The cleaned code<a class="headerlink" href="#the-cleaned-code" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">ms</span>
+
+<span class="n">sys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">()</span> <span class="c">#creating a ms object</span>
+<span class="n">R1</span><span class="o">=</span><span class="mf">1e13</span><span class="p">;</span> <span class="n">R2</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">Lc</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">npts</span><span class="o">=</span><span class="mi">120</span><span class="p">;</span> <span class="n">a</span><span class="o">=</span><span class="mi">150</span><span class="p">;</span> <span class="c"># cavity parameters </span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">build_1D_cav</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Lc</span><span class="p">)</span> <span class="c"># build the system</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">solve_modes</span><span class="p">()</span> <span class="c">#solve the modes default n_modes=30</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c">#plots the E-field of the 1st mode </span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">)</span> <span class="c">#plots the intensity of the 2nd mode</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;phase&#39;</span><span class="p">)</span> <span class="c">#plots the phase of the 2nd mode</span>
+<span class="n">ms</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">l</span><span class="p">,</span><span class="n">v</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c">#l: eigenvalue; v: eigenmode</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tutorial 1 - Simple 2 mirrors cavity</a><ul>
+<li><a class="reference internal" href="#system-defenition">System defenition</a></li>
+<li><a class="reference internal" href="#the-cleaned-code">The cleaned code</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="before_starting.html"
+                        title="previous chapter">Before starting</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorial2.html"
+                        title="next chapter">Tutorial 2 - Generalizes 1D cavity</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tutorial1.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial2.html" title="Tutorial 2 - Generalizes 1D cavity"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="before_starting.html" title="Before starting"
+             >previous</a> |</li>
+        <li><a href="index.html">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, M.Seghilani.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b2.
+    </div>
+  </body>
+</html>

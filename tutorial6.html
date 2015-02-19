@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial 6 - A second ‘Bessel-Gauss’ cavity design &mdash; OpenCavity 0.1 Pre-Alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1 Pre-Alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="OpenCavity 0.1 Pre-Alpha documentation" href="index.html" />
+    <link rel="next" title="Tutorial 7 - General 2D cavity design" href="tutorial7.html" />
+    <link rel="prev" title="Tutorial 5 - An advanced cavity example ‘Bessel-Gauss’ cavity" href="tutorial5.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial7.html" title="Tutorial 7 - General 2D cavity design"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tutorial5.html" title="Tutorial 5 - An advanced cavity example ‘Bessel-Gauss’ cavity"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tutorial-6-a-second-bessel-gauss-cavity-design">
+<span id="label-tuto6"></span><h1>Tutorial 6 - A second &#8216;Bessel-Gauss&#8217; cavity design<a class="headerlink" href="#tutorial-6-a-second-bessel-gauss-cavity-design" title="Permalink to this headline">¶</a></h1>
+<p>In the previous cavity design we used a divergent conical reflector which is equivalent to a negative refractive axicon, let&#8217;s tray now to use a positive
+axicon. Then we calculate the output beam by considering that the output coupler is the concave mirror and using the method explained in <a class="reference internal" href="tutorial4.html#tuto4-label"><em>Tutorial 4 - Calculating the output beam</em></a>,
+by assuming that the thickness of the output mirror d1 is 5mm for example, we take n1=1.5 the refractive index of the output mirror. The output plane
+where we want to see the beam is at a distance d2= 100mm from the output mirror second facet. But first let&#8217;s start with defining the cavity.</p>
+<p>The new design scheme is shown bellow:</p>
+<a class="reference internal image-reference" href="_images/Bessel_cavity_scheme2.png" id="bessel-cavity2-fig"><img alt="_images/Bessel_cavity_scheme2.png" class="align-center" id="bessel-cavity2-fig" src="_images/Bessel_cavity_scheme2.png" style="width: 5.5in;" /></a>
+<p>Creating the ABCD matrices and the cavity-subsystems just as in the previous tutorial:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">oc</span>
+
+<span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">opencavity.propagators</span> <span class="kn">import</span> <span class="n">FresnelProp</span>
+
+<span class="gp">In [3]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span> <span class="c">#import numerical Python</span>
+
+<span class="gp">In [4]: </span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span> <span class="c"># import matplotlib to plot figures</span>
+
+<span class="gp">In [5]: </span><span class="n">R1</span><span class="o">=</span><span class="mf">1e18</span><span class="p">;</span> <span class="n">R2</span><span class="o">=</span><span class="mi">250</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">Lc</span><span class="o">=</span><span class="mi">78</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">npts</span><span class="o">=</span><span class="mi">500</span><span class="p">;</span> <span class="n">a</span><span class="o">=</span><span class="mi">2000</span><span class="p">;</span> <span class="c"># cavity parameters</span>
+
+<span class="gp">In [6]: </span><span class="n">M1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span> <span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="n">R1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span> <span class="n">M2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">Lc</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span> <span class="c">#plane mirror M1 &amp; propagation distance Lc</span>
+
+<span class="gp">In [7]: </span><span class="n">M3</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="n">R2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span> <span class="n">M4</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">Lc</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span> <span class="c">#concave mirror M2 &amp;propagation distance Lc</span>
+
+<span class="gp">In [8]: </span><span class="n">M11</span><span class="o">=</span><span class="n">M2</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M1</span><span class="p">);</span> <span class="n">M22</span><span class="o">=</span><span class="n">M4</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M3</span><span class="p">);</span> <span class="c"># sub-system 1 &amp; sub-system 2</span>
+
+<span class="gp">In [9]: </span><span class="n">A11</span><span class="o">=</span><span class="n">M11</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span> <span class="n">B11</span><span class="o">=</span><span class="n">M11</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">];</span> <span class="n">C11</span><span class="o">=</span><span class="n">M11</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span> <span class="n">D11</span><span class="o">=</span><span class="n">M11</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="c"># getting the members of subsystem 1 matrix</span>
+
+<span class="gp">In [10]: </span><span class="n">A22</span><span class="o">=</span><span class="n">M22</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span> <span class="n">B22</span><span class="o">=</span><span class="n">M22</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">];</span> <span class="n">C22</span><span class="o">=</span><span class="n">M22</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span> <span class="n">D22</span><span class="o">=</span><span class="n">M22</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="c"># getting the members of subsystem 2 matrix</span>
+
+<span class="gp">In [11]: </span><span class="n">sys1</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="mf">1.04</span><span class="p">);</span> <span class="c"># working wavelength 1.04 micron</span>
+
+<span class="gp">In [12]: </span><span class="n">sys2</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="mf">1.04</span><span class="p">);</span>
+
+<span class="gp">In [13]: </span><span class="n">sys1</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A11</span><span class="p">,</span><span class="n">B11</span><span class="p">,</span><span class="n">C11</span><span class="p">,</span><span class="n">D11</span><span class="p">)</span> <span class="c">#</span>
+
+<span class="gp">In [14]: </span><span class="n">sys2</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A22</span><span class="p">,</span><span class="n">B22</span><span class="p">,</span><span class="n">C22</span><span class="p">,</span><span class="n">D22</span><span class="p">)</span> <span class="c">#</span>
+</pre></div>
+</div>
+<p>Creating the axicon function with <cite>positive</cite> base angle = +0.5°, <code class="docutils literal"><span class="pre">sys.k</span></code> is the wave vector, the only difference with the first example is the sign
+of the base angle.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [15]: </span><span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="mf">3.14</span><span class="o">/</span><span class="mi">180</span><span class="p">;</span><span class="c"># reflector is quivalent to refractive axcicon with 2 x theta</span>
+
+<span class="gp">In [16]: </span><span class="n">T_axicon</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mi">1j</span><span class="o">*</span><span class="n">sys1</span><span class="o">.</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">theta</span><span class="o">*</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">))</span><span class="o">*</span><span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Applying the axicon function and solve and show the fundamental mode</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [17]: </span><span class="n">sys1</span><span class="o">.</span><span class="n">apply_mask1D</span><span class="p">(</span><span class="n">T_axicon</span><span class="p">)</span>
+<span class="go">Applying 1D Mask...</span>
+<span class="go">Mask applied.</span>
+
+<span class="gp">In [18]: </span><span class="n">sys1</span><span class="o">.</span><span class="n">cascade_subsystem</span><span class="p">(</span><span class="n">sys2</span><span class="p">)</span>
+<span class="go">systems cascaded.</span>
+
+<span class="gp">In [19]: </span><span class="n">sys1</span><span class="o">.</span><span class="n">solve_modes</span><span class="p">()</span>
+<span class="go">running the eigenvalues solver...</span>
+
+<span class="gp">In [20]: </span><span class="n">sys1</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/tuto6_plot_tem00_I_1D.png"><img alt="_images/tuto6_plot_tem00_I_1D.png" src="_images/tuto6_plot_tem00_I_1D.png" style="width: 3.5in;" /></a>
+<p>The first thing we notice is that the ring radius of the beam is smaller. But the major difference is in the propagation. let&#8217;s calculate now the output
+beam at d2=10cm out of the cavity. The propagation system to calculate the output beam is shown bellow:</p>
+<a class="reference internal image-reference" href="_images/Bessel2_output.png" id="bessel-output-fig"><img alt="_images/Bessel2_output.png" class="align-center" id="bessel-output-fig" src="_images/Bessel2_output.png" style="width: 5in;" /></a>
+<p>creating the propagation matrice, fetching the mode and propagate it. The ABCD matrix of such a optical system is:</p>
+<div class="math">
+\[\begin{split}\begin{bmatrix} A &amp; B \\ C &amp; D \end{bmatrix}=
+\begin{bmatrix} 1 &amp; d2 \\ 0 &amp; 1 \end{bmatrix}
+\times \begin{bmatrix} 1 &amp; 1 \\ 0 &amp; n1/n0 \end{bmatrix}
+\times \begin{bmatrix} 1 &amp; d1 \\ 0 &amp; 1 \end{bmatrix}
+\times \begin{bmatrix} 1 &amp; 0 \\ \frac{(n0-n1)}{R2*n1} &amp; n0/n1 \end{bmatrix}
+\times \begin{bmatrix} 1 &amp; Lc \\ 0 &amp; 1 \end{bmatrix}\end{split}\]</div>
+<p>Entering ABCD matrices</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [21]: </span><span class="kn">import</span> <span class="nn">opencavity</span> <span class="kn">as</span> <span class="nn">oc</span>
+
+<span class="gp">In [22]: </span><span class="kn">from</span> <span class="nn">opencavity.propagators</span> <span class="kn">import</span> <span class="n">FresnelProp</span>
+
+<span class="gp">In [23]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span> <span class="c">#import numerical Python</span>
+
+<span class="gp">In [24]: </span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span> <span class="c"># import matplotlib to plot figures</span>
+
+<span class="gp">In [25]: </span><span class="n">R1</span><span class="o">=</span><span class="mf">1e18</span><span class="p">;</span> <span class="n">R2</span><span class="o">=</span><span class="mi">250</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">Lc</span><span class="o">=</span><span class="mi">78</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">npts</span><span class="o">=</span><span class="mi">500</span><span class="p">;</span> <span class="n">a</span><span class="o">=</span><span class="mi">2000</span><span class="p">;</span> <span class="c"># cavity parameters</span>
+
+<span class="gp">In [26]: </span><span class="n">M00</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="n">Lc</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>
+
+<span class="gp">In [27]: </span><span class="n">M01</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span> <span class="p">],[(</span><span class="mi">1</span><span class="o">-</span><span class="mf">1.5</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="o">-</span><span class="n">R2</span><span class="o">*</span><span class="mf">1.5</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="mf">1.5</span><span class="p">]]);</span><span class="c"># -R2  (&lt;0 because it is a concave interface)</span>
+
+<span class="gp">In [28]: </span><span class="n">M02</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mf">5e3</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>
+
+<span class="gp">In [29]: </span><span class="n">M03</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="o">/</span><span class="mi">1</span><span class="p">]]);</span>
+
+<span class="gp">In [30]: </span><span class="n">M04</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mf">100e3</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>
+
+<span class="gp">In [31]: </span><span class="n">M_out</span><span class="o">=</span><span class="n">M04</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M03</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M02</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M01</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M00</span><span class="p">))));</span>
+</pre></div>
+</div>
+<p>Propagating the beam</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [32]: </span><span class="n">propsys2</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># create propagator object</span>
+
+<span class="gp">In [33]: </span><span class="n">l</span><span class="p">,</span><span class="n">tem00</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># get the fundamental mode of the cavity</span>
+
+<span class="gp">In [34]: </span><span class="n">propsys2</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span> <span class="c"># set the beam to propagate</span>
+
+<span class="gp">In [35]: </span><span class="n">propsys2</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M_out</span><span class="p">)</span> <span class="c"># set the ABCD matrix</span>
+
+<span class="gp">In [36]: </span><span class="n">propsys2</span><span class="o">.</span><span class="n">propagate1D_ABCD</span><span class="p">(</span><span class="n">x2</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span> <span class="c"># calculate the propagation</span>
+
+<span class="gp">In [37]: </span><span class="n">propsys2</span><span class="o">.</span><span class="n">show_result_beam</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">)</span> <span class="c"># show propagation result</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/tuto6_plot_bessel_out_1D_I.png"><img alt="_images/tuto6_plot_bessel_out_1D_I.png" src="_images/tuto6_plot_bessel_out_1D_I.png" style="width: 4in;" /></a>
+<p>The beam radius remain almost unchanged!. To figure out how this beam propagates when he leaves the cavity we take the result of the propagation which is the beam at 100mm then we go back and
+propagate it from -100mm (just after the second mirror) to -50mm (See scheme bellow).</p>
+<a class="reference internal image-reference" href="_images/Bessel_output2.png" id="bessel-output2-fig"><img alt="_images/Bessel_output2.png" class="align-center" id="bessel-output2-fig" src="_images/Bessel_output2.png" style="width: 4.5in;" /></a>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [38]: </span><span class="n">U</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">propsys2</span><span class="o">.</span><span class="n">get_result_beam</span><span class="p">()</span> <span class="c"># get the beam resulting from last propagation</span>
+
+<span class="gp">In [39]: </span><span class="n">propsys2</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="c"># set this beam as a starting one</span>
+
+<span class="gp">In [40]: </span><span class="n">propsys2</span><span class="o">.</span><span class="n">yz_prop_chart</span><span class="p">(</span><span class="o">-</span><span class="mf">100e3</span><span class="p">,</span><span class="o">-</span><span class="mf">50e3</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">0.5</span><span class="o">*</span><span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span> <span class="c"># propagate at several successive planes</span>
+
+<span class="gp">In [41]: </span><span class="n">plt</span><span class="o">.</span><span class="n">set_cmap</span><span class="p">(</span><span class="s">&#39;hot&#39;</span><span class="p">)</span> <span class="c">#change the colormap (see &#39;matplotlib&#39; help)</span>
+
+<span class="gp">In [42]: </span><span class="n">propsys2</span><span class="o">.</span><span class="n">show_prop_yz</span><span class="p">()</span> <span class="c"># show the result</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/tuto6_plot_bessel_out_yz_I.png"><img alt="_images/tuto6_plot_bessel_out_yz_I.png" src="_images/tuto6_plot_bessel_out_yz_I.png" style="width: 4.5in;" /></a>
+<p>Well its more clear now, the high intensity region is just at the output of the cavity.</p>
+<div class="section" id="the-cleaned-code">
+<h2>The cleaned code<a class="headerlink" href="#the-cleaned-code" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">@author: M.seghilani</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">ms</span>
+<span class="kn">from</span> <span class="nn">opencavity.propagators</span> <span class="kn">import</span> <span class="n">FresnelProp</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span> <span class="c">#import numerical Python </span>
+
+<span class="n">R1</span><span class="o">=</span><span class="mf">1e18</span><span class="p">;</span> <span class="n">R2</span><span class="o">=</span><span class="mi">250</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">Lc</span><span class="o">=</span><span class="mi">78</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">npts</span><span class="o">=</span><span class="mi">500</span><span class="p">;</span> <span class="n">a</span><span class="o">=</span><span class="mi">2000</span><span class="p">;</span> <span class="c"># cavity parameters</span>
+<span class="n">M1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span> <span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="n">R1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>   <span class="c">#concave mirror M1 </span>
+<span class="n">M2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">Lc</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>  <span class="c">#propagation distance Lc</span>
+<span class="n">M3</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="n">R2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span> <span class="c">#concave mirror M2</span>
+<span class="n">M4</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">Lc</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span> <span class="c">#propagation distance Lc</span>
+<span class="n">M</span><span class="o">=</span><span class="n">M4</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M3</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M1</span><span class="p">)</span> <span class="c"># calculating the global matrix (note the inversed order)</span>
+
+<span class="n">M11</span><span class="o">=</span><span class="n">M2</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M1</span><span class="p">);</span> <span class="n">M22</span><span class="o">=</span><span class="n">M4</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M3</span><span class="p">);</span> <span class="c"># sub-system 2 </span>
+<span class="n">A11</span><span class="o">=</span><span class="n">M11</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span> <span class="n">B11</span><span class="o">=</span><span class="n">M11</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">];</span> <span class="n">C11</span><span class="o">=</span><span class="n">M11</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span> <span class="n">D11</span><span class="o">=</span><span class="n">M11</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="c"># getting the members of subsystem 1 matrix</span>
+<span class="n">A22</span><span class="o">=</span><span class="n">M22</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span> <span class="n">B22</span><span class="o">=</span><span class="n">M22</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">];</span> <span class="n">C22</span><span class="o">=</span><span class="n">M22</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span> <span class="n">D22</span><span class="o">=</span><span class="n">M22</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="c"># getting the members of subsystem 2 matrix</span>
+
+<span class="n">sys1</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="mf">1.04</span><span class="p">);</span>  
+<span class="n">sys2</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="mf">1.04</span><span class="p">);</span>
+
+<span class="n">sys1</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A11</span><span class="p">,</span><span class="n">B11</span><span class="p">,</span><span class="n">C11</span><span class="p">,</span><span class="n">D11</span><span class="p">)</span> <span class="c">#</span>
+<span class="n">sys2</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A22</span><span class="p">,</span><span class="n">B22</span><span class="p">,</span><span class="n">C22</span><span class="p">,</span><span class="n">D22</span><span class="p">)</span> <span class="c"># </span>
+
+<span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="mf">3.14</span><span class="o">/</span><span class="mi">180</span><span class="p">;</span><span class="c"># reflector is quivalent to refractive axcicon with 2 x theta</span>
+<span class="n">T_axicon</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="o">+</span><span class="mi">1j</span><span class="o">*</span><span class="n">sys1</span><span class="o">.</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">theta</span><span class="o">*</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">))</span><span class="o">*</span><span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span>
+
+<span class="n">sys1</span><span class="o">.</span><span class="n">apply_mask1D</span><span class="p">(</span><span class="n">T_axicon</span><span class="p">)</span>
+<span class="n">sys1</span><span class="o">.</span><span class="n">cascade_subsystem</span><span class="p">(</span><span class="n">sys2</span><span class="p">)</span>
+
+<span class="n">sys1</span><span class="o">.</span><span class="n">solve_modes</span><span class="p">()</span>
+
+<span class="n">sys1</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">)</span>
+<span class="n">sys1</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;phase&#39;</span><span class="p">)</span>
+<span class="n">l</span><span class="p">,</span><span class="n">tem00</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">print</span> <span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+
+
+<span class="c"># the output beam &amp; propagation</span>
+<span class="n">M00</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="n">Lc</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>   
+<span class="n">M01</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span> <span class="p">],[(</span><span class="mi">1</span><span class="o">-</span><span class="mf">1.5</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="o">-</span><span class="n">R2</span><span class="o">*</span><span class="mf">1.5</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="mf">1.5</span><span class="p">]]);</span><span class="c"># -R2  (&lt;0 because it is a concave interface)</span>
+<span class="n">M02</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mf">5e3</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>   
+<span class="n">M03</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="o">/</span><span class="mi">1</span><span class="p">]]);</span>
+<span class="n">M04</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mf">100e3</span> <span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]);</span>   
+<span class="n">M_out</span><span class="o">=</span><span class="n">M04</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M03</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M02</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M01</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M00</span><span class="p">))));</span>
+
+<span class="n">propsys2</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span>   
+<span class="n">l</span><span class="p">,</span><span class="n">tem00</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># get the fundamental mode of the cavity    </span>
+<span class="n">propsys2</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">tem00</span><span class="p">,</span> <span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span> <span class="c"># set the beam to propagate</span>
+<span class="n">propsys2</span><span class="o">.</span><span class="n">set_ABCD</span><span class="p">(</span><span class="n">M_out</span><span class="p">)</span> <span class="c"># set the ABCD matrix </span>
+<span class="n">propsys2</span><span class="o">.</span><span class="n">propagate1D_ABCD</span><span class="p">(</span><span class="n">x2</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span> <span class="c"># calculate the propagation from initial plane to a plane 10 times larger (the beam is wider) </span>
+<span class="n">propsys2</span><span class="o">.</span><span class="n">show_result_beam</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;intensity&#39;</span><span class="p">)</span> <span class="c"># show propagation result</span>
+
+<span class="n">U</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">propsys2</span><span class="o">.</span><span class="n">get_result_beam</span><span class="p">()</span>
+<span class="n">propsys2</span><span class="o">.</span><span class="n">set_start_beam</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">propsys2</span><span class="o">.</span><span class="n">yz_prop_chart</span><span class="p">(</span><span class="o">-</span><span class="mf">100e3</span><span class="p">,</span><span class="o">-</span><span class="mf">50e3</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mf">0.5</span><span class="o">*</span><span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span>
+<span class="n">propsys2</span><span class="o">.</span><span class="n">show_prop_yz</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tutorial 6 - A second &#8216;Bessel-Gauss&#8217; cavity design</a><ul>
+<li><a class="reference internal" href="#the-cleaned-code">The cleaned code</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tutorial5.html"
+                        title="previous chapter">Tutorial 5 - An advanced cavity example &#8216;Bessel-Gauss&#8217; cavity</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorial7.html"
+                        title="next chapter">Tutorial 7 - General 2D cavity design</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tutorial6.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial7.html" title="Tutorial 7 - General 2D cavity design"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tutorial5.html" title="Tutorial 5 - An advanced cavity example ‘Bessel-Gauss’ cavity"
+             >previous</a> |</li>
+        <li><a href="index.html">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, M.Seghilani.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b2.
+    </div>
+  </body>
+</html>
