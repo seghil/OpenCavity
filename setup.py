@@ -16,7 +16,7 @@ setup(name='opencavity',
       license='GPLv2',
       packages=['opencavity'],
       package_dir={'opencavity': 'opencavity'},
-      package_data={'opencavity': ['Docs\_build\html/*.html','Docs\_build\html\_static/*','Docs\_build\html\_images/*','Docs\_build\html\_sources/*']},
+      package_data={'opencavity': ['Docs\_build\html/*.html','Docs\_build\html\_static/*','Docs\_build\html\_images/*','Docs\_build\html\_sources/*','\Docs\tuto_source/*']},
       #data_files=[('Documents', ['Docs\*.html'])],
       nstall_requires=[
           'numpy','scipy','matplotlib'

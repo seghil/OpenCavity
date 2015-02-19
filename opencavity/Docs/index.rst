@@ -42,11 +42,18 @@ Contents:
    tutorial8.rst
    tutorial9.rst
    
-.. automodule:: opencavity
+.. automodule:: opencavity.modesolver
    :members:
- 
-.. automodule:: fresnel_prop
+   
+.. automodule:: opencavity.beams
    :members:
+   
+.. automodule:: opencavity.propagators
+   :members:
+  
+.. automodule:: opencavity.utilsfunc
+   :members:
+
 
 
 
