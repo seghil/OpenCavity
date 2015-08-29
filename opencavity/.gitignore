@@ -3,3 +3,4 @@
 /modesolver.pyc
 /propagators.pyc
 /utilsfunc.pyc
+*.pyc
