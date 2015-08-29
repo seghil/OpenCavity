@@ -46,3 +46,6 @@ propsys.show_result_beam()
 propsys.yz_prop_chart(-250e3,-100e3,100,sys1.x1/2)
 propsys.show_prop_yz()
 propsys.show_prop_yz(what='intensity')
+
+
+ms.plt.show()

@@ -49,3 +49,5 @@ tem00_2,x=propsys2.get_result_beam()
 
 print opsys.find_waist(tem00_1,x) # find the wais of the beam
 print opsys.find_waist(tem00_2,x)
+
+ms.plt.show()

@@ -47,3 +47,5 @@ sys1.show_mode(1,what='intensity')
 l0,v0=sys1.get_mode1D(0) #l: eigenvalue; v: eigenmode
 l1,v1=sys1.get_mode1D(1) 
 print(1-ms.np.abs(l0)**2,1-ms.np.abs(l1)**2)
+
+ms.plt.show()

@@ -504,6 +504,7 @@ class CavEigenSys(object):
                 "with initial values vector"
                 npts=np.size(self.x1)
                 v00=np.random.rand(npts**2)
+#                v00=np.ones(npts**2) #changed here 11-06-2015 by Seghil
                 self.l,self.v=la.eigs(self.Kt,n_modes, which="LM", v0=v00) #solving the eigenvalue problem
             
             elif self.dim_flag=='1D':

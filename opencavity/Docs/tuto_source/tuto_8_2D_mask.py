@@ -24,7 +24,6 @@ sys.show_mode(0)
 sys.show_mode(1)
 sys.show_mode(2)
 
-
 # add two crossed lossy lines at the center of the mask
 apert.add_rectangle(2, 50,positive='False')
 apert.add_rectangle(50, 2,positive='False')
@@ -36,3 +35,5 @@ sys.show_mode(0,'intensity')
 sys.show_mode(1,'intensity')
 sys.show_mode(2,'intensity')
 
+
+ms.plt.show()

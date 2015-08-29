@@ -27,3 +27,5 @@ l,v=opsys.get_mode2D(0);# l: eigenvalue, v: eigenvector (the mode)
 print (1-np.abs(l)**2)*100 # in percent
 l,v=opsys.get_mode2D(2);
 print (1-np.abs(l)**2)*100 
+
+ms.plt.show()
