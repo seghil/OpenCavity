@@ -60,4 +60,4 @@ propsys2.set_start_beam(U, x)
 propsys2.yz_prop_chart(-100e3,-50e3,100,0.5*sys1.x1)
 propsys2.show_prop_yz()
 
-ms.plt.show()
+ms.plt.show() # can be removed when using Ipython
