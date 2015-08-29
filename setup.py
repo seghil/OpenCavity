@@ -1,9 +1,21 @@
 # -*- coding: utf-8 -*-
 '''
-Created on 20 dec. 2014
+Created on 20 Dec. 2014
 
-@author: mohamed seghilani
+@author: Mohamed Seghilani
 '''
+
+""" How to run the setup file:
+see
+https://docs.python.org/2/distutils/builtdist.html
+
+python setup.py bdist_wininst # to generate windows installer 
+
+python setup.py bdist_rpm # to generate a "rpm" installer
+
+bdist_egg # to generate a platform ".egg" package 
+
+"""
 
 from setuptools import setup, find_packages
 
