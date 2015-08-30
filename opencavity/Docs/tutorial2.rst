@@ -3,17 +3,18 @@
 Tutorial 2 - Generalizes 1D cavity
 **********************************
 
-In this part we see how to define a general cavity  system  using a more general method: ABCD matrices, this is a more general and powerful way to define multi-elements cavity with different arrangements (V-shaped, bow-tie...etc) and it is the preferable way of defining optical cavities in OpenCavity.
+In this part we see how to define a general cavity  system  using a more general method: ABCD matrices, this is a more general and powerful way to define multi-elements cavity with different arrangements (V-shaped, bow-tie...etc), and it is the preferable way of defining optical cavities in OpenCavity.
 
-In this tutorial  we show three ways of defining a general optical cavity using the function ``build_1D_cav_ABCD(a,npts,A,B,C,D)``, you may say why learn 3 ways when we can just getting things done by leaning one method and stick with it? 
-The reason is that every one of these three techniques we show here is better adapted for some situations in particular as we will see in next tutorials. These three ways of defining a general cavity design we address here are:
+In this tutorial  we show three ways of defining a general optical cavity using the function ``build_1D_cav_ABCD(a,npts,A,B,C,D)``. You may wonder why learn 3 ways when we can just getting things done by learning one method and stick with it?.
+
+The reason is that every one of the three techniques we show here, is best suited for some particular situations, as we will see in next tutorials. These three ways of defining a general cavity design we address here are:
 
      - Using the global ABCD matrix of the cavity.
      - Using g1,g2 parameters of the cavity.
      - Using phase masks and cascading subsystems 
 
 
-System defenition using ABCD matrices
+System definition using ABCD matrices
 =====================================
 
 let’s start now and take the same cavity system of the previous tutorial. This simple two-mirrors linear resonator (radius of curvature R1 and R2) 
@@ -50,7 +51,7 @@ Defining this system is quite straightforward , all what we have to do for now i
 
 Making the matrices using ``numerical python``:``np`` , note here that we use numerical python from inside imported ``opencavity`` module that we called ``oc``,
 this is possible because ``numerical python`` or ``numpy`` is already imported inside ``opencavity``, but importing it again at the beginning of the script will
-work too as we did in other tutorials, the same thing holds for ``matplotlib`` module imported as ``plt`` in ``opencavity``.
+work too as we did in other tutorials. The same holds for ``matplotlib`` module imported as ``plt`` in ``opencavity``.
 
 .. ipython::
 
@@ -68,8 +69,7 @@ Calculating the dot product (matrix of the global system)
  
    In [10]: M=M4.dot(M3).dot(M2).dot(M1) # calculating the global matrix (note the inversed order)
 
-Till now we havn't use the OpenCavity package yet and we havn't done any mode calculation, all what we did is some matrix manipulation to create the ABCD matrix of the cavity.  
-Let's get the elements of this matrix and enter them into a oc object, we call it *opsys* 
+Till now we haven't use the OpenCavity package yet and we haven't done any mode calculation, all what we did is some matrix manipulation to create the ABCD matrix of the cavity. Let's get the elements of this matrix and enter them into a *solver* system, we call it *opsys* (for optical system)
 
 .. ipython::
  
@@ -77,7 +77,7 @@ Let's get the elements of this matrix and enter them into a oc object, we call i
    
    In [12]: opsys=ms.CavEigenSys() #creating a oc object
    
-   In [13]: opsys.build_1D_cav_ABCD(a,npts,A,B,C,D) # enter the ABCD matrixc and build the system-Kerenl
+   In [13]: opsys.build_1D_cav_ABCD(a,npts,A,B,C,D) # enter the ABCD matrix and build the system-Kerenl
 
 to find and show the modes of the cavity
 
@@ -94,7 +94,7 @@ to find and show the modes of the cavity
    @savefig tuto2_plot_mode0_P_1D.png width=4in
    In [15]: opsys.show_mode(0,what='phase') 
 
-voilà! this figures show the E-field of the fundamental mode and the intensity of the 2nd one, and the third figure shows the phase of the fundamental 
+voilà! these figures show the E-field of the fundamental mode and the intensity of the 2nd one. The third figure shows the phase of the fundamental 
 mode.
 
 The cleaned code
@@ -104,11 +104,10 @@ The cleaned code
 
 .. _tuto2-using-g1g2-label
 
-System defenition using g1, g2 parameters
+System definition using g1, g2 parameters
 =========================================
 
-g1 and g2 parameters are usually used to study the stability of resonators, they are defined as `g1=1-Lc/R1, g2=1-Lc/R2`. the resonator is sable if 
-0<g1*g2 <1. The global ABCD matrix of a the resonator can be written in terms of g1, g2 as follows: 
+g1 and g2 parameters are usually used to study the stability of resonators, they are defined as `g1=1-Lc/R1, g2=1-Lc/R2`. the resonator is sable if 0<g1*g2 <1. The global ABCD matrix of a the resonator can be written in terms of g1, g2 as follows: 
 
 .. math:
 
@@ -143,7 +142,7 @@ let's try it:
    
    In [2]: ms.plt.show()
 
-We obtains the same results! , the advantage of this method is that the code is cleaner and easy to read as we don't manipulate matrices thus the written code 
+We obtain the same results! , the advantage of this method is that the code is cleaner and easy to read as we don't manipulate matrices. Thus the written code 
 is quite simple, we can clearly distinguish the needed steps to build and solve the cavity:
    
    -  import the module 
@@ -155,14 +154,9 @@ is quite simple, we can clearly distinguish the needed steps to build and solve 
 
 cascading subsystems
 ====================
-Calculating the global transfer matrix of an optical cavity is a straightforward method to define it and solve the eigenmodes and eigenvalues, 
-however sometimes it is useful to split a global complex system to several subsystems, do some transformation on them, then cascade these subsystems 
-to make the global one. This may be inevitable when you want to introduce an amplitude or phase function somewhere inside the cavity like an aperture 
-fore example. This is covered in more details in the following tutorials, but for now lets see how to define and solve the modes of the same optical 
-cavity by splitting the global system into two subsystems and cascading them.
+Calculating the global transfer matrix of an optical cavity is a straightforward method to define it and solve the eigenmodes and eigenvalues, however, sometimes it is useful to split a global complex system to several subsystems, do some transformation on them, then cascade these subsystems to make a global one. This may be inevitable when you want to introduce an amplitude or phase function somewhere inside the cavity, such as an aperture. This is covered in more details in the following tutorials, but for now let's see how to define and solve the modes of the same optical cavity by splitting the global system into two subsystems and cascading them.
 
 We take the same matrices of the first example:
-
 
 .. ipython::
 
@@ -203,8 +197,7 @@ Calculating the dot product (matrix of 2 subsy-stems)
     
    In [10]: A22=M22[0,0]; B22=M22[0,1]; C22=M22[1,0]; D22=M22[1,1] # getting the members of subsystem 2 matrix
 
-As in the first example, till now we have just manipulated matrices to create two ABCD matrices representing two subsystems of the cavity. Lets create
-and build these subsystems:
+As in the first example, till now we have just manipulated matrices to create two ABCD matrices representing two subsystems of the cavity. Let's create and build these subsystems:
 
 .. ipython::
  
@@ -232,12 +225,8 @@ and build these subsystems:
 Comparison with the first method
 ================================
 
-As we can see we the calculated modes looks like the calculated with one general ABCD system, however we can see some slight differences, for example 
-small ripples  on each side of the mode and on the phase of the beam, this is the effect of the aperture. These effects does not appear when we us 
-one round trip matrix because the field is calculated once to transform it from the first plane to the last one without passing trough intermediate 
-steps, so even if at a given step in the system the beam is magnified we don't need larger calculation area as long as the beam is re-focused before 
-the last plane, thus the sampling rate and the size of the calculation zone are determined according requirements of the first and the last plane only. 
-This is a major advantage of the ABCD matrix formalism. However if for some reason we need to calculate the field at intermediate plane we have to take 
+As we can see we the calculated modes looks like the calculated with one general ABCD system, however we can see some slight differences, for example, small ripples  on each side of the mode and on the phase of the beam. This is the effect of the aperture. These effects didn't not appeared with the previous methods. This is explained by the fact that the field is calculated once on the starting plane only (after one round-trip). Therefore, even if at a given location in the system the beam is magnified we don't need larger calculation area as long as the beam is re-focused before the last plane, consequently, the sampling rate and the size of the calculation zone are determined according to the requirements of the first and the last plane only. 
+This is a major advantage of the ABCD matrix formalism. However, if for some reason we need to calculate the field at intermediate plane we have to take 
 the size of the field at this plane into account. To get rid of the ripples in the example we can merely use a larger aperture size (a=200 for example)
 
 .. ipython::
