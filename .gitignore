@@ -1,0 +1,8 @@
+build
+/dist
+/opencavity.egg-info
+/opencavity
+/*.buildinfo
+
+*.buildinfo
+.vs/OpenCavity/v14/.suo

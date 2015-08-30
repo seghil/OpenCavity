@@ -55,10 +55,7 @@
             
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>OpenCavity is a python package for design of free-space laser cavities and calculate their  eigenvalues and eigenmodes.
-It uses matrix method with Fresnel Kernel formulation plus an eigenvalue solver to find the fundamental mode of the laser cavity
-plus the higher order ones.
-the package is written with a sake of simplicity of use and fast learning curve.
+<p><em>OpenCavity</em>  uses the matrix method with Fresnel Kernel formulation, plus an eigenvalue solver to find the fundamental mode of a laser cavity plus the higher order ones.
 In addition to the mode solver, it contains Physical optics module (Fresnel propagator) for general 1D and 2D systems, and also
 an 1D/2D Gaussian beam generator.</p>
 <dl class="docutils">
@@ -79,31 +76,23 @@ an 1D/2D Gaussian beam generator.</p>
 </li>
 </ul>
 </dd>
-</dl>
-<p>The physical optics module with the Gaussian beam generator can be used as a tool to study beam propagation through optical
-systems (paraxial case), this can be useful fore example to:</p>
-<blockquote>
-<div><ul class="simple">
+<dt>The physical optics module with the Gaussian beam generator can be used as a tool to study beam propagation through optical systems (paraxial case), this can be useful fore example to:</dt>
+<dd><ul class="first last simple">
 <li>design &amp; study interference and interferometers.</li>
 <li>beam transformation using phase/amplitude elements. (lens, axicon, aperture, spatial light modulators ...etc)</li>
 <li>high order Gaussian beams propagation through optical systems.</li>
 </ul>
-</div></blockquote>
-<div class="section" id="python-dependencies">
-<h2>Python &amp; dependencies<a class="headerlink" href="#python-dependencies" title="Permalink to this headline">¶</a></h2>
-<p>We choose <a class="reference external" href="https://www.python.org/">python</a> programming language to write <strong>OpenCavity</strong> because it is powerful, fast and multi-platform
-(windows /Linux /Mac Os). It is also friendly, easy to learn and is open with   very important and active community,
-and a lot of useful packages.
-<strong>OpenCavity</strong> package like most scientific python softwares, needs  <a class="reference external" href="http://scipy.org/">scipy</a> and <a class="reference external" href="http://numpy.org/">numpy</a> for fast matrix manipulation,
-numerical and linear algebra calculations. It also depends on <em>matplotlib</em> package for 1D and 2D plots.</p>
-<p>If you are new to python the next section is for you, we will see how to install python and the needed dependencies for <strong>OpenCavity</strong> package.
-However we will see juste the minimum required for start using <strong>OpenCavity</strong>, to learn more about python there are plenty of excellent tutorials on the
-web, and the official python <a class="reference external" href="https://www.python.org/">website</a> would be a good place where to start.</p>
+</dd>
+</dl>
+<p>Installation, Python &amp; dependencies</p>
+<p>We choose <a class="reference external" href="https://www.python.org/">python</a> programming language to write <em>OpenCavity</em> because it is powerful, fast and multi-platform (windows /Linux /Mac Os). It is also friendly, easy to learn, open source with very important and active community, and a lot of useful packages.
+<em>OpenCavity</em> package like most scientific python softwares, needs  <a class="reference external" href="http://scipy.org/">scipy</a> and <a class="reference external" href="http://numpy.org/">numpy</a> for fast matrix manipulation, and linear algebra calculations. It also depends on <em>matplotlib</em> package for 1D and 2D plots.</p>
+<p>Once you have Python and required packages installed, you can download <em>opencavity</em> from <a class="reference external" href="https://github.com/seghil/OpenCavity/releases">releases page</a>  and install it.</p>
+<p>If you are new to python the next section is for you, we will see how to install python and the needed dependencies for <em>OpenCavity</em> package. However we will see just the minimum required for start using <em>OpenCavity</em>, to learn more about python there are plenty of excellent tutorials on the web, and the official python <a class="reference external" href="https://www.python.org/">website</a> would be a good place where to start.</p>
 <img alt="_images/python-logo.png" src="_images/python-logo.png" />
 <img alt="_images/numpylogo.png" src="_images/numpylogo.png" />
 <img alt="_images/scipy-logo.png" src="_images/scipy-logo.png" />
 <img alt="_images/matplotlib-logo.png" src="_images/matplotlib-logo.png" />
-</div>
 <div class="section" id="gallery">
 <h2>Gallery<a class="headerlink" href="#gallery" title="Permalink to this headline">¶</a></h2>
 <p>Some figures from the tutorials</p>
@@ -132,7 +121,6 @@ web, and the official python <a class="reference external" href="https://www.pyt
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Introduction</a><ul>
-<li><a class="reference internal" href="#python-dependencies">Python &amp; dependencies</a></li>
 <li><a class="reference internal" href="#gallery">Gallery</a></li>
 </ul>
 </li>

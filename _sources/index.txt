@@ -7,9 +7,8 @@ Welcome to OpenCavity documentation!
 ====================================
 
 *opencavity* is a python package for designing and solving eigenmodes of open optical cavities.
-It comes with other tools that allow to design and study laser resonators such as optical wave propagator through paraxial systems using Fresnel 
-integral and Gaussian beam generator. 
-The package is designed and written with a sake of usage simplicity and fast learning curve.
+It comes with other tools that allow to design and study laser resonators such as Gaussian beams generator, and optical wave propagator through paraxial systems using Fresnel integral (physical optics). 
+The package is designed and written with two gaols in mind: usage simplicity and fast learning curve.
 
 .. image:: _static/plot_mode0_E_1D.png
    :width: 2.5in 
@@ -21,7 +20,9 @@ The package is designed and written with a sake of usage simplicity and fast lea
    :width: 2.5in 
     
 .. image:: _static/tuto8_plot2_tem10_I_2D.png
-   :width: 2.5in    
+   :width: 2.5in  	
+   
+   Some examples of eigenmodes calculated using *opencavity*
     
     
 Contents:

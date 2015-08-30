@@ -52,13 +52,11 @@
   <div class="section" id="welcome-to-opencavity-documentation">
 <h1>Welcome to OpenCavity documentation!<a class="headerlink" href="#welcome-to-opencavity-documentation" title="Permalink to this headline">¶</a></h1>
 <p><em>opencavity</em> is a python package for designing and solving eigenmodes of open optical cavities.
-It comes with other tools that allow to design and study laser resonators such as optical wave propagator through paraxial systems using Fresnel
-integral and Gaussian beam generator.
-The package is designed and written with a sake of usage simplicity and fast learning curve.</p>
+It comes with other tools that allow to design and study laser resonators such as Gaussian beams generator, and optical wave propagator through paraxial systems using Fresnel integral (physical optics).
+The package is designed and written with two gaols in mind: usage simplicity and fast learning curve.</p>
 <a class="reference internal image-reference" href="_images/plot_mode0_E_1D.png"><img alt="_images/plot_mode0_E_1D.png" src="_images/plot_mode0_E_1D.png" style="width: 2.5in;" /></a>
 <a class="reference internal image-reference" href="_images/tuto7_plot_tem00_E_2D.png"><img alt="_images/tuto7_plot_tem00_E_2D.png" src="_images/tuto7_plot_tem00_E_2D.png" style="width: 2.5in;" /></a>
 <a class="reference internal image-reference" href="_images/tuto8_plot2_tem01_I_2D.png"><img alt="_images/tuto8_plot2_tem01_I_2D.png" src="_images/tuto8_plot2_tem01_I_2D.png" style="width: 2.5in;" /></a>
-<a class="reference internal image-reference" href="_images/tuto8_plot2_tem10_I_2D.png"><img alt="_images/tuto8_plot2_tem10_I_2D.png" src="_images/tuto8_plot2_tem10_I_2D.png" style="width: 2.5in;" /></a>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -804,12 +802,12 @@ this function is used internally after solving the eigenvalue problem to sort th
 </dd></dl>
 
 <dl class="class">
-<dt id="opencavity.beams.LGbeam">
-<em class="property">class </em><code class="descclassname">opencavity.beams.</code><code class="descname">LGbeam</code><span class="sig-paren">(</span><em>wavelength</em>, <em>w0</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.beams.LGbeam" title="Permalink to this definition">¶</a></dt>
+<dt id="opencavity.beams.LgBasis">
+<em class="property">class </em><code class="descclassname">opencavity.beams.</code><code class="descname">LgBasis</code><span class="sig-paren">(</span><em>wavelength</em>, <em>w0</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.beams.LgBasis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generation of Hermite Gauss beams</p>
 <dl class="method">
-<dt id="opencavity.beams.LGbeam.generate_lg">
-<code class="descname">generate_lg</code><span class="sig-paren">(</span><em>p</em>, <em>m</em>, <em>x</em>, <em>y</em>, <em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.beams.LGbeam.generate_lg" title="Permalink to this definition">¶</a></dt>
+<dt id="opencavity.beams.LgBasis.generate_lg">
+<code class="descname">generate_lg</code><span class="sig-paren">(</span><em>p</em>, <em>m</em>, <em>x</em>, <em>y</em>, <em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.beams.LgBasis.generate_lg" title="Permalink to this definition">¶</a></dt>
 <dd><p>generate a Hermite Gauss beam of order m,p</p>
 </dd></dl>
 

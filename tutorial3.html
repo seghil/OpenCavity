@@ -157,10 +157,10 @@ vectors contain Lengendre-Gauss nodes thereby the resolved modes are also calcul
 <span class="gp">In [18]: </span><span class="n">l1</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">In [19]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">(1.330713932268246e-06, 3.8373526170754069e-05)</span>
+<span class="go">(1.3307139318241568e-06, 3.8373526172974515e-05)</span>
 
 <span class="gp">In [20]: </span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l0</span><span class="p">)</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span>
-<span class="gr">Out[20]: </span><span class="mf">1.852158996740183e-05</span>
+<span class="gr">Out[20]: </span><span class="mf">1.8521589968734098e-05</span>
 </pre></div>
 </div>
 <p>As we can see the two modes are very well confined (have very low losses = 1-abs(l)²) and the differences between them is just negligible.</p>
@@ -210,7 +210,7 @@ We take the same code of the first example an we create and add an aperture:</p>
 <span class="gp">In [38]: </span><span class="n">ms</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
 
 <span class="gp">In [39]: </span><span class="n">ms</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">,</span><span class="n">aperture</span><span class="p">);</span> <span class="c"># plots the aperture function</span>
-<span class="gr">Out[39]: </span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="n">at</span> <span class="mh">0x16dadda0</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="gr">Out[39]: </span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="n">at</span> <span class="mh">0x1a965588</span><span class="o">&gt;</span><span class="p">]</span>
 
 <span class="gp">In [40]: </span><span class="n">sys1</span><span class="o">.</span><span class="n">apply_mask1D</span><span class="p">(</span><span class="n">aperture</span><span class="p">);</span> <span class="c"># apply the aperture to the subsystem 1</span>
 <span class="go">Applying 1D Mask...</span>
@@ -236,7 +236,7 @@ We take the same code of the first example an we create and add an aperture:</p>
 <span class="gp">In [46]: </span><span class="n">l1</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">In [47]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">(0.014508132902637749, 0.1420287444117414)</span>
+<span class="go">(0.014508132902640525, 0.14202874441174484)</span>
 </pre></div>
 </div>
 <p>Now the fundamental mode has round-trip loses of 1.4% and the second mode 12.7% this makes possible to select ony the
@@ -302,6 +302,8 @@ of the previous tutorial that we are already familiar with. But any mask can be 
 <span class="n">l0</span><span class="p">,</span><span class="n">v0</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c">#l: eigenvalue; v: eigenmode</span>
 <span class="n">l1</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> 
 <span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ms</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
