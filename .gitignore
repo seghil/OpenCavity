@@ -7,3 +7,6 @@ OpenCavity - VS1.pyproj.user
 *.user
 *.vsspell
 /opencavity/Docs/*.png
+*.png
+*.png
+.vs/OpenCavity/v14/.suo
