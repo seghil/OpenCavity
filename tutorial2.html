@@ -171,7 +171,7 @@ mode.</p>
 <h2>System definition using g1, g2 parameters<a class="headerlink" href="#system-definition-using-g1-g2-parameters" title="Permalink to this headline">¶</a></h2>
 <p>g1 and g2 parameters are usually used to study the stability of resonators, they are defined as <cite>g1=1-Lc/R1, g2=1-Lc/R2</cite>. the resonator is sable if 0&lt;g1*g2 &lt;1. The global ABCD matrix of a the resonator can be written in terms of g1, g2 as follows:</p>
 <p>let&#8217;s try it:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [19]: </span><span class="kn">import</span> <span class="nn">opencavity</span> <span class="kn">as</span> <span class="nn">ms</span><span class="p">;</span> <span class="c">#importing the opencavity module</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [19]: </span><span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">ms</span><span class="p">;</span> <span class="c">#importing the opencavity module</span>
 
 <span class="gp">In [20]: </span><span class="n">R1</span><span class="o">=</span><span class="mf">1e13</span><span class="p">;</span> <span class="n">R2</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">Lc</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">npts</span><span class="o">=</span><span class="mi">120</span><span class="p">;</span> <span class="n">a</span><span class="o">=</span><span class="mi">150</span><span class="p">;</span> <span class="c"># cavity parameters</span>
 
@@ -180,12 +180,6 @@ mode.</p>
 <span class="gp">In [22]: </span><span class="n">A</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">B</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g2</span><span class="o">*</span><span class="n">Lc</span><span class="p">;</span> <span class="n">C</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">/</span><span class="n">Lc</span><span class="p">;</span> <span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 
 <span class="gp">In [23]: </span><span class="n">opsys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">();</span>  <span class="c"># create a solver object</span>
-<span class="go">---------------------------------------------------------------------------</span>
-<span class="go">AttributeError                            Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-23-4c4451fa3143&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 opsys=ms.CavEigenSys();  # create a solver object</span>
-
-<span class="go">AttributeError: &#39;module&#39; object has no attribute &#39;CavEigenSys&#39;</span>
 
 <span class="gp">In [24]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span> <span class="c"># build the cavity kernel</span>
 
@@ -193,22 +187,10 @@ mode.</p>
 <span class="go">running the eigenvalues solver...</span>
 
 <span class="gp">In [26]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="n">ms</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span> <span class="c"># show the first mode</span>
-<span class="go">---------------------------------------------------------------------------</span>
-<span class="go">AttributeError                            Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-26-6cdafd916f5d&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 opsys.show_mode(0); ms.plt.grid() # show the first mode</span>
-
-<span class="go">AttributeError: &#39;module&#39; object has no attribute &#39;plt&#39;</span>
 
 <span class="gp">In [27]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;phase&#39;</span><span class="p">)</span>
 
 <span class="gp">In [28]: </span><span class="n">ms</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="go">---------------------------------------------------------------------------</span>
-<span class="go">AttributeError                            Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-28-6a4ca6f2b9a3&gt; in &lt;module&gt;()</span>
-<span class="go">----&gt; 1 ms.plt.show()</span>
-
-<span class="go">AttributeError: &#39;module&#39; object has no attribute &#39;plt&#39;</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/tuto2_plot_mode0_E_1D_g1g2.png"><img alt="_images/tuto2_plot_mode0_E_1D_g1g2.png" src="_images/tuto2_plot_mode0_E_1D_g1g2.png" style="width: 4in;" /></a>
