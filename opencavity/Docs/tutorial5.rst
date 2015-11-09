@@ -77,7 +77,7 @@ Creating the axicon function with base angle =-0.5°, ``sys.k`` is the wave vect
 
 .. ipython::
    
-   In [1]: theta=-0.5*3.14/180;# reflector is quivalent to refractive axcicon with 2 x theta
+   In [1]: theta=-0.5*3.14/180;# reflector is equivalent to refractive axicon with 2 x theta
    
    In [1]: T_axicon=ms.np.exp((1j*sys1.k)*2*theta*(ms.np.sign(sys1.x1))*sys1.x1)
 

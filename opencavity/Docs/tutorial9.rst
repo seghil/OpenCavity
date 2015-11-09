@@ -10,12 +10,12 @@ using phase-plates and diffractive elements  or spatial light modulators (SLMs) 
  
 First we generate a fundamental Gaussian beam using Hermite-Gauss beams generator (HgBasis function) then we see how to transform it  to a 
 donut-shaped one also known as vortex-beam using a phase mask. This beam  has a helical wavefront rather than parallel one as in fundamental 
-gaussian beams as we have already seen. 
+Gaussian beams as we have already seen. 
 In the second part of the tutorial we design a Mach-Zehnder interferometer to see the phase singularity of the donut beam, and understand 
 better why it is called a vortex. The objective of this tutorial is to become familiar with:
 
 - Beam generator module
-- Frenel propagator and use phase masks in addition to paraxial elements 
+- Fresnel propagator and use phase masks in addition to paraxial elements 
 - Superimpose and move beams on  detectors surface to get interference result. 
 
 First of all let's generate the Gaussian beam we are going to use through this tutorial, for this we use the function ``generate_gh(n,m,x,y,z)`` 
@@ -39,7 +39,7 @@ As always we start by importing modules we need.
    
    In [1]: import math
 
-Then we generate a fundamental Gaussian beam (n=m=0) at wavlength =1 and waist =100 (in wavelength unit say microns for example).
+Then we generate a fundamental Gaussian beam (n=m=0) at wavelength =1 and waist =100 (in wavelength unit say microns for example).
 
 .. ipython::
 
@@ -77,7 +77,7 @@ Now we want to transform this beam to a donut-shaped one, for this we need a hel
      y>0 , \phi=\frac{1 2\pi}{4} \\
      y=0 , \phi=2\pi
 
-In third case (x=y=0) we have a singular point(the phase is not defined) but let's juste take 2 \pi), it is important to note that the mask phase we are making acts as a 
+In third case (x=y=0) we have a singular point(the phase is not defined) but let's just take 2 \pi), it is important to note that the mask phase we are making acts as a 
 phase plate (add a certain amount to the beam phase) so just as we have seen with lenses its function takes the form :math:`exp(j\times phase(x,y))`. Indeed, in numerical
 python ``np`` we can use ``arctan2(y,x)`` an element-wise arc tangent function that choose the quadrant correctly.
 
@@ -94,7 +94,7 @@ python ``np`` we can use ``arctan2(y,x)`` an element-wise arc tangent function t
       ....:       phase[kx,ky]=np.exp(1j*m*(np.arctan2(y[ky],x[kx]))/(2*np.pi))
 
 
-In third case (x=y=0) we have a singular point(the phase is not defined) but let's juste take 2 \pi), it is important to note that the mask phase we are making acts as a phase plate (add a certain amount to the beam phase) so just alike we have seen with lenses its function takes the form :math: `exp(j\times phase(x,y))`.
+In third case (x=y=0) we have a singular point(the phase is not defined) but let's just take 2 \pi), it is important to note that the mask phase we are making acts as a phase plate (add a certain amount to the beam phase) so just alike we have seen with lenses its function takes the form :math: `exp(j\times phase(x,y))`.
 
 We consider the beam we generated is a collimated one (plane wavefront) to transform it we just multiply it by the phase function and propagate it using ``FresnelProp`` following 
 the steps we sown in previous tutorials:
@@ -112,7 +112,7 @@ Before starting to that let's take a look at the interferometer.
    :width: 6.5in
    :align: center
    
-The goal here is to propgate to have to have two different optical paths and therefor two versions of the beam having different radius of 
+The goal here is to propagate to have to have two different optical paths and therefor two versions of the beam having different radius of 
 curvature of the wavefront on the detector.  
 
 
@@ -191,7 +191,7 @@ The optical system is an object holding all informations needed for  the propaga
      - ``opsys.U2``,``opsys.x2``,``opsys.y2`` are the result beam E-field and coordinates of its plane.
    
 You can see the class documentation for more informations, for the time being let's stay with these two members (U1, U2). when the 
-function ``opsys.show_result_beam()`` it merely plots the amlitude of ``opsys.U2``. Now we want to see the interference of the two  
+function ``opsys.show_result_beam()`` it merely plots the amplitude of ``opsys.U2``. Now we want to see the interference of the two  
 beams (arm 1 and arm 2), to do this we have to sum the propagation result of ``opsys1.U2`` and ``opsys2.U2`` 
 
 .. ipython::
@@ -201,7 +201,7 @@ beams (arm 1 and arm 2), to do this we have to sum the propagation result of ``o
    In [10]: plt.figure()
    
    @savefig tuto9_plot_interference_I.png width=4.5in
-   In [10]: plt.pcolor(X,Y,np.abs(inter)**2) # plots the intesnty of the interference. 
+   In [10]: plt.pcolor(X,Y,np.abs(inter)**2) # plots the intensity of the interference. 
    
    In [10]: plt.show()
    

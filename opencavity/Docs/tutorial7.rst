@@ -10,7 +10,7 @@ see how to do the same thing but to design and calculate the modes of 2D optical
 .. ipython::
 
 
-   In [1]: import opencavity.modesolver as oc; #importing the opencavity module
+   In [1]: import opencavity.modesolver as ms; #importing the opencavity module
    
    In [2]: import matplotlib.pylab as plt
    
@@ -28,7 +28,7 @@ see how to do the same thing but to design and calculate the modes of 2D optical
  
    In [11]: A=M[0,0]; B=M[0,1]; C=M[1,0]; D=M[1,1]
    
-   In [12]: opsys=ms.CavEigenSys() #creating a oc object
+   In [12]: opsys=ms.CavEigenSys() #creating a ms object
    
 so far we are doing exactly the same thing as in previous tutorials, the change comes next: instead of using ``opsys.build_1D_cav_ABCD(a,npts,A,B,C,D)`` 
 we use ``opsys.build_2D_cav_ABCD(a,npts,A,B,C,D)``
@@ -36,7 +36,7 @@ we use ``opsys.build_2D_cav_ABCD(a,npts,A,B,C,D)``
 .. ipython::
 
 
-   In [1]: opsys=ms.CavEigenSys() #creating a oc object
+   In [1]: opsys=ms.CavEigenSys() #creating a ms object
    
    In [1]: opsys.build_2D_cav_ABCD(a, npts, A,B,C,D)
    

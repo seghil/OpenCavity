@@ -3,7 +3,7 @@
 Before starting
 ===============
 
-*Opencavity* can be downloaded from  `releases page <https://github.com/seghil/OpenCavity/releases>`_ . But it requires some scientific and visualisation python packages to work.
+*Opencavity* can be downloaded from  `releases page <https://github.com/seghil/OpenCavity/releases>`_ . But it requires some scientific and visualization python packages to work.
 
 In the first part of this page we present briefly how to install python and the needed dependencies (numpy, scipy and matplotlib).
 
@@ -12,7 +12,7 @@ In the second part we see some basics of optical cavities and their eigenmodes, 
 New to python?
 -------------------
 
-The easiest way to install `python2.7 <https://www.python.org/download/releases/2.7/>`_  on windows and all the needed dependencies is to install one of the scientific Phython bundles such as `anaconda <http://continuum.io/downloads>`_ or `pythonxy <https://code.google.com/p/pythonxy/>`_  which come with the most popular python packages
+The easiest way to install `python2.7 <https://www.python.org/download/releases/2.7/>`_  on windows and all the needed dependencies is to install one of the scientific Python bundles such as `anaconda <http://continuum.io/downloads>`_ or `pythonxy <https://code.google.com/p/pythonxy/>`_  which come with the most popular python packages
 for scientific and engineering (numerical computations, data analysis and data visualization...). Both python distributions come with `spyder <https://code.google.com/p/spyderlib/>`_ a (Matlab-like) interactive development editor for python. This is the simplest way to have a working environment out of the box, otherwise you will have to install every single package separately:
 
      - `python2.7 <https://www.python.org/download/releases/2.7/>`_
@@ -20,7 +20,7 @@ for scientific and engineering (numerical computations, data analysis and data v
      - `numpy <http://numpy.org/>`_ 
      - `spyder <https://code.google.com/p/spyderlib/>`_ is also highly recommended as a working editor. 
  
-On *linux* users can install all modules quickly using the command line::
+On *Linux* users can install all modules quickly using the command line::
 
      #sudo apt-get install python-numpy python-scipy python-matplotlib ipython  python-spyderlib
 
@@ -31,12 +31,12 @@ Once all packages installed, you can install *OpenCavity* from `releases page <h
 The important parts pointed out in the figure above are:
 
      - Editor : a text editor for python (writing and executing python scripts)
-     - Python console: for interactively (in-line) writing and executing python commandes.
+     - Python console: for interactively (in-line) writing and executing python commands.
      - Object instructor: gives informations about variables in the workspace (like the workspace browser in Matlab)
 
-When we give commands in the tutorials you can directly copy-past them in the console, Or in the editor to save and execute the commands. For these reasons at the end of each tutorial we give the cleaned code to copy the code directly without having to remove the commands number every time. If you have Ipython installed on your machine you can use it in *spyder* by choosing ``ipython interperter`` in the ``interpreters`` menu. We will use an Ipython interpreter in the following tutorials, but using the default python interpreter 
+When we give commands in the tutorials you can directly copy-past them in the console, Or in the editor to save and execute the commands. For these reasons at the end of each tutorial we give the cleaned code to copy the code directly without having to remove the commands number every time. If you have Ipython installed on your machine you can use it in *spyder* by choosing ``ipython interpreter`` in the ``interpreters`` menu. We will use an Ipython interpreter in the following tutorials, but using the default python interpreter 
 will also work.
-To check taht everything works fine, you can try to import the *opencavity* package and launch an off-line version of this tutorials by typing 
+To check that everything works fine, you can try to import the *opencavity* package and launch an off-line version of this tutorials by typing 
 .. ipython::
 
    In [1]: import opencavity; #importing the opencavity module

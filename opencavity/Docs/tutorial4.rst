@@ -26,7 +26,7 @@ product, or we can simply use `g1,g2` parameters as we did in :ref:`tuto2-using-
 
 .. ipython::
 
-   In [1]: import opencavity.modesolver as oc; #importing the opencavity module
+   In [1]: import opencavity.modesolver as ms; #importing the opencavity module
    
    In [2]: R1=1e13; R2=10*1e3; Lc=8*1e3; npts=120; a=150; # cavity parameters
 
@@ -34,9 +34,9 @@ product, or we can simply use `g1,g2` parameters as we did in :ref:`tuto2-using-
    
    In [2]: A=2*g1*g2-1; B=2*g2*Lc; C=2*g1/Lc; D=2*g1*g2-1;
    
-   In [12]: opsys=ms.CavEigenSys() #creating a oc object
+   In [12]: opsys=ms.CavEigenSys() #creating a ms object
    
-   In [13]: opsys.build_1D_cav_ABCD(a,npts,A,B,C,D) # enter the ABCD matrixc and build the system-Kerenl
+   In [13]: opsys.build_1D_cav_ABCD(a,npts,A,B,C,D) # enter the ABCD matrixc and build the system-Kernel
 
    In [14]: opsys.solve_modes() 
    

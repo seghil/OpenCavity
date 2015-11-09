@@ -23,7 +23,7 @@ Creating the ABCD matrices and the cavity-subsystems just as in the previous tut
 
 .. ipython::
    
-   In [1]: import opencavity.modesolver as oc
+   In [1]: import opencavity.modesolver as ms
    
    In [1]: from opencavity.propagators import FresnelProp
    
@@ -59,7 +59,7 @@ of the base angle.
 
 .. ipython::
    
-   In [1]: theta=0.5*3.14/180;# reflector is quivalent to refractive axcicon with 2 x theta
+   In [1]: theta=0.5*3.14/180;# reflector is equivalent to refractive axicon with 2 x theta
    
    In [1]: T_axicon=ms.np.exp((1j*sys1.k)*2*theta*(ms.np.sign(sys1.x1))*sys1.x1)
 
@@ -87,7 +87,7 @@ beam at d2=10cm out of the cavity. The propagation system to calculate the outpu
    :align: center
 
 
-creating the propagation matrice, fetching the mode and propagate it. The ABCD matrix of such a optical system is: 
+creating the propagation matrix, fetching the mode and propagate it. The ABCD matrix of such a optical system is: 
 
 .. math::
       \begin{bmatrix} A & B \\ C & D \end{bmatrix}=
@@ -101,7 +101,7 @@ Entering ABCD matrices
  
 .. ipython:: 
 
-   In [1]: import opencavity as oc
+   In [1]: import opencavity as ms
    
    In [1]: from opencavity.propagators import FresnelProp
    
