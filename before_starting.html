@@ -55,12 +55,12 @@
             
   <div class="section" id="before-starting">
 <h1>Before starting<a class="headerlink" href="#before-starting" title="Permalink to this headline">¶</a></h1>
-<p><em>Opencavity</em> can be downloaded from  <a class="reference external" href="https://github.com/seghil/OpenCavity/releases">releases page</a> . But it requires some scientific and visualisation python packages to work.</p>
+<p><em>Opencavity</em> can be downloaded from  <a class="reference external" href="https://github.com/seghil/OpenCavity/releases">releases page</a> . But it requires some scientific and visualization python packages to work.</p>
 <p>In the first part of this page we present briefly how to install python and the needed dependencies (numpy, scipy and matplotlib).</p>
 <p>In the second part we see some basics of optical cavities and their eigenmodes, don&#8217;t worry it is not a course, just what one needs to learn and start using <em>OpenCavity</em> rapidly and efficiently. Let&#8217;s begin!</p>
 <div class="section" id="new-to-python">
 <h2>New to python?<a class="headerlink" href="#new-to-python" title="Permalink to this headline">¶</a></h2>
-<p>The easiest way to install <a class="reference external" href="https://www.python.org/download/releases/2.7/">python2.7</a>  on windows and all the needed dependencies is to install one of the scientific Phython bundles such as <a class="reference external" href="http://continuum.io/downloads">anaconda</a> or <a class="reference external" href="https://code.google.com/p/pythonxy/">pythonxy</a>  which come with the most popular python packages
+<p>The easiest way to install <a class="reference external" href="https://www.python.org/download/releases/2.7/">python2.7</a>  on windows and all the needed dependencies is to install one of the scientific Python bundles such as <a class="reference external" href="http://continuum.io/downloads">anaconda</a> or <a class="reference external" href="https://code.google.com/p/pythonxy/">pythonxy</a>  which come with the most popular python packages
 for scientific and engineering (numerical computations, data analysis and data visualization...). Both python distributions come with <a class="reference external" href="https://code.google.com/p/spyderlib/">spyder</a> a (Matlab-like) interactive development editor for python. This is the simplest way to have a working environment out of the box, otherwise you will have to install every single package separately:</p>
 <blockquote>
 <div><ul class="simple">
@@ -70,7 +70,7 @@ for scientific and engineering (numerical computations, data analysis and data v
 <li><a class="reference external" href="https://code.google.com/p/spyderlib/">spyder</a> is also highly recommended as a working editor.</li>
 </ul>
 </div></blockquote>
-<p>On <em>linux</em> users can install all modules quickly using the command line:</p>
+<p>On <em>Linux</em> users can install all modules quickly using the command line:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#sudo apt-get install python-numpy python-scipy python-matplotlib ipython  python-spyderlib</span>
 </pre></div>
 </div>
@@ -80,13 +80,13 @@ for scientific and engineering (numerical computations, data analysis and data v
 <blockquote>
 <div><ul class="simple">
 <li>Editor : a text editor for python (writing and executing python scripts)</li>
-<li>Python console: for interactively (in-line) writing and executing python commandes.</li>
+<li>Python console: for interactively (in-line) writing and executing python commands.</li>
 <li>Object instructor: gives informations about variables in the workspace (like the workspace browser in Matlab)</li>
 </ul>
 </div></blockquote>
-<p>When we give commands in the tutorials you can directly copy-past them in the console, Or in the editor to save and execute the commands. For these reasons at the end of each tutorial we give the cleaned code to copy the code directly without having to remove the commands number every time. If you have Ipython installed on your machine you can use it in <em>spyder</em> by choosing <code class="docutils literal"><span class="pre">ipython</span> <span class="pre">interperter</span></code> in the <code class="docutils literal"><span class="pre">interpreters</span></code> menu. We will use an Ipython interpreter in the following tutorials, but using the default python interpreter
+<p>When we give commands in the tutorials you can directly copy-past them in the console, Or in the editor to save and execute the commands. For these reasons at the end of each tutorial we give the cleaned code to copy the code directly without having to remove the commands number every time. If you have Ipython installed on your machine you can use it in <em>spyder</em> by choosing <code class="docutils literal"><span class="pre">ipython</span> <span class="pre">interpreter</span></code> in the <code class="docutils literal"><span class="pre">interpreters</span></code> menu. We will use an Ipython interpreter in the following tutorials, but using the default python interpreter
 will also work.
-To check taht everything works fine, you can try to import the <em>opencavity</em> package and launch an off-line version of this tutorials by typing
+To check that everything works fine, you can try to import the <em>opencavity</em> package and launch an off-line version of this tutorials by typing
 .. ipython:</p>
 <div class="highlight-python"><div class="highlight"><pre>In [1]: import opencavity; #importing the opencavity module
 

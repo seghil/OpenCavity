@@ -57,12 +57,12 @@ In this tutorial  we use the Fresnel propagation module to do beam transforming 
 using phase-plates and diffractive elements  or spatial light modulators (SLMs) to transform the phase structure of a given beam.</p>
 <p>First we generate a fundamental Gaussian beam using Hermite-Gauss beams generator (HgBasis function) then we see how to transform it  to a
 donut-shaped one also known as vortex-beam using a phase mask. This beam  has a helical wavefront rather than parallel one as in fundamental
-gaussian beams as we have already seen.
+Gaussian beams as we have already seen.
 In the second part of the tutorial we design a Mach-Zehnder interferometer to see the phase singularity of the donut beam, and understand
 better why it is called a vortex. The objective of this tutorial is to become familiar with:</p>
 <ul class="simple">
 <li>Beam generator module</li>
-<li>Frenel propagator and use phase masks in addition to paraxial elements</li>
+<li>Fresnel propagator and use phase masks in addition to paraxial elements</li>
 <li>Superimpose and move beams on  detectors surface to get interference result.</li>
 </ul>
 <p>First of all let&#8217;s generate the Gaussian beam we are going to use through this tutorial, for this we use the function <code class="docutils literal"><span class="pre">generate_gh(n,m,x,y,z)</span></code>
@@ -82,7 +82,7 @@ As always we start by importing modules we need.</p>
 <span class="gp">In [5]: </span><span class="kn">import</span> <span class="nn">math</span>
 </pre></div>
 </div>
-<p>Then we generate a fundamental Gaussian beam (n=m=0) at wavlength =1 and waist =100 (in wavelength unit say microns for example).</p>
+<p>Then we generate a fundamental Gaussian beam (n=m=0) at wavelength =1 and waist =100 (in wavelength unit say microns for example).</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [6]: </span><span class="n">waist</span><span class="o">=</span><span class="mi">100</span><span class="p">;</span> <span class="n">waist_x</span><span class="o">=</span><span class="n">waist</span><span class="p">;</span> <span class="n">waist_y</span><span class="o">=</span><span class="n">waist</span><span class="p">;</span> <span class="n">wavelength</span><span class="o">=</span><span class="mi">1</span>
 
 <span class="gp">In [7]: </span><span class="n">H</span><span class="o">=</span><span class="n">HgBasis</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span><span class="n">waist_x</span><span class="p">,</span><span class="n">waist_y</span><span class="p">)</span> <span class="c">#creating the Hermite-Gauss basis with initial waist equals to 100 microns</span>
@@ -100,10 +100,8 @@ As always we start by importing modules we need.</p>
 <span class="gp">In [13]: </span><span class="n">tem00</span><span class="o">=</span><span class="n">H</span><span class="o">.</span><span class="n">generate_hg</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c"># generate TEM00 mode</span>
 
 <span class="gp">In [14]: </span><span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tem00</span><span class="p">));</span> <span class="n">plt</span><span class="o">.</span><span class="n">set_cmap</span><span class="p">(</span><span class="s">&#39;hot&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span> <span class="c"># 2D plot/ colormap /colorbar</span>
-<span class="gr">Out[14]: </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">instance</span> <span class="n">at</span> <span class="mh">0x00000000516824C8</span><span class="o">&gt;</span>
 
 <span class="gp">In [15]: </span><span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">tem00</span><span class="p">));</span> <span class="c"># phase map</span>
-<span class="gr">Out[15]: </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">collections</span><span class="o">.</span><span class="n">PolyCollection</span> <span class="n">at</span> <span class="mh">0x507bbe80</span><span class="o">&gt;</span>
 
 <span class="gp">In [16]: </span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -116,7 +114,7 @@ As always we start by importing modules we need.</p>
 \[\begin{split}y&lt;0 , \phi=\frac{3 2\pi}{4} \\
 y&gt;0 , \phi=\frac{1 2\pi}{4} \\
 y=0 , \phi=2\pi\end{split}\]</div>
-<p>In third case (x=y=0) we have a singular point(the phase is not defined) but let&#8217;s juste take 2 pi), it is important to note that the mask phase we are making acts as a
+<p>In third case (x=y=0) we have a singular point(the phase is not defined) but let&#8217;s just take 2 pi), it is important to note that the mask phase we are making acts as a
 phase plate (add a certain amount to the beam phase) so just as we have seen with lenses its function takes the form <span class="math">\(exp(j\times phase(x,y))\)</span>. Indeed, in numerical
 python <code class="docutils literal"><span class="pre">np</span></code> we can use <code class="docutils literal"><span class="pre">arctan2(y,x)</span></code> an element-wise arc tangent function that choose the quadrant correctly.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [17]: </span><span class="n">n</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">size</span>  <span class="c"># size of the array &#39;x&#39;</span>
@@ -131,7 +129,7 @@ python <code class="docutils literal"><span class="pre">np</span></code> we can 
 <span class="gp">   ....:</span> 
 </pre></div>
 </div>
-<p>In third case (x=y=0) we have a singular point(the phase is not defined) but let&#8217;s juste take 2 pi), it is important to note that the mask phase we are making acts as a phase plate (add a certain amount to the beam phase) so just alike we have seen with lenses its function takes the form :math: <cite>exp(jtimes phase(x,y))</cite>.</p>
+<p>In third case (x=y=0) we have a singular point(the phase is not defined) but let&#8217;s just take 2 pi), it is important to note that the mask phase we are making acts as a phase plate (add a certain amount to the beam phase) so just alike we have seen with lenses its function takes the form :math: <cite>exp(jtimes phase(x,y))</cite>.</p>
 <p>We consider the beam we generated is a collimated one (plane wavefront) to transform it we just multiply it by the phase function and propagate it using <code class="docutils literal"><span class="pre">FresnelProp</span></code> following
 the steps we sown in previous tutorials:</p>
 <ul class="simple">
@@ -143,7 +141,7 @@ the steps we sown in previous tutorials:</p>
 <p>Where (x2,y2) are vectors defining the propagation plane (result) that one can consider as the detector surface.</p>
 <p>Before starting to that let&#8217;s take a look at the interferometer.</p>
 <a class="reference internal image-reference" href="_images/schema_interfero_donut.png"><img alt="_images/schema_interfero_donut.png" class="align-center" src="_images/schema_interfero_donut.png" style="width: 6.5in;" /></a>
-<p>The goal here is to propgate to have to have two different optical paths and therefor two versions of the beam having different radius of
+<p>The goal here is to propagate to have to have two different optical paths and therefor two versions of the beam having different radius of
 curvature of the wavefront on the detector.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [21]: </span><span class="n">L1</span><span class="o">=</span><span class="mi">50</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">L2</span><span class="o">=</span><span class="mf">190e3</span><span class="p">;</span> <span class="n">L3</span><span class="o">=</span><span class="mf">120e3</span><span class="p">;</span> <span class="n">L4</span><span class="o">=</span><span class="mf">140e3</span><span class="p">;</span>
 
@@ -218,15 +216,15 @@ curvature of the wavefront on the detector.</p>
 </ul>
 </div></blockquote>
 <p>You can see the class documentation for more informations, for the time being let&#8217;s stay with these two members (U1, U2). when the
-function <code class="docutils literal"><span class="pre">opsys.show_result_beam()</span></code> it merely plots the amlitude of <code class="docutils literal"><span class="pre">opsys.U2</span></code>. Now we want to see the interference of the two
+function <code class="docutils literal"><span class="pre">opsys.show_result_beam()</span></code> it merely plots the amplitude of <code class="docutils literal"><span class="pre">opsys.U2</span></code>. Now we want to see the interference of the two
 beams (arm 1 and arm 2), to do this we have to sum the propagation result of <code class="docutils literal"><span class="pre">opsys1.U2</span></code> and <code class="docutils literal"><span class="pre">opsys2.U2</span></code></p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [44]: </span><span class="n">inter</span><span class="o">=</span><span class="mf">0.4</span><span class="o">*</span><span class="n">opsys1</span><span class="o">.</span><span class="n">U2</span><span class="o">+</span><span class="n">opsys2</span><span class="o">.</span><span class="n">U2</span>
 
 <span class="gp">In [45]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="gr">Out[45]: </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span> <span class="n">at</span> <span class="mh">0x55de7390</span><span class="o">&gt;</span>
+<span class="gr">Out[45]: </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span> <span class="n">at</span> <span class="mh">0x51216828</span><span class="o">&gt;</span>
 
-<span class="gp">In [46]: </span><span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">inter</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c"># plots the intesnty of the interference.</span>
-<span class="gr">Out[46]: </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">collections</span><span class="o">.</span><span class="n">PolyCollection</span> <span class="n">at</span> <span class="mh">0x55f2fef0</span><span class="o">&gt;</span>
+<span class="gp">In [46]: </span><span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">inter</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c"># plots the intensity of the interference.</span>
+<span class="gr">Out[46]: </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">collections</span><span class="o">.</span><span class="n">PolyCollection</span> <span class="n">at</span> <span class="mh">0x5448c518</span><span class="o">&gt;</span>
 
 <span class="gp">In [47]: </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>

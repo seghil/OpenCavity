@@ -56,10 +56,10 @@
   <div class="section" id="tutorial-3-using-apertures-and-phase-masks">
 <span id="tuto3-label"></span><h1>Tutorial 3 - using apertures and phase masks<a class="headerlink" href="#tutorial-3-using-apertures-and-phase-masks" title="Permalink to this headline">¶</a></h1>
 <p>In the previous tutorial we have seen how to use ABCD matrix to define a linear simple two mirrors cavity, at this point you should be able to define and find
-the modes of a simple linear resonator, using ABCD matrix, this method is genral and powerful and as we will see in next tutorials it can be used to
+the modes of a simple linear resonator, using ABCD matrix, this method is general and powerful and as we will see in next tutorials it can be used to
 define more complex resonators scheme like a V-shaped , bow-tie cavities.
 Nevertheless there are some configuration that cannot be defined using  ABCD matrix alone, fore example when we want to add an aperture somewhere inside
-the cavity, or some amplitude or phase modulations (phase mask, diffracitve elements, thermal lenses..etc). We can define such systems in OpenCavity by splitting the complex system to subsystems and applying phase mask or aperture, then cascade the subsystems
+the cavity, or some amplitude or phase modulations (phase mask, diffractive elements, thermal lenses..etc). We can define such systems in OpenCavity by splitting the complex system to subsystems and applying phase mask or aperture, then cascade the subsystems
 to make the global one. well let&#8217;s take some examples you should have a better picture after.</p>
 <div class="section" id="plano-concave-cavity-using-phase-mask">
 <h2>Plano concave cavity using phase mask<a class="headerlink" href="#plano-concave-cavity-using-phase-mask" title="Permalink to this headline">¶</a></h2>
@@ -89,7 +89,7 @@ mirror M1. If you want to apply a mask, say to the last plane just make it the s
 <div><ol class="arabic simple">
 <li>sub-system1: Plane mirror -&gt; propagation -&gt; apply phase mask 1</li>
 <li>sub-system2: plane mirror -&gt; propagation -&gt; apply phase mask 2</li>
-<li>global-system = cascade(sub-system1, subsytem2)</li>
+<li>global-system = cascade(sub-system1, subsystem2)</li>
 <li>solve global-system</li>
 </ol>
 </div></blockquote>
@@ -104,13 +104,13 @@ mirror M1. If you want to apply a mask, say to the last plane just make it the s
 
 <span class="gp">In [5]: </span><span class="n">sys2</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">();</span>
 
-<span class="gp">In [6]: </span><span class="n">sys1</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A1</span><span class="p">,</span><span class="n">B1</span><span class="p">,</span><span class="n">C1</span><span class="p">,</span><span class="n">D1</span><span class="p">)</span> <span class="c"># system containig just propagation distance</span>
+<span class="gp">In [6]: </span><span class="n">sys1</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A1</span><span class="p">,</span><span class="n">B1</span><span class="p">,</span><span class="n">C1</span><span class="p">,</span><span class="n">D1</span><span class="p">)</span> <span class="c"># system containing just propagation distance</span>
 
-<span class="gp">In [7]: </span><span class="n">sys2</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A1</span><span class="p">,</span><span class="n">B1</span><span class="p">,</span><span class="n">C1</span><span class="p">,</span><span class="n">D1</span><span class="p">)</span> <span class="c"># system containig just propagation distance, we dont applay phase mask of plane mirror it is just &#39;1&#39;</span>
+<span class="gp">In [7]: </span><span class="n">sys2</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A1</span><span class="p">,</span><span class="n">B1</span><span class="p">,</span><span class="n">C1</span><span class="p">,</span><span class="n">D1</span><span class="p">)</span> <span class="c"># system containing just propagation distance, we don&#39;t apply phase mask of plane mirror it is just &#39;1&#39;</span>
 
-<span class="gp">In [8]: </span><span class="n">T_lens</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mi">1j</span><span class="o">*</span><span class="n">sys2</span><span class="o">.</span><span class="n">k</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="p">))</span><span class="o">*</span><span class="n">sys2</span><span class="o">.</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">);</span> <span class="c"># transfer function (phase mask) of a focuding lens, sys.k is the  wave-vector</span>
+<span class="gp">In [8]: </span><span class="n">T_lens</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mi">1j</span><span class="o">*</span><span class="n">sys2</span><span class="o">.</span><span class="n">k</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="p">))</span><span class="o">*</span><span class="n">sys2</span><span class="o">.</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">);</span> <span class="c"># transfer function (phase mask) of a focusing lens, sys.k is the  wave-vector</span>
 
-<span class="gp">In [9]: </span><span class="n">sys2</span><span class="o">.</span><span class="n">apply_mask1D</span><span class="p">(</span><span class="n">T_lens</span><span class="p">);</span> <span class="c"># apply a phase mask to the second system = focusing + popagation</span>
+<span class="gp">In [9]: </span><span class="n">sys2</span><span class="o">.</span><span class="n">apply_mask1D</span><span class="p">(</span><span class="n">T_lens</span><span class="p">);</span> <span class="c"># apply a phase mask to the second system = focusing + propagation</span>
 <span class="go">Applying 1D Mask...</span>
 <span class="go">Mask applied.</span>
 
@@ -145,7 +145,7 @@ and the last planes of the system, as you can see in the code we used this absci
 The question is why bothering and create these vectors when it is too easy to generate linearly spaced vector from <code class="docutils literal"><span class="pre">-a</span></code> to <code class="docutils literal"><span class="pre">+a</span></code>
 containing <code class="docutils literal"><span class="pre">npts</span></code> elements. The answer is: because these two vectors are not linearly spaced, indeed to build the Matrix-kernel,
 OpenCavity transforms the Fresnel propagation integral to an exact some using the Legendre-Gauss quadrature scheme, thus  the
-vectors contain Lengendre-Gauss nodes thereby the resolved modes are also calculated at these points.</p>
+vectors contain Legendre-Gauss nodes thereby the resolved modes are also calculated at these points.</p>
 </div>
 <div class="section" id="inserting-an-aperture-inside-the-cavity">
 <h2>inserting an aperture inside the cavity<a class="headerlink" href="#inserting-an-aperture-inside-the-cavity" title="Permalink to this headline">¶</a></h2>
@@ -157,10 +157,10 @@ vectors contain Lengendre-Gauss nodes thereby the resolved modes are also calcul
 <span class="gp">In [18]: </span><span class="n">l1</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">In [19]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">(1.3307139318241568e-06, 3.8373526172974515e-05)</span>
+<span class="go">(1.330713932268246e-06, 3.8373526170754069e-05)</span>
 
 <span class="gp">In [20]: </span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l0</span><span class="p">)</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span>
-<span class="gr">Out[20]: </span><span class="mf">1.8521589968734098e-05</span>
+<span class="gr">Out[20]: </span><span class="mf">1.852158996740183e-05</span>
 </pre></div>
 </div>
 <p>As we can see the two modes are very well confined (have very low losses = 1-abs(l)²) and the differences between them is just negligible.</p>
@@ -210,7 +210,6 @@ We take the same code of the first example an we create and add an aperture:</p>
 <span class="gp">In [38]: </span><span class="n">ms</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
 
 <span class="gp">In [39]: </span><span class="n">ms</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">,</span><span class="n">aperture</span><span class="p">);</span> <span class="c"># plots the aperture function</span>
-<span class="gr">Out[39]: </span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="n">at</span> <span class="mh">0x1a965588</span><span class="o">&gt;</span><span class="p">]</span>
 
 <span class="gp">In [40]: </span><span class="n">sys1</span><span class="o">.</span><span class="n">apply_mask1D</span><span class="p">(</span><span class="n">aperture</span><span class="p">);</span> <span class="c"># apply the aperture to the subsystem 1</span>
 <span class="go">Applying 1D Mask...</span>
@@ -236,11 +235,10 @@ We take the same code of the first example an we create and add an aperture:</p>
 <span class="gp">In [46]: </span><span class="n">l1</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">In [47]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">(0.014508132902640525, 0.14202874441174484)</span>
+<span class="go">(0.014508132902637749, 0.1420287444117414)</span>
 </pre></div>
 </div>
-<p>Now the fundamental mode has round-trip loses of 1.4% and the second mode 12.7% this makes possible to select ony the
-the fundamental one for example if one put a gain meduim with net gain = 5% inside this cavity only the fundamental mode survives.</p>
+<p>Now the fundamental mode has round-trip loses of 1.4% and the second mode 12.7% this makes possible to select only the the fundamental one for example if one put a gain medium with net gain = 5% inside this cavity only the fundamental mode survives.</p>
 <p>A question now: in this example the aperture is inserted on the first mirror, what if we want to change its place to the second
 mirror? Well as we said earlier in this tutorial when we use the function <code class="docutils literal"><span class="pre">apply_mask1D()</span></code> on a system this apply the mask on
 the first plane of the system, if we take a look at the code above the <code class="docutils literal"><span class="pre">sys2</span></code> is the return-trip subsystem so it starts with

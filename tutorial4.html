@@ -70,7 +70,7 @@ Let&#8217;s start by taking the cavity system of tutorial-2 and calculate its ei
 \times \begin{bmatrix} 1 &amp; Lc \\ 0 &amp; 1 \end{bmatrix}\end{split}\]</div>
 <p>The first step is to import <code class="docutils literal"><span class="pre">opencavity</span></code> module and enter the global matrix of the cavity, this can be done directly by writing each matrix then do the dot
 product, or we can simply use <cite>g1,g2</cite> parameters as we did in <em class="xref std std-ref">tuto2-using-g1g2-label</em>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">oc</span><span class="p">;</span> <span class="c">#importing the opencavity module</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">ms</span><span class="p">;</span> <span class="c">#importing the opencavity module</span>
 
 <span class="gp">In [2]: </span><span class="n">R1</span><span class="o">=</span><span class="mf">1e13</span><span class="p">;</span> <span class="n">R2</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">Lc</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">npts</span><span class="o">=</span><span class="mi">120</span><span class="p">;</span> <span class="n">a</span><span class="o">=</span><span class="mi">150</span><span class="p">;</span> <span class="c"># cavity parameters</span>
 
@@ -78,9 +78,9 @@ product, or we can simply use <cite>g1,g2</cite> parameters as we did in <em cla
 
 <span class="gp">In [4]: </span><span class="n">A</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">B</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g2</span><span class="o">*</span><span class="n">Lc</span><span class="p">;</span> <span class="n">C</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">/</span><span class="n">Lc</span><span class="p">;</span> <span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 
-<span class="gp">In [5]: </span><span class="n">opsys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">()</span> <span class="c">#creating a oc object</span>
+<span class="gp">In [5]: </span><span class="n">opsys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">()</span> <span class="c">#creating a ms object</span>
 
-<span class="gp">In [6]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span> <span class="c"># enter the ABCD matrixc and build the system-Kerenl</span>
+<span class="gp">In [6]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span> <span class="c"># enter the ABCD matrixc and build the system-Kernel</span>
 
 <span class="gp">In [7]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">solve_modes</span><span class="p">()</span>
 <span class="go">running the eigenvalues solver...</span>
@@ -158,10 +158,10 @@ the function <code class="docutils literal"><span class="pre">get_result_beam()<
 <span class="gp">In [29]: </span><span class="n">tem00_2</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">propsys2</span><span class="o">.</span><span class="n">get_result_beam</span><span class="p">()</span>
 
 <span class="gp">In [30]: </span><span class="k">print</span> <span class="n">opsys</span><span class="o">.</span><span class="n">find_waist</span><span class="p">(</span><span class="n">tem00_1</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="c"># calculate the waist of the beam at 36% of maximum amplitude</span>
-<span class="go">797.449863496</span>
+<span class="go">764.060403123</span>
 
 <span class="gp">In [31]: </span><span class="k">print</span> <span class="n">opsys</span><span class="o">.</span><span class="n">find_waist</span><span class="p">(</span><span class="n">tem00_2</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
-<span class="go">589.789316892</span>
+<span class="go">660.868672265</span>
 </pre></div>
 </div>
 <div class="section" id="the-cleaned-code">

@@ -17,7 +17,7 @@ The reason is that every one of the three techniques we show here, is best suite
 System definition using ABCD matrices
 =====================================
 
-let’s start now and take the same cavity system of the previous tutorial. This simple two-mirrors linear resonator (radius of curvature R1 and R2) 
+Let’s start now and take the same cavity system of the previous tutorial. This simple two-mirrors linear resonator (radius of curvature R1 and R2) 
 represented below is equivalent to a periodic sequence made of two thin lenses with focal lengths equal to f1 (=R1/2) and f2 (=R2/2), spaced by a distance Lc.
 
 .. image:: _static/Optical_cavity_lens.png
@@ -49,7 +49,7 @@ Defining this system is quite straightforward , all what we have to do for now i
    In [6]: A4=1; B4=Lc; C4=0; D4=1;    #propagation distance Lc
    
 
-Making the matrices using ``numerical python``:``np`` , note here that we use numerical python from inside imported ``opencavity`` module that we called ``oc``,
+Making the matrices using ``numerical python``:``np`` , note here that we use numerical python from inside imported ``opencavity`` module that we called ``ms``,
 this is possible because ``numerical python`` or ``numpy`` is already imported inside ``opencavity``, but importing it again at the beginning of the script will
 work too as we did in other tutorials. The same holds for ``matplotlib`` module imported as ``plt`` in ``opencavity``.
 
@@ -75,7 +75,7 @@ Till now we haven't use the OpenCavity package yet and we haven't done any mode 
  
    In [11]: A=M[0,0]; B=M[0,1]; C=M[1,0]; D=M[1,1]
    
-   In [12]: opsys=ms.CavEigenSys() #creating a oc object
+   In [12]: opsys=ms.CavEigenSys() #creating a ms object
    
    In [13]: opsys.build_1D_cav_ABCD(a,npts,A,B,C,D) # enter the ABCD matrix and build the system-Kerenl
 
@@ -120,7 +120,7 @@ let's try it:
 
 .. ipython::
 
-   In [1]: import opencavity as oc; #importing the opencavity module
+   In [1]: import opencavity as ms; #importing the opencavity module
    
    In [2]: R1=1e13; R2=10*1e3; Lc=8*1e3; npts=120; a=150; # cavity parameters
    
@@ -160,7 +160,7 @@ We take the same matrices of the first example:
 
 .. ipython::
 
-   In [1]: import opencavity as oc
+   In [1]: import opencavity.modesolver as ms
    
    In [2]: R1=1e13; R2=10*1e3; Lc=8*1e3; npts=120; a=150; # cavity parameters
 
@@ -185,11 +185,11 @@ Making the matrices using ``numerical python``:``np``.
    
    In [4]: M4=ms.np.array([[A4, B4],[C4, D4]]);
 
-Calculating the dot product (matrix of 2 subsy-stems) 
+Calculating the dot product (matrix of 2 subsystems) 
 
 .. ipython::
  
-   In [10]: M11=M2.dot(M1); # sub-sytem 1
+   In [10]: M11=M2.dot(M1); # sub-system 1
    
    In [10]: M22=M4.dot(M3); # sub-system 2 
    
@@ -203,7 +203,7 @@ As in the first example, till now we have just manipulated matrices to create tw
  
    In [10]: sys1=ms.CavEigenSys(); 
    
-   In [10]: sys2=ms.CavEigenSys()
+   In [10]: sys2=ms.CavEigenSys();
    
    In [10]: sys1.build_1D_cav_ABCD(a,npts,A11,B11,C11,D11)
    

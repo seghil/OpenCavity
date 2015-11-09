@@ -5,10 +5,10 @@ Tutorial 3 - using apertures and phase masks
 ********************************************
 
 In the previous tutorial we have seen how to use ABCD matrix to define a linear simple two mirrors cavity, at this point you should be able to define and find 
-the modes of a simple linear resonator, using ABCD matrix, this method is genral and powerful and as we will see in next tutorials it can be used to 
+the modes of a simple linear resonator, using ABCD matrix, this method is general and powerful and as we will see in next tutorials it can be used to 
 define more complex resonators scheme like a V-shaped , bow-tie cavities.
 Nevertheless there are some configuration that cannot be defined using  ABCD matrix alone, fore example when we want to add an aperture somewhere inside 
-the cavity, or some amplitude or phase modulations (phase mask, diffracitve elements, thermal lenses..etc). We can define such systems in OpenCavity by splitting the complex system to subsystems and applying phase mask or aperture, then cascade the subsystems 
+the cavity, or some amplitude or phase modulations (phase mask, diffractive elements, thermal lenses..etc). We can define such systems in OpenCavity by splitting the complex system to subsystems and applying phase mask or aperture, then cascade the subsystems 
 to make the global one. well let's take some examples you should have a better picture after.
 
 Plano concave cavity using phase mask
@@ -35,7 +35,7 @@ Knowing this, to define our plano-concave cavity using two subsystems we proceed
 
    1. sub-system1: Plane mirror -> propagation -> apply phase mask 1
    2. sub-system2: plane mirror -> propagation -> apply phase mask 2
-   3. global-system = cascade(sub-system1, subsytem2)
+   3. global-system = cascade(sub-system1, subsystem2)
    4. solve global-system
      
 It is time to stop talking and start acting, here is the code:
@@ -52,13 +52,13 @@ It is time to stop talking and start acting, here is the code:
    
    In [10]: sys2=ms.CavEigenSys();
    
-   In [10]: sys1.build_1D_cav_ABCD(a,npts,A1,B1,C1,D1) # system containig just propagation distance 
+   In [10]: sys1.build_1D_cav_ABCD(a,npts,A1,B1,C1,D1) # system containing just propagation distance 
    
-   In [10]: sys2.build_1D_cav_ABCD(a,npts,A1,B1,C1,D1) # system containig just propagation distance, we dont applay phase mask of plane mirror it is just '1'
+   In [10]: sys2.build_1D_cav_ABCD(a,npts,A1,B1,C1,D1) # system containing just propagation distance, we don't apply phase mask of plane mirror it is just '1'
    
-   In [10]: T_lens=ms.np.exp((1j*sys2.k/(2*f))*sys2.x1**2); # transfer function (phase mask) of a focuding lens, sys.k is the  wave-vector 
+   In [10]: T_lens=ms.np.exp((1j*sys2.k/(2*f))*sys2.x1**2); # transfer function (phase mask) of a focusing lens, sys.k is the  wave-vector 
    
-   In [10]: sys2.apply_mask1D(T_lens); # apply a phase mask to the second system = focusing + popagation 
+   In [10]: sys2.apply_mask1D(T_lens); # apply a phase mask to the second system = focusing + propagation 
    
    In [10]: sys1.cascade_subsystem(sys2)
    
@@ -91,7 +91,7 @@ and the last planes of the system, as you can see in the code we used this absci
 The question is why bothering and create these vectors when it is too easy to generate linearly spaced vector from ``-a`` to ``+a`` 
 containing ``npts`` elements. The answer is: because these two vectors are not linearly spaced, indeed to build the Matrix-kernel, 
 OpenCavity transforms the Fresnel propagation integral to an exact some using the Legendre-Gauss quadrature scheme, thus  the 
-vectors contain Lengendre-Gauss nodes thereby the resolved modes are also calculated at these points.
+vectors contain Legendre-Gauss nodes thereby the resolved modes are also calculated at these points.
 
 inserting an aperture inside the cavity
 =======================================
@@ -192,8 +192,7 @@ well the fundamental mode still not perturbed, let's see now the round-trip loss
    
    In [10]: print(1-ms.np.abs(l0)**2,1-ms.np.abs(l1)**2)
    
-Now the fundamental mode has round-trip loses of 1.4% and the second mode 12.7% this makes possible to select ony the 
-the fundamental one for example if one put a gain meduim with net gain = 5% inside this cavity only the fundamental mode survives.
+Now the fundamental mode has round-trip loses of 1.4% and the second mode 12.7% this makes possible to select only the the fundamental one for example if one put a gain medium with net gain = 5% inside this cavity only the fundamental mode survives.
 
 A question now: in this example the aperture is inserted on the first mirror, what if we want to change its place to the second 
 mirror? Well as we said earlier in this tutorial when we use the function ``apply_mask1D()`` on a system this apply the mask on 

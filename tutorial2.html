@@ -67,7 +67,7 @@
 </div></blockquote>
 <div class="section" id="system-definition-using-abcd-matrices">
 <h2>System definition using ABCD matrices<a class="headerlink" href="#system-definition-using-abcd-matrices" title="Permalink to this headline">¶</a></h2>
-<p>let’s start now and take the same cavity system of the previous tutorial. This simple two-mirrors linear resonator (radius of curvature R1 and R2)
+<p>Let’s start now and take the same cavity system of the previous tutorial. This simple two-mirrors linear resonator (radius of curvature R1 and R2)
 represented below is equivalent to a periodic sequence made of two thin lenses with focal lengths equal to f1 (=R1/2) and f2 (=R2/2), spaced by a distance Lc.</p>
 <img alt="_images/Optical_cavity_lens.png" src="_images/Optical_cavity_lens.png" />
 <p>The T transfer matrix of such a system is</p>
@@ -91,7 +91,7 @@ represented below is equivalent to a periodic sequence made of two thin lenses w
 <span class="gp">In [6]: </span><span class="n">A4</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">B4</span><span class="o">=</span><span class="n">Lc</span><span class="p">;</span> <span class="n">C4</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">D4</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>    <span class="c">#propagation distance Lc</span>
 </pre></div>
 </div>
-<p>Making the matrices using <code class="docutils literal"><span class="pre">numerical</span> <span class="pre">python</span></code>:<code class="docutils literal"><span class="pre">np</span></code> , note here that we use numerical python from inside imported <code class="docutils literal"><span class="pre">opencavity</span></code> module that we called <code class="docutils literal"><span class="pre">oc</span></code>,
+<p>Making the matrices using <code class="docutils literal"><span class="pre">numerical</span> <span class="pre">python</span></code>:<code class="docutils literal"><span class="pre">np</span></code> , note here that we use numerical python from inside imported <code class="docutils literal"><span class="pre">opencavity</span></code> module that we called <code class="docutils literal"><span class="pre">ms</span></code>,
 this is possible because <code class="docutils literal"><span class="pre">numerical</span> <span class="pre">python</span></code> or <code class="docutils literal"><span class="pre">numpy</span></code> is already imported inside <code class="docutils literal"><span class="pre">opencavity</span></code>, but importing it again at the beginning of the script will
 work too as we did in other tutorials. The same holds for <code class="docutils literal"><span class="pre">matplotlib</span></code> module imported as <code class="docutils literal"><span class="pre">plt</span></code> in <code class="docutils literal"><span class="pre">opencavity</span></code>.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [7]: </span><span class="n">M1</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">A1</span><span class="p">,</span><span class="n">B1</span> <span class="p">],[</span><span class="n">C1</span><span class="p">,</span> <span class="n">D1</span><span class="p">]]);</span>
@@ -110,7 +110,7 @@ work too as we did in other tutorials. The same holds for <code class="docutils 
 <p>Till now we haven&#8217;t use the OpenCavity package yet and we haven&#8217;t done any mode calculation, all what we did is some matrix manipulation to create the ABCD matrix of the cavity. Let&#8217;s get the elements of this matrix and enter them into a <em>solver</em> system, we call it <em>opsys</em> (for optical system)</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [12]: </span><span class="n">A</span><span class="o">=</span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span> <span class="n">B</span><span class="o">=</span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">];</span> <span class="n">C</span><span class="o">=</span><span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span> <span class="n">D</span><span class="o">=</span><span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="gp">In [13]: </span><span class="n">opsys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">()</span> <span class="c">#creating a oc object</span>
+<span class="gp">In [13]: </span><span class="n">opsys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">()</span> <span class="c">#creating a ms object</span>
 
 <span class="gp">In [14]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span> <span class="c"># enter the ABCD matrix and build the system-Kerenl</span>
 </pre></div>
@@ -171,7 +171,7 @@ mode.</p>
 <h2>System definition using g1, g2 parameters<a class="headerlink" href="#system-definition-using-g1-g2-parameters" title="Permalink to this headline">¶</a></h2>
 <p>g1 and g2 parameters are usually used to study the stability of resonators, they are defined as <cite>g1=1-Lc/R1, g2=1-Lc/R2</cite>. the resonator is sable if 0&lt;g1*g2 &lt;1. The global ABCD matrix of a the resonator can be written in terms of g1, g2 as follows:</p>
 <p>let&#8217;s try it:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [19]: </span><span class="kn">import</span> <span class="nn">opencavity</span> <span class="kn">as</span> <span class="nn">oc</span><span class="p">;</span> <span class="c">#importing the opencavity module</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [19]: </span><span class="kn">import</span> <span class="nn">opencavity</span> <span class="kn">as</span> <span class="nn">ms</span><span class="p">;</span> <span class="c">#importing the opencavity module</span>
 
 <span class="gp">In [20]: </span><span class="n">R1</span><span class="o">=</span><span class="mf">1e13</span><span class="p">;</span> <span class="n">R2</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">Lc</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">npts</span><span class="o">=</span><span class="mi">120</span><span class="p">;</span> <span class="n">a</span><span class="o">=</span><span class="mi">150</span><span class="p">;</span> <span class="c"># cavity parameters</span>
 
@@ -180,6 +180,12 @@ mode.</p>
 <span class="gp">In [22]: </span><span class="n">A</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">B</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g2</span><span class="o">*</span><span class="n">Lc</span><span class="p">;</span> <span class="n">C</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">/</span><span class="n">Lc</span><span class="p">;</span> <span class="n">D</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">g2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 
 <span class="gp">In [23]: </span><span class="n">opsys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">();</span>  <span class="c"># create a solver object</span>
+<span class="go">---------------------------------------------------------------------------</span>
+<span class="go">AttributeError                            Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-23-4c4451fa3143&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 opsys=ms.CavEigenSys();  # create a solver object</span>
+
+<span class="go">AttributeError: &#39;module&#39; object has no attribute &#39;CavEigenSys&#39;</span>
 
 <span class="gp">In [24]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span> <span class="c"># build the cavity kernel</span>
 
@@ -187,10 +193,22 @@ mode.</p>
 <span class="go">running the eigenvalues solver...</span>
 
 <span class="gp">In [26]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="n">ms</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span> <span class="c"># show the first mode</span>
+<span class="go">---------------------------------------------------------------------------</span>
+<span class="go">AttributeError                            Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-26-6cdafd916f5d&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 opsys.show_mode(0); ms.plt.grid() # show the first mode</span>
+
+<span class="go">AttributeError: &#39;module&#39; object has no attribute &#39;plt&#39;</span>
 
 <span class="gp">In [27]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">show_mode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">what</span><span class="o">=</span><span class="s">&#39;phase&#39;</span><span class="p">)</span>
 
 <span class="gp">In [28]: </span><span class="n">ms</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="go">---------------------------------------------------------------------------</span>
+<span class="go">AttributeError                            Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-28-6a4ca6f2b9a3&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 ms.plt.show()</span>
+
+<span class="go">AttributeError: &#39;module&#39; object has no attribute &#39;plt&#39;</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/tuto2_plot_mode0_E_1D_g1g2.png"><img alt="_images/tuto2_plot_mode0_E_1D_g1g2.png" src="_images/tuto2_plot_mode0_E_1D_g1g2.png" style="width: 4in;" /></a>
@@ -211,7 +229,7 @@ is quite simple, we can clearly distinguish the needed steps to build and solve 
 <h2>cascading subsystems<a class="headerlink" href="#cascading-subsystems" title="Permalink to this headline">¶</a></h2>
 <p>Calculating the global transfer matrix of an optical cavity is a straightforward method to define it and solve the eigenmodes and eigenvalues, however, sometimes it is useful to split a global complex system to several subsystems, do some transformation on them, then cascade these subsystems to make a global one. This may be inevitable when you want to introduce an amplitude or phase function somewhere inside the cavity, such as an aperture. This is covered in more details in the following tutorials, but for now let&#8217;s see how to define and solve the modes of the same optical cavity by splitting the global system into two subsystems and cascading them.</p>
 <p>We take the same matrices of the first example:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [29]: </span><span class="kn">import</span> <span class="nn">opencavity</span> <span class="kn">as</span> <span class="nn">oc</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [29]: </span><span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">ms</span>
 
 <span class="gp">In [30]: </span><span class="n">R1</span><span class="o">=</span><span class="mf">1e13</span><span class="p">;</span> <span class="n">R2</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">Lc</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mf">1e3</span><span class="p">;</span> <span class="n">npts</span><span class="o">=</span><span class="mi">120</span><span class="p">;</span> <span class="n">a</span><span class="o">=</span><span class="mi">150</span><span class="p">;</span> <span class="c"># cavity parameters</span>
 
@@ -234,8 +252,8 @@ is quite simple, we can clearly distinguish the needed steps to build and solve 
 <span class="gp">In [38]: </span><span class="n">M4</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">A4</span><span class="p">,</span> <span class="n">B4</span><span class="p">],[</span><span class="n">C4</span><span class="p">,</span> <span class="n">D4</span><span class="p">]]);</span>
 </pre></div>
 </div>
-<p>Calculating the dot product (matrix of 2 subsy-stems)</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [39]: </span><span class="n">M11</span><span class="o">=</span><span class="n">M2</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M1</span><span class="p">);</span> <span class="c"># sub-sytem 1</span>
+<p>Calculating the dot product (matrix of 2 subsystems)</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [39]: </span><span class="n">M11</span><span class="o">=</span><span class="n">M2</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M1</span><span class="p">);</span> <span class="c"># sub-system 1</span>
 
 <span class="gp">In [40]: </span><span class="n">M22</span><span class="o">=</span><span class="n">M4</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M3</span><span class="p">);</span> <span class="c"># sub-system 2</span>
 
@@ -247,7 +265,7 @@ is quite simple, we can clearly distinguish the needed steps to build and solve 
 <p>As in the first example, till now we have just manipulated matrices to create two ABCD matrices representing two subsystems of the cavity. Let&#8217;s create and build these subsystems:</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [43]: </span><span class="n">sys1</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">();</span>
 
-<span class="gp">In [44]: </span><span class="n">sys2</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">()</span>
+<span class="gp">In [44]: </span><span class="n">sys2</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">();</span>
 
 <span class="gp">In [45]: </span><span class="n">sys1</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A11</span><span class="p">,</span><span class="n">B11</span><span class="p">,</span><span class="n">C11</span><span class="p">,</span><span class="n">D11</span><span class="p">)</span>
 

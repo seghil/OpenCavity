@@ -30,7 +30,7 @@ This is the simplest example one can get, Well let's see how to calculate the ei
    
    In [5]: sys.solve_modes(n_modes=10); # solve the 10 first modes of the cavity, default value of n_modes is 30
    
-- in the first command we import the **CavityMode** module  and we call it ``oc`` in the running session, the ``;`` is used to not show messages. 
+- in the first command we import the **CavityMode** module  and we call it ``ms`` in the running session, the ``;`` is used to not show messages. 
 - in the command 2 we create a *opencavity* object working at a wavelength=1.01, this object will contain all the system (parameters, solutions...) note that:
       - the default wavelength is 1, this means that ``sys=ms.CavEigenSys()`` = ``sys=ms.CavEigenSys(wavelength=1)``
       - the wavelength is unitless, thus all distances are in the wavelength unit. (here micron)
@@ -58,7 +58,7 @@ The calculated eigenmodes and eigenvalues are in ``sys``, to get them:
 
    In [9]: l,v=sys.get_mode1D(0) # l is the eigenvalue, and v the eigenvector: complex E-field of the mode
    
-   In [9]: print(1-ms.np.abs(l)**2) # the round trip losses = 1- |l|^2, we use np numerical-python imported within the oc
+   In [9]: print(1-ms.np.abs(l)**2) # the round trip losses = 1- |l|^2, we use np numerical-python imported within the ms
   
   
 In this example we used the function ``buid_1D_cav()`` to build the cavity `kernel`,  this function is appropriate for simple systems like the one of this tutorial when we have linear 2 mirrors cavity. However, there is a more general and powerful function which is ``build_1D_cav_ABCD()`` which can be used to define any optical cavity using its transfer matrix. (see :ref:`_ray-matrices-label`). In the forthcoming tutorials we will use this function, including the next one which is a tutorial that aim at getting familiar with defining general cavity designs.

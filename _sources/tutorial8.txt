@@ -20,7 +20,7 @@ Lets start by creating the cavity system:
    
    In [1]: import numpy as np
    
-   In [1]: sys=ms.CavEigenSys() #creating a oc object
+   In [1]: sys=ms.CavEigenSys() #creating a ms object
    
    In [1]: R1=1e13; R2=10*1e3; Lc=8*1e3; npts=64; a=80; # cavity parameters 
    

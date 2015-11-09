@@ -57,7 +57,7 @@
 <span id="tuto7-label"></span><h1>Tutorial 7 - General 2D cavity design<a class="headerlink" href="#tutorial-7-general-2d-cavity-design" title="Permalink to this headline">¶</a></h1>
 <p>In the previous tutorials we have seen how to define and calculate the modes of a given 1D optical cavity using ABCD transfer matrix definition. Now we
 see how to do the same thing but to design and calculate the modes of 2D optical cavity. The system definition procedure is quite similar as shown below.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">oc</span><span class="p">;</span> <span class="c">#importing the opencavity module</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">ms</span><span class="p">;</span> <span class="c">#importing the opencavity module</span>
 
 <span class="gp">In [2]: </span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
 
@@ -75,12 +75,12 @@ see how to do the same thing but to design and calculate the modes of 2D optical
 
 <span class="gp">In [9]: </span><span class="n">A</span><span class="o">=</span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span> <span class="n">B</span><span class="o">=</span><span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">];</span> <span class="n">C</span><span class="o">=</span><span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span> <span class="n">D</span><span class="o">=</span><span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="gp">In [10]: </span><span class="n">opsys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">()</span> <span class="c">#creating a oc object</span>
+<span class="gp">In [10]: </span><span class="n">opsys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">()</span> <span class="c">#creating a ms object</span>
 </pre></div>
 </div>
 <p>so far we are doing exactly the same thing as in previous tutorials, the change comes next: instead of using <code class="docutils literal"><span class="pre">opsys.build_1D_cav_ABCD(a,npts,A,B,C,D)</span></code>
 we use <code class="docutils literal"><span class="pre">opsys.build_2D_cav_ABCD(a,npts,A,B,C,D)</span></code></p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [11]: </span><span class="n">opsys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">()</span> <span class="c">#creating a oc object</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [11]: </span><span class="n">opsys</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">CavEigenSys</span><span class="p">()</span> <span class="c">#creating a ms object</span>
 
 <span class="gp">In [12]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">build_2D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span>
 <span class="go">Building the  kernel matrix ...</span>
@@ -137,12 +137,12 @@ we use <code class="docutils literal"><span class="pre">opsys.build_2D_cav_ABCD(
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [23]: </span><span class="n">l</span><span class="p">,</span><span class="n">v</span><span class="o">=</span><span class="n">opsys</span><span class="o">.</span><span class="n">get_mode2D</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="c"># l: eigenvalue, v: eigenvector (the mode)</span>
 
 <span class="gp">In [24]: </span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span> <span class="c"># in percent</span>
-<span class="gr">Out[24]: </span><span class="mf">1.1188458848288008e-05</span>
+<span class="gr">Out[24]: </span><span class="mf">1.1188459314581678e-05</span>
 
 <span class="gp">In [25]: </span><span class="n">l</span><span class="p">,</span><span class="n">v</span><span class="o">=</span><span class="n">opsys</span><span class="o">.</span><span class="n">get_mode2D</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 
 <span class="gp">In [26]: </span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-<span class="gr">Out[26]: </span><span class="mf">0.00017114867003620304</span>
+<span class="gr">Out[26]: </span><span class="mf">0.00017114866766032577</span>
 </pre></div>
 </div>
 <p>Using 2D cavity design offers more flexibility to simulate some effects, for example aberrations in laser mirrors, tilt, astigmatism...etc. It also allows

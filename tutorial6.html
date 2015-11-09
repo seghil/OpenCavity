@@ -62,7 +62,7 @@ where we want to see the beam is at a distance d2= 100mm from the output mirror 
 <p>The new design scheme is shown bellow:</p>
 <a class="reference internal image-reference" href="_images/Bessel_cavity_scheme2.png" id="bessel-cavity2-fig"><img alt="_images/Bessel_cavity_scheme2.png" class="align-center" id="bessel-cavity2-fig" src="_images/Bessel_cavity_scheme2.png" style="width: 5.5in;" /></a>
 <p>Creating the ABCD matrices and the cavity-subsystems just as in the previous tutorial:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">oc</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">opencavity.modesolver</span> <span class="kn">as</span> <span class="nn">ms</span>
 
 <span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">opencavity.propagators</span> <span class="kn">import</span> <span class="n">FresnelProp</span>
 
@@ -93,7 +93,7 @@ where we want to see the beam is at a distance d2= 100mm from the output mirror 
 </div>
 <p>Creating the axicon function with <cite>positive</cite> base angle = +0.5°, <code class="docutils literal"><span class="pre">sys.k</span></code> is the wave vector, the only difference with the first example is the sign
 of the base angle.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [15]: </span><span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="mf">3.14</span><span class="o">/</span><span class="mi">180</span><span class="p">;</span><span class="c"># reflector is quivalent to refractive axcicon with 2 x theta</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [15]: </span><span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="mf">3.14</span><span class="o">/</span><span class="mi">180</span><span class="p">;</span><span class="c"># reflector is equivalent to refractive axicon with 2 x theta</span>
 
 <span class="gp">In [16]: </span><span class="n">T_axicon</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mi">1j</span><span class="o">*</span><span class="n">sys1</span><span class="o">.</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">theta</span><span class="o">*</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">))</span><span class="o">*</span><span class="n">sys1</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span>
 </pre></div>
@@ -116,7 +116,7 @@ of the base angle.</p>
 <p>The first thing we notice is that the ring radius of the beam is smaller. But the major difference is in the propagation. let&#8217;s calculate now the output
 beam at d2=10cm out of the cavity. The propagation system to calculate the output beam is shown bellow:</p>
 <a class="reference internal image-reference" href="_images/Bessel2_output.png" id="bessel-output-fig"><img alt="_images/Bessel2_output.png" class="align-center" id="bessel-output-fig" src="_images/Bessel2_output.png" style="width: 5in;" /></a>
-<p>creating the propagation matrice, fetching the mode and propagate it. The ABCD matrix of such a optical system is:</p>
+<p>creating the propagation matrix, fetching the mode and propagate it. The ABCD matrix of such a optical system is:</p>
 <div class="math">
 \[\begin{split}\begin{bmatrix} A &amp; B \\ C &amp; D \end{bmatrix}=
 \begin{bmatrix} 1 &amp; d2 \\ 0 &amp; 1 \end{bmatrix}
@@ -125,7 +125,7 @@ beam at d2=10cm out of the cavity. The propagation system to calculate the outpu
 \times \begin{bmatrix} 1 &amp; 0 \\ \frac{(n0-n1)}{R2*n1} &amp; n0/n1 \end{bmatrix}
 \times \begin{bmatrix} 1 &amp; Lc \\ 0 &amp; 1 \end{bmatrix}\end{split}\]</div>
 <p>Entering ABCD matrices</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [21]: </span><span class="kn">import</span> <span class="nn">opencavity</span> <span class="kn">as</span> <span class="nn">oc</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [21]: </span><span class="kn">import</span> <span class="nn">opencavity</span> <span class="kn">as</span> <span class="nn">ms</span>
 
 <span class="gp">In [22]: </span><span class="kn">from</span> <span class="nn">opencavity.propagators</span> <span class="kn">import</span> <span class="n">FresnelProp</span>
 

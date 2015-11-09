@@ -80,7 +80,7 @@ the plane mirror.</p>
 </pre></div>
 </div>
 <ul>
-<li><p class="first">in the first command we import the <strong>CavityMode</strong> module  and we call it <code class="docutils literal"><span class="pre">oc</span></code> in the running session, the <code class="docutils literal"><span class="pre">;</span></code> is used to not show messages.</p>
+<li><p class="first">in the first command we import the <strong>CavityMode</strong> module  and we call it <code class="docutils literal"><span class="pre">ms</span></code> in the running session, the <code class="docutils literal"><span class="pre">;</span></code> is used to not show messages.</p>
 </li>
 <li><dl class="first docutils">
 <dt>in the command 2 we create a <em>opencavity</em> object working at a wavelength=1.01, this object will contain all the system (parameters, solutions...) note that:</dt>
@@ -118,7 +118,7 @@ the plane mirror.</p>
 <p>The calculated eigenmodes and eigenvalues are in <code class="docutils literal"><span class="pre">sys</span></code>, to get them:</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [9]: </span><span class="n">l</span><span class="p">,</span><span class="n">v</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># l is the eigenvalue, and v the eigenvector: complex E-field of the mode</span>
 
-<span class="gp">In [10]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c"># the round trip losses = 1- |l|^2, we use np numerical-python imported within the oc</span>
+<span class="gp">In [10]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c"># the round trip losses = 1- |l|^2, we use np numerical-python imported within the ms</span>
 <span class="go">0.0099009900994</span>
 </pre></div>
 </div>
