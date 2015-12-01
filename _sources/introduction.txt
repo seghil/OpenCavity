@@ -2,10 +2,9 @@ Introduction
 ============
 
 *OpenCavity*  uses the matrix method with Fresnel Kernel formulation, plus an eigenvalue solver to find the fundamental mode of a laser cavity plus the higher order ones.
-In addition to the mode solver, it contains Physical optics module (Fresnel propagator) for general 1D and 2D systems, and also 
-an 1D/2D Gaussian beam generator.  
+In addition to the mode solver, it contains a Physical optics module (Fresnel propagator) for general 1D and 2D systems, plus a 1D/2D Gaussian beam generator.  
 
-Thanks to its general systems definition, the package can be used as a tool to :
+Thanks to its general systems definition, the package can be used as a tool to:
      - simulate and understand laser cavities physics.
      - design & optimization to study the effect of 
                - aberrations.

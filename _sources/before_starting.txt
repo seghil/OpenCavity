@@ -20,7 +20,7 @@ for scientific and engineering (numerical computations, data analysis and data v
      - `numpy <http://numpy.org/>`_ 
      - `spyder <https://code.google.com/p/spyderlib/>`_ is also highly recommended as a working editor. 
  
-On *Linux* users can install all modules quickly using the command line::
+On *Linux*, users can install all modules quickly using the command line::
 
      #sudo apt-get install python-numpy python-scipy python-matplotlib ipython  python-spyderlib
 
@@ -34,12 +34,13 @@ The important parts pointed out in the figure above are:
      - Python console: for interactively (in-line) writing and executing python commands.
      - Object instructor: gives informations about variables in the workspace (like the workspace browser in Matlab)
 
-When we give commands in the tutorials you can directly copy-past them in the console, Or in the editor to save and execute the commands. For these reasons at the end of each tutorial we give the cleaned code to copy the code directly without having to remove the commands number every time. If you have Ipython installed on your machine you can use it in *spyder* by choosing ``ipython interpreter`` in the ``interpreters`` menu. We will use an Ipython interpreter in the following tutorials, but using the default python interpreter 
+When we give commands in the tutorials you can directly copy-past them in the console, Or in the editor to save and execute them in a file. For these reasons, at the end of each tutorial we give a summary of the code to copy it directly in an executable Python script. If you have Ipython installed on your machine you can use it in *spyder* by choosing ``ipython interpreter`` in the ``interpreters`` menu. We will use an Ipython interpreter in the following tutorials, but using the default python interpreter 
 will also work.
-To check that everything works fine, you can try to import the *opencavity* package and launch an off-line version of this tutorials by typing 
+To check that everything works fine, you can try to import the *opencavity* package and launch an off-line version of this tutorials by typing
+
 .. ipython::
 
-   In [1]: import opencavity; #importing the opencavity module
+   In [1]: import opencavity.help; #importing the opencavity help module
 
    In [2]:  opencavity.help.launch(); #Launch off-line documentation in the browser
 

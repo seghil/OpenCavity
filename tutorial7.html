@@ -137,12 +137,12 @@ we use <code class="docutils literal"><span class="pre">opsys.build_2D_cav_ABCD(
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [23]: </span><span class="n">l</span><span class="p">,</span><span class="n">v</span><span class="o">=</span><span class="n">opsys</span><span class="o">.</span><span class="n">get_mode2D</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="c"># l: eigenvalue, v: eigenvector (the mode)</span>
 
 <span class="gp">In [24]: </span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span> <span class="c"># in percent</span>
-<span class="gr">Out[24]: </span><span class="mf">1.1188459314581678e-05</span>
+<span class="gr">Out[24]: </span><span class="mf">1.1188459936306572e-05</span>
 
 <span class="gp">In [25]: </span><span class="n">l</span><span class="p">,</span><span class="n">v</span><span class="o">=</span><span class="n">opsys</span><span class="o">.</span><span class="n">get_mode2D</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 
 <span class="gp">In [26]: </span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-<span class="gr">Out[26]: </span><span class="mf">0.00017114866766032577</span>
+<span class="gr">Out[26]: </span><span class="mf">0.00017114866894818448</span>
 </pre></div>
 </div>
 <p>Using 2D cavity design offers more flexibility to simulate some effects, for example aberrations in laser mirrors, tilt, astigmatism...etc. It also allows

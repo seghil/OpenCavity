@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial 9 - Fresnel propagation module &mdash; OpenCavity 0.1 Pre-Alpha documentation</title>
+    <title>Tutorial 9 - Beam transforming and interferometric simulation &mdash; OpenCavity 0.1 Pre-Alpha documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -49,8 +49,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="tutorial-9-fresnel-propagation-module">
-<span id="tuto9-label"></span><h1>Tutorial 9 - Fresnel propagation module<a class="headerlink" href="#tutorial-9-fresnel-propagation-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tutorial-9-beam-transforming-and-interferometric-simulation">
+<span id="tuto9-label"></span><h1>Tutorial 9 - Beam transforming and interferometric simulation<a class="headerlink" href="#tutorial-9-beam-transforming-and-interferometric-simulation" title="Permalink to this headline">¶</a></h1>
 <p>In some of the previous tutorials we used the Fresnel propagation module that comes with OpenCavity, mainly to calculate the output beam for
 1d and 2D cavity systems. And also with Bessel-Gauss cavities to show how the Bessel beams propagate especially in their non-diffracting region.
 In this tutorial  we use the Fresnel propagation module to do beam transforming using a phase function as it is usually realized practically
@@ -221,10 +221,10 @@ beams (arm 1 and arm 2), to do this we have to sum the propagation result of <co
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [44]: </span><span class="n">inter</span><span class="o">=</span><span class="mf">0.4</span><span class="o">*</span><span class="n">opsys1</span><span class="o">.</span><span class="n">U2</span><span class="o">+</span><span class="n">opsys2</span><span class="o">.</span><span class="n">U2</span>
 
 <span class="gp">In [45]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="gr">Out[45]: </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span> <span class="n">at</span> <span class="mh">0x51216828</span><span class="o">&gt;</span>
+<span class="gr">Out[45]: </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span> <span class="n">at</span> <span class="mh">0x187fd4a8</span><span class="o">&gt;</span>
 
 <span class="gp">In [46]: </span><span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">inter</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c"># plots the intensity of the interference.</span>
-<span class="gr">Out[46]: </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">collections</span><span class="o">.</span><span class="n">PolyCollection</span> <span class="n">at</span> <span class="mh">0x5448c518</span><span class="o">&gt;</span>
+<span class="gr">Out[46]: </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">collections</span><span class="o">.</span><span class="n">PolyCollection</span> <span class="n">at</span> <span class="mh">0x196f8240</span><span class="o">&gt;</span>
 
 <span class="gp">In [47]: </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -321,7 +321,7 @@ beams (arm 1 and arm 2), to do this we have to sum the propagation result of <co
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Tutorial 9 - Fresnel propagation module</a><ul>
+<li><a class="reference internal" href="#">Tutorial 9 - Beam transforming and interferometric simulation</a><ul>
 <li><a class="reference internal" href="#the-cleaned-code">The cleaned code</a></li>
 </ul>
 </li>

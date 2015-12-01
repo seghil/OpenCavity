@@ -51,9 +51,14 @@
             
   <div class="section" id="welcome-to-opencavity-documentation">
 <h1>Welcome to OpenCavity documentation!<a class="headerlink" href="#welcome-to-opencavity-documentation" title="Permalink to this headline">¶</a></h1>
-<p><em>opencavity</em> is a python package to solve the eigenmodes of open optical cavities.
-It comes with other tools that allow to design and study laser resonators, such as a Gaussian beam generator and a physical optics propagator.
-The package is designed and written with two gaols in mind: usage simplicity and fast learning curve.</p>
+<p><em>opencavity</em> is a python package that allows to analyze the eigenmodes of open optical cavities.</p>
+<p>What <em>opencavity</em> allows to do:</p>
+<ul class="simple">
+<li>Compute both fundamental and higher order eigenmodes of optical resonators.</li>
+<li>Simulate resonators that includes optical elements: apertures, diffractive optical elements (DOE), or any arbitrary phase and amplitude masks placed anywhere inside the resonator.</li>
+<li>It integrates a physical optics module that allows to compute the output mode, and simulate its propagation outside the resonator. This module can be used for example to design interferometric setups, beam shaping or transforming using DOE.</li>
+</ul>
+<p>The package is designed and written with two gaols in mind: usage simplicity and fast learning curve.</p>
 <a class="reference internal image-reference" href="_images/plot_mode0_E_1D.png"><img alt="_images/plot_mode0_E_1D.png" src="_images/plot_mode0_E_1D.png" style="width: 2.5in;" /></a>
 <a class="reference internal image-reference" href="_images/tuto7_plot_tem00_E_2D.png"><img alt="_images/tuto7_plot_tem00_E_2D.png" src="_images/tuto7_plot_tem00_E_2D.png" style="width: 2.5in;" /></a>
 <a class="reference internal image-reference" href="_images/tuto8_plot2_tem01_I_2D.png"><img alt="_images/tuto8_plot2_tem01_I_2D.png" src="_images/tuto8_plot2_tem01_I_2D.png" style="width: 2.5in;" /></a>
@@ -69,10 +74,10 @@ The package is designed and written with two gaols in mind: usage simplicity and
 <li class="toctree-l1"><a class="reference internal" href="tutorial1.html">Tutorial 1 - Simple 2 mirrors cavity</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial2.html">Tutorial 2 - Generalizes 1D cavity</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="tutorial2.html">Tutorial 2 - General 1D cavity</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial3.html">Tutorial 3 - using apertures and phase masks</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="tutorial3.html">Tutorial 3 - Using apertures and phase masks</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial4.html">Tutorial 4 - Calculating the output beam</a><ul class="simple">
@@ -90,7 +95,7 @@ The package is designed and written with two gaols in mind: usage simplicity and
 <li class="toctree-l1"><a class="reference internal" href="tutorial8.html">Tutorial 8 - 2D cavity with masks</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial9.html">Tutorial 9 - Fresnel propagation module</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="tutorial9.html">Tutorial 9 - Beam transforming and interferometric simulation</a><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -818,21 +823,20 @@ this function is used internally after solving the eigenvalue problem to sort th
 <dl class="class">
 <dt id="opencavity.propagators.FresnelProp">
 <em class="property">class </em><code class="descclassname">opencavity.propagators.</code><code class="descname">FresnelProp</code><span class="sig-paren">(</span><em>wavelength=1</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class for Fresnel propagation kernel construction and integrals calculation
-this class contains all informations about the optical system:</p>
-<blockquote>
-<div><ul class="simple">
+<dd><dl class="docutils">
+<dt>Class for Fresnel propagation kernel construction and integrals calculation. This class contains all information about the optical system: </dt>
+<dd><ul class="first last simple">
 <li>wavelength =1 (default value)</li>
 <li>U1 : the initial field (complex 1D or 2D vector)</li>
 <li>x1,y1 : starting plane coordinates (1D vector of float)</li>
 <li>U2 : resulting field   ((complex 1D or 2D vector)</li>
 <li>x2,y2 : result plane coordinates (1D vector of float)</li>
 </ul>
-</div></blockquote>
+</dd>
+</dl>
 <p>The optical system can be 1D or 2D, this information is stored in the attribute
 &#8216;dimension_flag&#8217;</p>
-<p>This class contains a method to calculate the propagated field at several distances  
-to follow the propagation. It is called yz_prop_chart()</p>
+<p>This class contains a method to calculate the propagated field at several distances. It is called yz_prop_chart()</p>
 <p>The class contains plotting methods to show the start/result field</p>
 <p>Steps to use this class:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">opSys</span><span class="o">=</span><span class="n">FresnelProp</span><span class="p">()</span> <span class="c"># create a propagation system (object)</span>
@@ -876,7 +880,7 @@ Args:</p>
 <dl class="method">
 <dt id="opencavity.propagators.FresnelProp.cascade_subsystem">
 <code class="descname">cascade_subsystem</code><span class="sig-paren">(</span><em>M2</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.cascade_subsystem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cascade subsytem does dot product with the initial ABCD matrix (inverted order).
+<dd><p>Cascade subsystem does dot product with the initial ABCD matrix (inverted order).
 Args:</p>
 <blockquote>
 <div><ul class="simple">
@@ -919,7 +923,7 @@ Args:</p>
 <dl class="method">
 <dt id="opencavity.propagators.FresnelProp.get_result_beam">
 <code class="descname">get_result_beam</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.get_result_beam" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fetch the propagation result contained in &#8216;self.U2&#8217; and the corresponding abscissa self.x2 it returns U2,x2 and y2 if 2D.
+<dd><p>Fetch the propagation result contained in &#8216;self.U2&#8217; and the corresponding abscissa self.x2. It returns U2,x2 and y2 if 2D.
 Args:</p>
 <blockquote>
 <div>-none</div></blockquote>
@@ -970,7 +974,7 @@ Args:</p>
 <dl class="method">
 <dt id="opencavity.propagators.FresnelProp.kernel2D_ABCD">
 <code class="descname">kernel2D_ABCD</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em>, <em>y1</em>, <em>y2</em>, <em>Ax</em>, <em>Bx</em>, <em>Cx</em>, <em>Dx</em>, <em>Ay=0</em>, <em>By=0</em>, <em>Cy=0</em>, <em>Dy=0</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.kernel2D_ABCD" title="Permalink to this definition">¶</a></dt>
-<dd><p>fresnel Kernel 2D this function is used internally in Fresnel integral calculation</p>
+<dd><p>Fresnel Kernel 2D this function is used internally in Fresnel integral calculation</p>
 </dd></dl>
 
 <dl class="method">
@@ -981,7 +985,7 @@ from the plane x1 to the plane x2 .</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><ul class="first last simple">
-<li>x2 (real 1D vector) : vector defining the propagation plane coordinates can be assimilated to a detector surface for example. by default it is a void vector, this means that the result plane is taken equal to the startingone (same size).</li>
+<li>x2 (real 1D vector) : vector defining the propagation plane coordinates can be assimilated to a detector surface for example. by default it is a void vector, this means that the result plane is taken equal to the starting one (same size).</li>
 </ul>
 </dd>
 <dt>Returns: </dt>
@@ -1085,7 +1089,7 @@ from the plane x1 to the plane x2 .</p>
 <p class="first admonition-title">Note</p>
 <ul class="last simple">
 <li>default value of y1 is void vector, this assumes 1D system.</li>
-<li>For 2D system if y1 is not given it will be taken equals to x1.</li>
+<li>For a 2D system if y1 is not given it will be taken equal to x1.</li>
 </ul>
 </div>
 <dl class="docutils">
@@ -1199,14 +1203,14 @@ Args:</p>
 <dl class="method">
 <dt id="opencavity.propagators.FresnelProp.yz_prop_chart">
 <code class="descname">yz_prop_chart</code><span class="sig-paren">(</span><em>Lmin</em>, <em>Lmax</em>, <em>nstep</em>, <em>x2=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#opencavity.propagators.FresnelProp.yz_prop_chart" title="Permalink to this definition">¶</a></dt>
-<dd><p>Propagate the 1D complex field to several planes and store the results in a matrix to follow the propagation as a function of distance    .</p>
+<dd><p>Propagates the 1D complex field to several planes and store the results in a matrix to follow the propagation as a function of distance    .</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><ul class="first last simple">
-<li>Lmin (real) : initial distance from which propagations calculation starts.</li>
-<li>Lmax (real)&gt; Lmax : Stop distance until which propagations are calculated.</li>
+<li>Lmin (real) : initial distance from which propagation calculation starts.</li>
+<li>Lmax (real)&gt; Lmax : Stop distance until which propagation is calculated.</li>
 <li>nstep (integer) : number of planes where the propagated field is calculated.</li>
-<li>x2(real 1D vectors) : vector defining the propagation plane coordinates, can be assimilated to a detector surface for example. by default it is a void vector, this means that the result plane is taken equal to the starting one (same size)</li>
+<li>x2(real 1D vectors) : vector defining the propagation plane coordinates, can be assimilated to a detector surface for example. by default it is a void vector, This means that the result plane is taken equal to the starting one (same size)</li>
 </ul>
 </dd>
 <dt>Returns: </dt>

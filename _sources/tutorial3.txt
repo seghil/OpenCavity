@@ -1,7 +1,7 @@
 .. _tuto3-label:
 
 ********************************************
-Tutorial 3 - using apertures and phase masks
+Tutorial 3 - Using apertures and phase masks
 ********************************************
 
 In the previous tutorial we have seen how to use ABCD matrix to define a linear simple two mirrors cavity, at this point you should be able to define and find 

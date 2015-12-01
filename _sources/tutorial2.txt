@@ -1,7 +1,7 @@
 
-**********************************
-Tutorial 2 - Generalizes 1D cavity
-**********************************
+******************************
+Tutorial 2 - General 1D cavity
+******************************
 
 In this part we see how to define a general cavity  system  using a more general method: ABCD matrices, this is a more general and powerful way to define multi-elements cavity with different arrangements (V-shaped, bow-tie...etc), and it is the preferable way of defining optical cavities in OpenCavity.
 
@@ -120,7 +120,7 @@ let's try it:
 
 .. ipython::
 
-   In [1]: import opencavity as ms; #importing the opencavity module
+   In [1]: import opencavity.modesolver as ms; #importing the opencavity module
    
    In [2]: R1=1e13; R2=10*1e3; Lc=8*1e3; npts=120; a=150; # cavity parameters
    

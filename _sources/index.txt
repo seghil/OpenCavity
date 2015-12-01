@@ -1,4 +1,4 @@
-.. CavityModes documentation master file, created by
+.. OpenCavity documentation master file, created by
    sphinx-quickstart on Sat Nov 22 14:44:25 2014.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -6,8 +6,14 @@
 Welcome to OpenCavity documentation!
 ====================================
 
-*opencavity* is a python package to solve the eigenmodes of open optical cavities.
-It comes with other tools that allow to design and study laser resonators, such as a Gaussian beam generator and a physical optics propagator. 
+*opencavity* is a python package that allows to analyze the eigenmodes of open optical cavities.
+
+What *opencavity* allows to do:
+
+- Compute both fundamental and higher order eigenmodes of optical resonators.
+- Simulate resonators that includes optical elements: apertures, diffractive optical elements (DOE), or any arbitrary phase and amplitude masks placed anywhere inside the resonator.
+-  It integrates a physical optics module that allows to compute the output mode, and simulate its propagation outside the resonator. This module can be used for example to design interferometric setups, beam shaping or transforming using DOE.
+
 The package is designed and written with two gaols in mind: usage simplicity and fast learning curve.
 
 .. image:: _static/plot_mode0_E_1D.png

@@ -1,8 +1,8 @@
 .. _tuto9-label:
 
-***************************************
-Tutorial 9 - Fresnel propagation module
-***************************************
+*************************************************************
+Tutorial 9 - Beam transforming and interferometric simulation 
+*************************************************************
 In some of the previous tutorials we used the Fresnel propagation module that comes with OpenCavity, mainly to calculate the output beam for 
 1d and 2D cavity systems. And also with Bessel-Gauss cavities to show how the Bessel beams propagate especially in their non-diffracting region. 
 In this tutorial  we use the Fresnel propagation module to do beam transforming using a phase function as it is usually realized practically 

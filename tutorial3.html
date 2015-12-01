@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial 3 - using apertures and phase masks &mdash; OpenCavity 0.1 Pre-Alpha documentation</title>
+    <title>Tutorial 3 - Using apertures and phase masks &mdash; OpenCavity 0.1 Pre-Alpha documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="OpenCavity 0.1 Pre-Alpha documentation" href="index.html" />
     <link rel="next" title="Tutorial 4 - Calculating the output beam" href="tutorial4.html" />
-    <link rel="prev" title="Tutorial 2 - Generalizes 1D cavity" href="tutorial2.html" /> 
+    <link rel="prev" title="Tutorial 2 - General 1D cavity" href="tutorial2.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -42,7 +42,7 @@
           <a href="tutorial4.html" title="Tutorial 4 - Calculating the output beam"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="tutorial2.html" title="Tutorial 2 - Generalizes 1D cavity"
+          <a href="tutorial2.html" title="Tutorial 2 - General 1D cavity"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
       </ul>
@@ -54,7 +54,7 @@
           <div class="body" role="main">
             
   <div class="section" id="tutorial-3-using-apertures-and-phase-masks">
-<span id="tuto3-label"></span><h1>Tutorial 3 - using apertures and phase masks<a class="headerlink" href="#tutorial-3-using-apertures-and-phase-masks" title="Permalink to this headline">¶</a></h1>
+<span id="tuto3-label"></span><h1>Tutorial 3 - Using apertures and phase masks<a class="headerlink" href="#tutorial-3-using-apertures-and-phase-masks" title="Permalink to this headline">¶</a></h1>
 <p>In the previous tutorial we have seen how to use ABCD matrix to define a linear simple two mirrors cavity, at this point you should be able to define and find
 the modes of a simple linear resonator, using ABCD matrix, this method is general and powerful and as we will see in next tutorials it can be used to
 define more complex resonators scheme like a V-shaped , bow-tie cavities.
@@ -157,10 +157,10 @@ vectors contain Legendre-Gauss nodes thereby the resolved modes are also calcula
 <span class="gp">In [18]: </span><span class="n">l1</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">In [19]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">(1.330713932268246e-06, 3.8373526170754069e-05)</span>
+<span class="go">(1.3307139324902906e-06, 3.8373526170309979e-05)</span>
 
 <span class="gp">In [20]: </span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l0</span><span class="p">)</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span>
-<span class="gr">Out[20]: </span><span class="mf">1.852158996740183e-05</span>
+<span class="gr">Out[20]: </span><span class="mf">1.8521589967068763e-05</span>
 </pre></div>
 </div>
 <p>As we can see the two modes are very well confined (have very low losses = 1-abs(l)²) and the differences between them is just negligible.</p>
@@ -235,7 +235,7 @@ We take the same code of the first example an we create and add an aperture:</p>
 <span class="gp">In [46]: </span><span class="n">l1</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="n">sys1</span><span class="o">.</span><span class="n">get_mode1D</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">In [47]: </span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">ms</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">(0.014508132902637749, 0.1420287444117414)</span>
+<span class="go">(0.014508132902636639, 0.14202874441174429)</span>
 </pre></div>
 </div>
 <p>Now the fundamental mode has round-trip loses of 1.4% and the second mode 12.7% this makes possible to select only the the fundamental one for example if one put a gain medium with net gain = 5% inside this cavity only the fundamental mode survives.</p>
@@ -315,7 +315,7 @@ of the previous tutorial that we are already familiar with. But any mask can be 
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Tutorial 3 - using apertures and phase masks</a><ul>
+<li><a class="reference internal" href="#">Tutorial 3 - Using apertures and phase masks</a><ul>
 <li><a class="reference internal" href="#plano-concave-cavity-using-phase-mask">Plano concave cavity using phase mask</a></li>
 <li><a class="reference internal" href="#notes-on-vectors-spacing-in-opencavity">Notes on vectors spacing in OpenCavity</a></li>
 <li><a class="reference internal" href="#inserting-an-aperture-inside-the-cavity">inserting an aperture inside the cavity</a></li>
@@ -326,7 +326,7 @@ of the previous tutorial that we are already familiar with. But any mask can be 
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="tutorial2.html"
-                        title="previous chapter">Tutorial 2 - Generalizes 1D cavity</a></p>
+                        title="previous chapter">Tutorial 2 - General 1D cavity</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="tutorial4.html"
                         title="next chapter">Tutorial 4 - Calculating the output beam</a></p>
@@ -367,7 +367,7 @@ of the previous tutorial that we are already familiar with. But any mask can be 
           <a href="tutorial4.html" title="Tutorial 4 - Calculating the output beam"
              >next</a> |</li>
         <li class="right" >
-          <a href="tutorial2.html" title="Tutorial 2 - Generalizes 1D cavity"
+          <a href="tutorial2.html" title="Tutorial 2 - General 1D cavity"
              >previous</a> |</li>
         <li><a href="index.html">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
       </ul>
