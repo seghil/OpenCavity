@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial 1 - Simple 2 mirrors cavity &mdash; OpenCavity 0.1 Pre-Alpha documentation</title>
+    <title>Tutorial 1 - Simple 2 mirror cavity &mdash; OpenCavity 0.1 Pre-Alpha documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="OpenCavity 0.1 Pre-Alpha documentation" href="index.html" />
-    <link rel="next" title="Tutorial 2 - Generalizes 1D cavity" href="tutorial2.html" />
+    <link rel="next" title="Tutorial 2 - General 1D cavity" href="tutorial2.html" />
     <link rel="prev" title="Before starting" href="before_starting.html" /> 
   </head>
   <body role="document">
@@ -39,7 +39,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tutorial2.html" title="Tutorial 2 - Generalizes 1D cavity"
+          <a href="tutorial2.html" title="Tutorial 2 - General 1D cavity"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="before_starting.html" title="Before starting"
@@ -53,8 +53,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="tutorial-1-simple-2-mirrors-cavity">
-<h1>Tutorial 1 - Simple 2 mirrors cavity<a class="headerlink" href="#tutorial-1-simple-2-mirrors-cavity" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tutorial-1-simple-2-mirror-cavity">
+<h1>Tutorial 1 - Simple 2 mirror cavity<a class="headerlink" href="#tutorial-1-simple-2-mirror-cavity" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="system-definition">
 <h2>System definition<a class="headerlink" href="#system-definition" title="Permalink to this headline">¶</a></h2>
 <p>In this example we see how to calculate the eigenmodes of a simple 2 mirrors optical resonator (see Fig below)</p>
@@ -86,7 +86,7 @@ the plane mirror.</p>
 <dt>in the command 2 we create a <em>opencavity</em> object working at a wavelength=1.01, this object will contain all the system (parameters, solutions...) note that:</dt>
 <dd><ul class="first last simple">
 <li>the default wavelength is 1, this means that <code class="docutils literal"><span class="pre">sys=ms.CavEigenSys()</span></code> = <code class="docutils literal"><span class="pre">sys=ms.CavEigenSys(wavelength=1)</span></code></li>
-<li>the wavelength is unitless, thus all distances are in the wavelength unit. (here micron)</li>
+<li>the wavelength is unitless, thus all distances are in the wavelength unit. (here we consider micron)</li>
 </ul>
 </dd>
 </dl>
@@ -122,7 +122,7 @@ the plane mirror.</p>
 <span class="go">0.0099009900994</span>
 </pre></div>
 </div>
-<p>In this example we used the function <code class="docutils literal"><span class="pre">buid_1D_cav()</span></code> to build the cavity <cite>kernel</cite>,  this function is appropriate for simple systems like the one of this tutorial when we have linear 2 mirrors cavity. However, there is a more general and powerful function which is <code class="docutils literal"><span class="pre">build_1D_cav_ABCD()</span></code> which can be used to define any optical cavity using its transfer matrix. (see <em class="xref std std-ref">_ray-matrices-label</em>). In the forthcoming tutorials we will use this function, including the next one which is a tutorial that aim at getting familiar with defining general cavity designs.</p>
+<p>In this example we used the function <code class="docutils literal"><span class="pre">buid_1D_cav()</span></code> to build the cavity <cite>kernel</cite>,  this function is appropriate for simple systems like the one of this tutorial when we have linear 2 mirrors cavity. However, there is a more general and powerful function which is <code class="docutils literal"><span class="pre">build_1D_cav_ABCD()</span></code> which can be used to define any optical cavity using its transfer matrix. (see <a class="reference internal" href="before_starting.html#ray-matrices-label"><em>Gaussian optics and paraxial ray matrices</em></a>). In the forthcoming tutorials we will use this function, including the next one which is a tutorial that aim at getting familiar with defining general cavity designs.</p>
 <p>To summarize, the steps one should do to define a cavity systems and find its modes using <code class="docutils literal"><span class="pre">opencavity</span></code> can be summarized as follows:</p>
 <blockquote>
 <div><ul class="simple">
@@ -167,7 +167,7 @@ the plane mirror.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Tutorial 1 - Simple 2 mirrors cavity</a><ul>
+<li><a class="reference internal" href="#">Tutorial 1 - Simple 2 mirror cavity</a><ul>
 <li><a class="reference internal" href="#system-definition">System definition</a></li>
 <li><a class="reference internal" href="#the-cleaned-code">The cleaned code</a></li>
 </ul>
@@ -179,7 +179,7 @@ the plane mirror.</p>
                         title="previous chapter">Before starting</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="tutorial2.html"
-                        title="next chapter">Tutorial 2 - Generalizes 1D cavity</a></p>
+                        title="next chapter">Tutorial 2 - General 1D cavity</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -214,7 +214,7 @@ the plane mirror.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tutorial2.html" title="Tutorial 2 - Generalizes 1D cavity"
+          <a href="tutorial2.html" title="Tutorial 2 - General 1D cavity"
              >next</a> |</li>
         <li class="right" >
           <a href="before_starting.html" title="Before starting"

@@ -25,8 +25,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="OpenCavity 0.1 Pre-Alpha documentation" href="index.html" />
-    <link rel="next" title="Tutorial 3 - using apertures and phase masks" href="tutorial3.html" />
-    <link rel="prev" title="Tutorial 1 - Simple 2 mirrors cavity" href="tutorial1.html" /> 
+    <link rel="next" title="Tutorial 3 - Using apertures and phase masks" href="tutorial3.html" />
+    <link rel="prev" title="Tutorial 1 - Simple 2 mirror cavity" href="tutorial1.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -39,10 +39,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tutorial3.html" title="Tutorial 3 - using apertures and phase masks"
+          <a href="tutorial3.html" title="Tutorial 3 - Using apertures and phase masks"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="tutorial1.html" title="Tutorial 1 - Simple 2 mirrors cavity"
+          <a href="tutorial1.html" title="Tutorial 1 - Simple 2 mirror cavity"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
       </ul>
@@ -56,7 +56,7 @@
   <div class="section" id="tutorial-2-general-1d-cavity">
 <h1>Tutorial 2 - General 1D cavity<a class="headerlink" href="#tutorial-2-general-1d-cavity" title="Permalink to this headline">¶</a></h1>
 <p>In this part we see how to define a general cavity  system  using a more general method: ABCD matrices, this is a more general and powerful way to define multi-elements cavity with different arrangements (V-shaped, bow-tie...etc), and it is the preferable way of defining optical cavities in OpenCavity.</p>
-<p>In this tutorial  we show three ways of defining a general optical cavity using the function <code class="docutils literal"><span class="pre">build_1D_cav_ABCD(a,npts,A,B,C,D)</span></code>. You may wonder why learn 3 ways when we can just getting things done by learning one method and stick with it?.</p>
+<p>In this tutorial  we show three ways of defining a general optical cavity using the function <code class="docutils literal"><span class="pre">build_1D_cav_ABCD(a,npts,A,B,C,D)</span></code>. You may wonder why learn 3 ways when we can just getting things done by learning one method and stick with it?</p>
 <p>The reason is that every one of the three techniques we show here, is best suited for some particular situations, as we will see in next tutorials. These three ways of defining a general cavity design we address here are:</p>
 <blockquote>
 <div><ul class="simple">
@@ -115,7 +115,7 @@ work too as we did in other tutorials. The same holds for <code class="docutils 
 <span class="gp">In [14]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">build_1D_cav_ABCD</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">npts</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span> <span class="c"># enter the ABCD matrix and build the system-Kerenl</span>
 </pre></div>
 </div>
-<p>to find and show the modes of the cavity</p>
+<p>To find and show the modes of the cavity</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [15]: </span><span class="n">opsys</span><span class="o">.</span><span class="n">solve_modes</span><span class="p">()</span> <span class="c"># by default find the 30 first modes</span>
 <span class="go">running the eigenvalues solver...</span>
 
@@ -321,10 +321,10 @@ the size of the field at this plane into account. To get rid of the ripples in t
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="tutorial1.html"
-                        title="previous chapter">Tutorial 1 - Simple 2 mirrors cavity</a></p>
+                        title="previous chapter">Tutorial 1 - Simple 2 mirror cavity</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="tutorial3.html"
-                        title="next chapter">Tutorial 3 - using apertures and phase masks</a></p>
+                        title="next chapter">Tutorial 3 - Using apertures and phase masks</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -359,10 +359,10 @@ the size of the field at this plane into account. To get rid of the ripples in t
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tutorial3.html" title="Tutorial 3 - using apertures and phase masks"
+          <a href="tutorial3.html" title="Tutorial 3 - Using apertures and phase masks"
              >next</a> |</li>
         <li class="right" >
-          <a href="tutorial1.html" title="Tutorial 1 - Simple 2 mirrors cavity"
+          <a href="tutorial1.html" title="Tutorial 1 - Simple 2 mirror cavity"
              >previous</a> |</li>
         <li><a href="index.html">OpenCavity 0.1 Pre-Alpha documentation</a> &raquo;</li> 
       </ul>
