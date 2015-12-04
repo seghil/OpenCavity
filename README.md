@@ -1,6 +1,6 @@
 # OpenCavity
 
-Opencavity is a python package that allows to analyze the eigenmodes of open optical cavities.
+Opencavity is a python package that allows to analyze the eigenmodes of open optical resonators.
 
 What opencavity allows to do:
  
